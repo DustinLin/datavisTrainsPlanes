@@ -7,14 +7,14 @@ ALB,Albany,USA
 ABQ,Albuquerque,USA
 ABE,Allentown,USA
 AOO,Altoona,USA
-AXS,Altu,USA
+AXS,Altus,USA
 AMA,Amarillo,USA
 ANC,Anchorage,USA
 ARB,Ann Arbor,USA
 ANB,Anniston,USA
-ATW,Appelto,USA
+ATW,Appelton,USA
 AVL,Asheville,USA
-ASE,Aspe,USA
+ASE,Aspen,USA
 AHN,Athens,USA
 ATO,Athens,USA
 ATL,Atlanta,USA
@@ -26,7 +26,7 @@ BFL,Bakersfield,USA
 BWI,Washington DC,USA
 BGR,Bangor,USA
 BTR,Baton Rouge,USA
-BPT,Beaumon,USA
+BPT,Beaumont,USA
 BKW,Beckley,USA
 BLI,Bellingham,USA
 BJI,Bemidji,USA
@@ -42,22 +42,22 @@ BOI,Boise,USA
 BXS,Borrego Springs,USA
 BOS,Boston,USA
 BZN,Bozeman,USA
-BFD,Bradfor,USA
+BFD,Bradford,USA
 BRD,Brainerd,USA
 BDR,Bridgeport,USA
 BKX,Brookings,USA
 BQK,Brunswick,USA
-BUF,Buffal,USA
+BUF,Buffalo,USA
 BHC,Bullhead City,USA
 BUR,Burbank,USA
-BRL,Burlington I,USA
+BRL,Burlington IA,USA
 BTV,Burlington,USA
 BTM,Butte,USA
 CLD,Carlsbad,USA
 CSN,Carson City,USA
 CPR,Casper,USA
 CDC,Cedar City,USA
-CID,Cedar Rapids I,USA
+CID,Cedar Rapids IA,USA
 CMI,Champaign,USA
 CHS,Charleston,USA
 CRW,Charleston,USA
@@ -73,9 +73,9 @@ CVG,Cincinnati,USA
 CKB,Clarksburg,USA
 BKL,Cleveland,USA
 CLE,Cleveland,USA
-COD,Cod,USA
+COD,Cody,USA
 KCC,Coffmann Cove,USA
-CLL,College Statio,USA
+CLL,College Station,USA
 COS,Colorado Springs,USA
 CAE,Columbia,USA
 CSG,Columbus,USA
@@ -101,7 +101,7 @@ DVL,Devils Lake,USA
 DLG,Dillingham,USA
 DHN,Dothan,USA
 DUJ,Dubois,USA
-DBQ,Dubuque I,USA
+DBQ,Dubuque IA,USA
 DLH,Duluth,USA
 DRO,Durango,USA
 DUT,Dutch Harbor,USA
@@ -120,21 +120,21 @@ FAI,Fairbanks,USA
 FAR,Fargo,USA
 FMN,Farmington,USA
 FYV,Fayetteville,USA
-FAY,Fayettevill,USA
+FAY,Fayetteville,USA
 FLG,Flagstaff,USA
 FNT,Flint,USA
 FLO,Florence,USA
-FOD,Fort Dodge I,USA
-FHU,Fort Huachuc,USA
-FLL,Fort Lauderdal,USA
-FMY,Fort Myer,USA
-RSW,Fort Myer,USA
+FOD,Fort Dodge IA,USA
+FHU,Fort Huachuca,USA
+FLL,Fort Lauderdale,USA
+FMY,Fort Myers,USA
+RSW,Fort Myers,USA
 FRI,Fort Riley,USA
 FSM,Fort Smith,USA
 VPS,Fort Walton Beach,USA
 FWA,Fort Wayne,USA
 DFW,Fort Worth,USA
-FKL,Frankli,USA
+FKL,Franklin,USA
 FAT,Fresno,USA
 GAD,Gadsden,USA
 GNV,Gainesville,USA
@@ -148,17 +148,17 @@ GRR,Grand Rapids,USA
 GPZ,Grand Rapids,USA
 GTF,Great Falls,USA
 GRB,Green Bay,USA
-LWB,Greenbrie,USA
-GSO,Greensbor,USA
+LWB,Greenbrier,USA
+GSO,Greensboro,USA
 GLH,Greenville,USA
 PGV,Greenville,USA
-GSP,Greenvill,USA
-GON,Groto,USA
-GPT,Gulfpor,USA
-GUC,Gunniso,USA
+GSP,Greenville,USA
+GON,Groton,USA
+GPT,Gulfport,USA
+GUC,Gunnison,USA
 HNS,Haines,USA
 CMX,Hancock,USA
-HRL,Harlinge,USA
+HRL,Harlingen,USA
 HAR,Harrisburg,USA
 MDT,Harrisburg,USA
 BDL,Hartford,USA
@@ -172,7 +172,7 @@ HOM,Homer,USA
 HNL,Honolulu,USA
 HNH,Hoonah,USA
 HOU,Houston,USA
-IAH,Housto,USA
+IAH,Houston,USA
 HTS,Huntington,USA
 HSV,Huntsville,USA
 HON,Huron,USA
@@ -184,10 +184,10 @@ IPL,Imperial,USA
 IND,Indianapolis,USA
 INL,International Falls,USA
 IYK,Inykern,USA
-ITH,Ithac,USA
+ITH,Ithaca,USA
 JAC,Jackson Hole,USA
 JXN,Jackson,USA
-MJQ,Jackso,USA
+MJQ,Jackson,USA
 JAN,Jackson,USA
 HKS,Jackson,USA
 MKL,Jackson,USA
@@ -205,13 +205,13 @@ JHW,Jamestown,USA
 JVL,Janesville,USA
 JEF,Jefferson City,USA
 BGM,Johnson City,USA
-JON,Johnston Islan,USA
+JON,Johnston Island,USA
 JST,Johnstown,USA
 JBR,Jonesboro,USA
 JLN,Joplin,USA
 JNU,Juneau,USA
 OGG,Kahului,USA
-AZO,Kalamazo,USA
+AZO,Kalamazoo,USA
 FCA,Kalispell,USA
 MUE,Kamuela,USA
 MCI,Kansas City,USA
@@ -232,7 +232,7 @@ OTZ,Kotzbue,USA
 WLB,Labouchere Bay,USA
 LSE,La Crosse,USA
 LAF,Lafayette,USA
-LFT,Lafayett,USA
+LFT,Lafayette,USA
 LCH,Lake Charles,USA
 HII,Lake Havasu City,USA
 TVL,Lake Tahoe,USA
@@ -243,7 +243,7 @@ LAR,Laramie,USA
 LRD,Laredo,USA
 LAS,Las Vegas,USA
 LBE,Latrobe,USA
-PIB,Laure,USA
+PIB,Laurel,USA
 LAW,Lawton,USA
 LEB,Lebanon,USA
 LWS,Lewiston,USA
@@ -254,8 +254,8 @@ LNK,Lincoln,USA
 LIT,Little Rock,USA
 LGB,Long Beach,USA
 LIJ,Long Island,USA
-ISP,Long Islan,USA
-GGG,Longvie,USA
+ISP,Long Island,USA
+GGG,Longview,USA
 LAX,Los Angeles,USA
 SDF,Louisville,USA
 LBB,Lubbock,USA
@@ -266,9 +266,9 @@ MSN,Madison,USA
 MHT,Manchester,USA
 MTH,Marathon,USA
 MQT,Marquette,USA
-MVY,Marth,USA
+MVY,Martha,USA
 MRB,Martinsburg,USA
-MCW,Mason City I,USA
+MCW,Mason City IA,USA
 MTO,Mattoon,USA
 MFE,McAllen,USA
 MFR,Medford,USA
@@ -278,7 +278,7 @@ MCE,Merced,USA
 MEI,Meridian,USA
 MTM,Metlakatla,USA
 MIA,Miami,USA
-MAF,Midlan,USA
+MAF,Midland,USA
 MLS,Miles City,USA
 MKE,Milwaukee,USA
 MSP,Minneapolis,USA
@@ -287,14 +287,14 @@ MSO,Missula,USA
 MHE,Mitchell,USA
 MOB,Mobile,USA
 MOD,Modesto,USA
-MLI,Molin,USA
+MLI,Moline,USA
 MLU,Monroe,USA
 MRY,Monterey,USA
 MGM,Montgomery,USA
-MTJ,Montros,USA
+MTJ,Montrose,USA
 MGW,Morgantown,USA
 MWH,Moses Lake,USA
-MCL,M,USA
+MCL,Mt. McKinley,USA
 MSL,Muscle Shoals,USA
 MKG,Muskegon,USA
 MYR,Myrtle Beach,USA
@@ -304,16 +304,16 @@ APF,Naples,USA
 BNA,Nashville,USA
 EWN,New Bern,USA
 HVN,New Haven,USA
-MSY,New Orlean,USA
+MSY,New Orleans,USA
 JFK,New York,USA
 LGA,New York,USA
 EWR,New York,USA
 NYC,New York,USA
 SWF,Newburgh,USA
-PHF,Newport New,USA
-IAG,Niagara Falls Internationa,USA
+PHF,Newport News,USA
+IAG,Niagara Falls International,USA
 OME,Nome,USA
-ORF,Norfol,USA
+ORF,Norfolk,USA
 OTH,North Bend,USA
 OAK,Oakland,USA
 OKC,Oklahoma City,USA
@@ -326,16 +326,16 @@ OSH,Oshkosh,USA
 OWB,Owensboro,USA
 OXR,Oxnard,USA
 PAH,Paducah,USA
-PGA,Pag,USA
+PGA,Page,USA
 PKB,Pakersburg,USA
-PMD,Palmdal,USA
+PMD,Palmdale,USA
 PSP,Palm Springs,USA
 PFN,Panama City,USA
 PSC,Pasco,USA
 PLN,Pellston,USA
 PDT,Pendelton,USA
 PNS,Pensacola,USA
-PIA,Peori,USA
+PIA,Peoria,USA
 PSG,Petersburg,USA
 PHL,Philadelphia,USA
 PHX,Phoenix,USA
@@ -345,7 +345,7 @@ PLB,Plattsburgh,USA
 PIH,Pocatello,USA
 CLM,Port Angeles,USA
 PWM,Portland,USA
-PDX,Portland International,USA
+PDX,Portland,USA
 POU,Poughkeepsie,USA
 PQI,Presque Island,USA
 PVD,Providence,USA
@@ -353,7 +353,7 @@ SCC,Prudhoe Bay,USA
 PUB,Pueblo,USA
 PUW,Pullman,USA
 UIN,Quincy,USA
-RDU,Raleig,USA
+RDU,Raleigh,USA
 RAP,Rapid City,USA
 RDG,Reading,USA
 RDD,Redding,USA
@@ -369,7 +369,7 @@ RFD,Rockford,USA
 RKD,Rockland,USA
 RWI,Rocky Mount,USA
 SMF,Sacramento,USA
-MBS,Sagina,USA
+MBS,Saginaw,USA
 SLE,Salem,USA
 SNS,Salinas,USA
 SBY,Salisbury,USA
@@ -384,15 +384,15 @@ SNA,Santa Ana,USA
 SBA,Santa Barbara,USA
 SMX,Santa Maria,USA
 STS,Santa Rosa,USA
-SRQ,Sarasot,USA
+SRQ,Sarasota,USA
 SAV,Savannah,USA
 SCF,Scottsdale,USA
-SEA,Seattl,USA
-SHD,Shenandoah Valle,USA
+SEA,Seattle,USA
+SHD,Shenandoah Valley,USA
 SHR,Sheridan,USA
-SHV,Shrevepor,USA
+SHV,Shreveport,USA
 SDY,Sidney,USA
-SUX,Sioux City I,USA
+SUX,Sioux City IA,USA
 FSD,Sioux Falls,USA
 SIT,Sitka,USA
 SGY,Skagway,USA
@@ -400,9 +400,9 @@ SBN,South Bend,USA
 GEG,Spokane,USA
 SPI,Springfield,USA
 SGF,Springfield,USA
-SGU,S,USA
-STL,S,USA
-SCE,State Colleg,USA
+SGU,St. George,USA
+STL,St. Louis,USA
+SCE,State College,USA
 HDN,Steamboat Springs,USA
 SCK,Stockton,USA
 SUN,Sun Valley,USA
@@ -417,8 +417,8 @@ TVF,Thief River Falls,USA
 KTB,Thorne Bay,USA
 TOL,Toledo,USA
 TVC,Traverse City,USA
-TTN,Trento,USA
-TRI,Tr,USA
+TTN,Trenton,USA
+TRI,Tri,USA
 TUS,Tucson,USA
 TUP,Tulepo,USA
 TUL,Tulsa,USA
@@ -433,24 +433,24 @@ EGE,Vail,USA
 VDZ,Valdez,USA
 VLD,Valdosta,USA
 VEL,Vernal,USA
-VRB,Vero Beac,USA
+VRB,Vero Beach,USA
 VIS,Visalia,USA
 ACT,Waco,USA
 ALW,Walla Walla,USA
 BWI,Washington DC,USA
 IAD,Washington DC,USA
 DCA,Washington DC,USA
-WAS,Washington D,USA
-ALO,Waterloo I,USA
+WAS,Washington DC,USA
+ALO,Waterloo IA,USA
 ATY,Watertown,USA
-CWA,Wausa,USA
+CWA,Wausau,USA
 EAT,Wenatchee,USA
 PBI,West Palm Beach,USA
 WYS,West Yellowstone,USA
 HPN,White Plains,USA
 SPS,Wichita Falls,USA
 ICT,Wichita,USA
-AVP,Wilkes Barr,USA
+AVP,Wilkes Barre,USA
 IPT,Williamsport,USA
 ISL,Williston,USA
 ILM,Wilmington,USA
