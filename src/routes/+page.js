@@ -6,22 +6,18 @@ import * as d3 from 'd3';
 export async function load({ fetch }) {
 
 	// loading geojson data, can confirm loads correctly
-	const res = await fetch('/usaGeojson.json');
+	// pre-filtered to remove Alaska, Hawaii, Puerto Rico
+	const res = await fetch('/usaContGeojson.json');
 	const datasetUSAGeo = await res.json();
 
+	// will eventually phase out, and use usaCitiesMap in the end?
 	const res2 = await fetch('/usaCities.geojson');
 	const datasetCities = await res2.json();
 
+	const res3 = await fetch('/cityCordMap.json');
+	const cityCordMap = await res3.json();
 
-	// want to prefilter?
-	datasetUSAGeo.features =  datasetUSAGeo.features.filter(
-    (fea) =>
-      !(
-        fea.properties.NAME === "Alaska" ||
-        fea.properties.NAME === "Hawaii" ||
-        fea.properties.NAME === "Puerto Rico"
-      )
-  	);
+
 
 	const datasetCitiesBig =  datasetCities.features.filter(
     (city) =>
@@ -33,7 +29,8 @@ export async function load({ fetch }) {
 	const dataPayload = {
 		// want to pass the entire GEO obj as that helps make the projection?
 		usaGeo: datasetUSAGeo,
-		citiesBig: datasetCitiesBig
+		citiesBig: datasetCitiesBig,
+		cityCordMap: cityCordMap
 	}
 
 

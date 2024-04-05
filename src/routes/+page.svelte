@@ -19,12 +19,11 @@
 
 	const usaGeoContig = data.dataPayload.usaGeo
 	const bigCities = data.dataPayload.citiesBig
+	const cityCordMap = data.dataPayload.cityCordMap
 
 	console.log(`there are many states: ${usaGeoContig.features.length}`)
 	console.log(`There are many big cities: ${bigCities.length}`)
-
-
-
+	console.log(`There are many cities in the cord map: ${Object.keys(cityCordMap).length}`)
 
 
 
@@ -40,9 +39,7 @@
 	<div class="main">
 		<p>Here is where we want to start putting out visuals?, and implement a scroll</p>
 		<!-- compoenent -->
-		<Map map={usaGeoContig} cities={bigCities}/>
-		<Map map={usaGeoContig} cities={bigCities}/>
-		<Map map={usaGeoContig} cities={bigCities}/>
+		<Map map={usaGeoContig} cities={bigCities} cordMap={cityCordMap}/>
 	</div>
 </div>
 
