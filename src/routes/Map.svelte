@@ -12,6 +12,11 @@
 	export let cities;
 	export let cordMap;  
 
+	export let onhover;
+
+	// want to make the highlighted route more noticeable, so re-draw it like the example?
+	export let highlightedRoute;
+
 	// trying to plot lines and add interaction?
 	// from observable its an array of arrays
 	// TODO ask jack to append state at the end?
@@ -75,8 +80,6 @@
 
 
 
-
-
 	/**
 	 * 
 	 * debugging
@@ -107,12 +110,19 @@
 			.attr("stroke", "white");
 	*/
 
+	// TODO try to make display reactive
+	let borderBoxSize;
+	// borderBoxSize: has 2 entires: inline-size - width of div, block-size - height of div
+	// borderBoxSize could be undefined
+	let width = 975
+	let height = 610
+	//$: width = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 975
+	//$: height = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 610
+
 </script>
 
 <div class="maps">
-	<p>map</p>
-
-	<svg width="975" height="610">
+	<svg width={width} height={height}>
 		<!-- drawing paths for each state, using projections -->
 		{#each map.features as state}
 			<path
@@ -147,18 +157,21 @@
 		<!-- todo, refactor to a separate file/component?-->
 		<!--  drawing a line, need to extract coordinates and draw city end points -->
 
+		<!-- conditionally render color based on hover? -->
 		<line
 			x1={routeToCords(route, 0, 0)}
 			y1={routeToCords(route, 0, 1)}
 			x2={routeToCords(route, 1, 0)}
 			y2={routeToCords(route, 1, 1)}
 			stroke="blue"
-			stroke-width=1
+			stroke-width=2
+			on:mouseover={() => onhover(route)}
+			on:mouseleave={() => onhover(null)}
+			on:focus={() => onhover(route)}
+			on:focusout={() => onhover(null)}
 		/>
 
-	
 		{/each}
-
 
 
 	</svg>
@@ -168,6 +181,12 @@
 <style>
 	.maps {
 		border-style: solid;
+		/* the weight? */
+		flex:2;
+	}
+	line:hover {
+		color: "yellow";
+		stroke-width: 4;
 	}
 
 </style>

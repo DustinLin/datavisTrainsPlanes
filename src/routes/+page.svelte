@@ -13,6 +13,7 @@
 	import ColorLegend from './ColorLegend.svelte';
 
 	import Map from './Map.svelte'
+  import RouteDisplay from './RouteDisplay.svelte';
 
 	// data comes from the load function in +page.js
 	export let data;
@@ -27,6 +28,23 @@
 
 
 
+	// for keeping track of which route was highlighted
+	// idea is to pass highlightedRoute to some other component
+	// TODO: for multiple maps will need to create a diff variable.. or else they all point to the same thing
+	let highlightedRoute = null;
+
+	function onhover(route){
+		// set params for route
+		if (route === null) {
+			highlightedRoute = null
+		} else {
+			// interesting that these print statements end up printing on the web browser/client side, not sure why
+			//console.log(`hovering over route ${route}`)
+			highlightedRoute = route
+		}
+	}
+
+
 	//$: color = d3.scaleOrdinal().domain(categories).range(d3.schemeTableau10);
 </script>
 
@@ -39,7 +57,11 @@
 	<div class="main">
 		<p>Here is where we want to start putting out visuals?, and implement a scroll</p>
 		<!-- compoenent -->
-		<Map map={usaGeoContig} cities={bigCities} cordMap={cityCordMap}/>
+		<div class="infoMap">
+			<Map map={usaGeoContig} cities={bigCities} cordMap={cityCordMap} onhover={onhover} highlightedRoute={highlightedRoute}/>
+			<RouteDisplay highlightedRoute={highlightedRoute}/>
+		</div>
+
 	</div>
 </div>
 
@@ -76,9 +98,12 @@
 		justify-content: center;
 
 		gap: 2em;
+	}
 
-
-
+	.infoMap {
+		/* want a horizonal flex? */
+		display: flex;
+		gap: 2em;
 
 	}
 </style>
