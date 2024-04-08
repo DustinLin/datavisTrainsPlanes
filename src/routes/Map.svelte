@@ -9,7 +9,7 @@
 
 	// prov want to rename "dataset" to like map data or smth
 	export let map;
-	export let cities;
+	export let cities; // remove "cities" data when sure not being used, replacing with cordMap rn
 	export let cordMap;  
 
 	export let onhover;

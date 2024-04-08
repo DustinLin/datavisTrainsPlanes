@@ -13,18 +13,22 @@
 	import ColorLegend from './ColorLegend.svelte';
 
 	import Map from './Map.svelte'
-  import RouteDisplay from './RouteDisplay.svelte';
+  	import RouteDisplay from './RouteDisplay.svelte';
+	import RailMap from './RailMap.svelte';
 
 	// data comes from the load function in +page.js
 	export let data;
 
-	const usaGeoContig = data.dataPayload.usaGeo
-	const bigCities = data.dataPayload.citiesBig
-	const cityCordMap = data.dataPayload.cityCordMap
+	const usaGeoContig = data.dataPayload.usaGeo;
+	const bigCities = data.dataPayload.citiesBig;
+	const cityCordMap = data.dataPayload.cityCordMap;
+	const amtrakMap = data.dataPayload.amtrakMap;
+
 
 	console.log(`there are many states: ${usaGeoContig.features.length}`)
 	console.log(`There are many big cities: ${bigCities.length}`)
 	console.log(`There are many cities in the cord map: ${Object.keys(cityCordMap).length}`)
+	console.log(`there are many amtrak routes: ${amtrakMap.features.length}`)
 
 
 
@@ -61,6 +65,7 @@
 			<Map map={usaGeoContig} cities={bigCities} cordMap={cityCordMap} onhover={onhover} highlightedRoute={highlightedRoute}/>
 			<RouteDisplay highlightedRoute={highlightedRoute}/>
 		</div>
+		<RailMap map={usaGeoContig} railMap={amtrakMap} cordMap={cityCordMap}/>
 
 	</div>
 </div>
