@@ -3,7 +3,7 @@
 
 	export let highlightedRoute; 
 
-	import {cityPairsToCities, cityStToCity} from '../utils';
+	import {cityPairsToCities, cityStToCity, numberWithCommas} from '../utils';
 
 
 	/* What a highlightedRoute looks like:
@@ -29,7 +29,7 @@
 		<li>Destination City: {cityStToCity(cityPairsToCities(highlightedRoute[0])[1])}</li>
 		<li>Destination Airport: {highlightedRoute[1].DEST} </li>
 		<li>Distance: {highlightedRoute[1].DISTANCE} miles </li>
-		<li>Passengers: {highlightedRoute[1].PASSENGERS}</li>
+		<li>Passengers: {numberWithCommas(highlightedRoute[1].PASSENGERS)}</li>
 	</ul>
 
 </div>

@@ -18,8 +18,13 @@ export let cityStToCity = (cityStStr) => {
 	return cityStStr.split("_")[0]
 }
 
-// idk if this one needed tbh
+// simple string operation but is being used
 export let cityStToPair = (city, state) => {
 	return `${city}_${state}`
 }
 
+
+// adding commas so large numbers are more readable
+export let numberWithCommas = (x) => {
+  return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+}
