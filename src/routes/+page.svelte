@@ -65,6 +65,7 @@
 			<Map map={usaGeoContig} cities={bigCities} cordMap={cityCordMap} onhover={onhover} highlightedRoute={highlightedRoute}/>
 			<RouteDisplay highlightedRoute={highlightedRoute}/>
 		</div>
+		<p>More text/transition, how to make pretty...</p>
 		<RailMap map={usaGeoContig} railMap={amtrakMap} cordMap={cityCordMap}/>
 
 	</div>
