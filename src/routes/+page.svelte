@@ -15,6 +15,7 @@
 	import Map from './Map.svelte'
   	import RouteDisplay from './RouteDisplay.svelte';
 	import RailMap from './RailMap.svelte';
+  import TopChart from './TopChart.svelte';
 
 	// data comes from the load function in +page.js
 	export let data;
@@ -67,6 +68,7 @@
 		</div>
 		<p>More text/transition, how to make pretty...</p>
 		<RailMap map={usaGeoContig} railMap={amtrakMap} cordMap={cityCordMap}/>
+		<TopChart/>
 
 	</div>
 </div>
