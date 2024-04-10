@@ -19,7 +19,6 @@
 
 	// trying to plot lines and add interaction?
 	// from observable its an array of arrays
-	// TODO ask jack to append state at the end?
 	const mockData = [ [ "(Boston_MA, New York_NY)",
 	  { DEPARTURES_PERFORMED: 35030,
 		SEATS: 3529952,
@@ -79,7 +78,6 @@
 	// now have some cities that we want to plot
 
 
-
 	/**
 	 * 
 	 * debugging
@@ -119,6 +117,14 @@
 	//$: width = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 975
 	//$: height = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 610
 
+	const CITY_CIRCLE_R = 5
+	const CITY_CIRCLE_COL = "red"
+
+	// BUG?: the <style> section doesn't seem to have this var in scope
+	const ROUTE_STROKE_COL = "blue"
+	const ROUTE_STROKE_WID = 3
+
+
 </script>
 
 <div class="maps">
@@ -139,15 +145,16 @@
 		<circle
 			cx = {usaMapProjection(cordMap[city].COORD)[0]}
 			cy = {usaMapProjection(cordMap[city].COORD)[1]}
-			fill = "red"
-			r = {3}
+			fill = {CITY_CIRCLE_COL}
+			r = {CITY_CIRCLE_R}
 		/>
+		<!-- adding a bit of buffer room to x,y cords -->
 		<text
 			font-size = 10
 			font-family = "sans-serif"
 			dominant-baseline = "hanging"
-			x = {usaMapProjection(cordMap[city].COORD)[0]}
-			y = {usaMapProjection(cordMap[city].COORD)[1]}
+			x = {usaMapProjection(cordMap[city].COORD)[0] + 4}
+			y = {usaMapProjection(cordMap[city].COORD)[1] + 4}
 		>
 			{city.split("_")[0]}
 		</text>
@@ -163,8 +170,8 @@
 			y1={routeToCords(route, 0, 1)}
 			x2={routeToCords(route, 1, 0)}
 			y2={routeToCords(route, 1, 1)}
-			stroke="blue"
-			stroke-width=2
+			stroke={ROUTE_STROKE_COL}
+			stroke-width={ROUTE_STROKE_WID}
 			on:mouseover={() => onhover(route)}
 			on:mouseleave={() => onhover(null)}
 			on:focus={() => onhover(route)}
@@ -185,8 +192,8 @@
 		flex:2;
 	}
 	line:hover {
-		color: "yellow";
-		stroke-width: 4;
+		stroke: "#669977";
+		/* can't access js variables in <style> section? */
+		stroke-width: 4; 
 	}
-
 </style>

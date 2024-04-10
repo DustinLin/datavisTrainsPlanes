@@ -49,10 +49,9 @@
 {/if}
 
 <style>
-	/* todo styling */
+	/* todo styling is scuffed but it looks ok with hard coded values */
 	.routeInfo {
-		flex: 1;
-		width: 500px;
+		width: 300px;
 	}
 </style>
 
