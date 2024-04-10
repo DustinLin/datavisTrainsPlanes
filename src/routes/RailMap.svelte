@@ -76,14 +76,14 @@
 			cx = {usaMapProjection(cordMap[city].COORD)[0]}
 			cy = {usaMapProjection(cordMap[city].COORD)[1]}
 			fill = "red"
-			r = {3}
+			r = {5}
 		/>
 		<text
 			font-size = 10
 			font-family = "sans-serif"
 			dominant-baseline = "hanging"
-			x = {usaMapProjection(cordMap[city].COORD)[0]}
-			y = {usaMapProjection(cordMap[city].COORD)[1]}
+			x = {usaMapProjection(cordMap[city].COORD)[0] + 4}
+			y = {usaMapProjection(cordMap[city].COORD)[1] + 4}
 		>
 			{city.split("_")[0]}
 		</text>

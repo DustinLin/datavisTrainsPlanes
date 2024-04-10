@@ -49,6 +49,23 @@
 		}
 	}
 
+	/* TODO: think about highlighting rail lines for <RailMap/> ?
+	let highlightedRouteRail = null;
+
+	function onhoverRail(route){
+		// set params for route
+		if (route === null) {
+			highlightedRouteRail = null
+		} else {
+			// interesting that these print statements end up printing on the web browser/client side, not sure why
+			//console.log(`hovering over route ${route}`)
+			highlightedRouterRail = route
+		}
+	}
+	*/
+
+
+
 
 	//$: color = d3.scaleOrdinal().domain(categories).range(d3.schemeTableau10);
 </script>
@@ -67,7 +84,10 @@
 			<RouteDisplay highlightedRoute={highlightedRoute}/>
 		</div>
 		<p>More text/transition, how to make pretty...</p>
-		<RailMap map={usaGeoContig} railMap={amtrakMap} cordMap={cityCordMap}/>
+		<div class="infoMap">
+			<RailMap map={usaGeoContig} railMap={amtrakMap} cordMap={cityCordMap}/>
+			<!-- <RouteDisplay highlightedRoute={highlightedRouteRail}/> -->
+		</div>
 		<TopChart/>
 
 	</div>
