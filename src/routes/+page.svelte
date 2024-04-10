@@ -13,17 +13,59 @@
 	import ColorLegend from './ColorLegend.svelte';
 
 	import Map from './Map.svelte'
+  	import RouteDisplay from './RouteDisplay.svelte';
+	import RailMap from './RailMap.svelte';
+  import TopChart from './TopChart.svelte';
 
 	// data comes from the load function in +page.js
 	export let data;
 
-	const usaGeoContig = data.dataPayload.usaGeo
-	const bigCities = data.dataPayload.citiesBig
-	const cityCordMap = data.dataPayload.cityCordMap
+	const usaGeoContig = data.dataPayload.usaGeo;
+	const bigCities = data.dataPayload.citiesBig;
+	const cityCordMap = data.dataPayload.cityCordMap;
+	const amtrakMap = data.dataPayload.amtrakMap;
+	const filteredCityPairToInfo = data.dataPayload.filteredCityPairToInfo;
+
 
 	console.log(`there are many states: ${usaGeoContig.features.length}`)
 	console.log(`There are many big cities: ${bigCities.length}`)
 	console.log(`There are many cities in the cord map: ${Object.keys(cityCordMap).length}`)
+	console.log(`there are many amtrak routes: ${amtrakMap.features.length}`)
+	console.log(`there are many city pairs: ${filteredCityPairToInfo.length}`)
+
+
+
+	// for keeping track of which route was highlighted
+	// idea is to pass highlightedRoute to some other component
+	// TODO: for multiple maps will need to create a diff variable.. or else they all point to the same thing
+	let highlightedRoute = null;
+
+	function onhover(route){
+		// set params for route
+		if (route === null) {
+			highlightedRoute = null
+		} else {
+			// interesting that these print statements end up printing on the web browser/client side, not sure why
+			//console.log(`hovering over route ${route}`)
+			highlightedRoute = route
+		}
+	}
+
+	/* TODO: think about highlighting rail lines for <RailMap/> ?
+	let highlightedRouteRail = null;
+
+	function onhoverRail(route){
+		// set params for route
+		if (route === null) {
+			highlightedRouteRail = null
+		} else {
+			// interesting that these print statements end up printing on the web browser/client side, not sure why
+			//console.log(`hovering over route ${route}`)
+			highlightedRouterRail = route
+		}
+	}
+	*/
+
 
 
 
@@ -39,7 +81,17 @@
 	<div class="main">
 		<p>Here is where we want to start putting out visuals?, and implement a scroll</p>
 		<!-- compoenent -->
-		<Map map={usaGeoContig} cities={bigCities} cordMap={cityCordMap}/>
+		<div class="infoMap">
+			<Map map={usaGeoContig} cities={bigCities} cordMap={cityCordMap} onhover={onhover} highlightedRoute={highlightedRoute}/>
+			<RouteDisplay highlightedRoute={highlightedRoute}/>
+		</div>
+		<p>More text/transition, how to make pretty...</p>
+		<div class="infoMap">
+			<RailMap map={usaGeoContig} railMap={amtrakMap} cordMap={cityCordMap}/>
+			<!-- <RouteDisplay highlightedRoute={highlightedRouteRail}/> -->
+		</div>
+		<TopChart/>
+
 	</div>
 </div>
 
@@ -76,9 +128,12 @@
 		justify-content: center;
 
 		gap: 2em;
+	}
 
-
-
+	.infoMap {
+		/* want a horizonal flex? */
+		display: flex;
+		gap: 2em;
 
 	}
 </style>

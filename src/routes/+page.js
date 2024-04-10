@@ -17,8 +17,15 @@ export async function load({ fetch }) {
 	const res3 = await fetch('/cityCordMap.json');
 	const cityCordMap = await res3.json();
 
+	const res4 = await fetch('/AmtrakRoutes.geojson');
+	const amtrakMap= await res4.json();
+
+	const res5 = await fetch('/filteredCityPairToInfo.json');
+	const filteredCityPairToInfo = await res5.json();
 
 
+
+	// old code/dataset can remove?
 	const datasetCitiesBig =  datasetCities.features.filter(
     (city) =>
       city.properties.POPULATION > 600000 &&
@@ -30,7 +37,9 @@ export async function load({ fetch }) {
 		// want to pass the entire GEO obj as that helps make the projection?
 		usaGeo: datasetUSAGeo,
 		citiesBig: datasetCitiesBig,
-		cityCordMap: cityCordMap
+		cityCordMap: cityCordMap,
+		amtrakMap: amtrakMap,
+		filteredCityPairToInfo: filteredCityPairToInfo
 	}
 
 

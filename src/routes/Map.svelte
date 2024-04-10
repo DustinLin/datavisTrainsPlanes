@@ -9,12 +9,16 @@
 
 	// prov want to rename "dataset" to like map data or smth
 	export let map;
-	export let cities;
+	export let cities; // remove "cities" data when sure not being used, replacing with cordMap rn
 	export let cordMap;  
+
+	export let onhover;
+
+	// want to make the highlighted route more noticeable, so re-draw it like the example?
+	export let highlightedRoute;
 
 	// trying to plot lines and add interaction?
 	// from observable its an array of arrays
-	// TODO ask jack to append state at the end?
 	const mockData = [ [ "(Boston_MA, New York_NY)",
 	  { DEPARTURES_PERFORMED: 35030,
 		SEATS: 3529952,
@@ -74,9 +78,6 @@
 	// now have some cities that we want to plot
 
 
-
-
-
 	/**
 	 * 
 	 * debugging
@@ -107,12 +108,27 @@
 			.attr("stroke", "white");
 	*/
 
+	// TODO try to make display reactive
+	let borderBoxSize;
+	// borderBoxSize: has 2 entires: inline-size - width of div, block-size - height of div
+	// borderBoxSize could be undefined
+	let width = 975
+	let height = 610
+	//$: width = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 975
+	//$: height = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 610
+
+	const CITY_CIRCLE_R = 5
+	const CITY_CIRCLE_COL = "red"
+
+	// BUG?: the <style> section doesn't seem to have this var in scope
+	const ROUTE_STROKE_COL = "blue"
+	const ROUTE_STROKE_WID = 3
+
+
 </script>
 
 <div class="maps">
-	<p>map</p>
-
-	<svg width="975" height="610">
+	<svg width={width} height={height}>
 		<!-- drawing paths for each state, using projections -->
 		{#each map.features as state}
 			<path
@@ -129,15 +145,16 @@
 		<circle
 			cx = {usaMapProjection(cordMap[city].COORD)[0]}
 			cy = {usaMapProjection(cordMap[city].COORD)[1]}
-			fill = "red"
-			r = {3}
+			fill = {CITY_CIRCLE_COL}
+			r = {CITY_CIRCLE_R}
 		/>
+		<!-- adding a bit of buffer room to x,y cords -->
 		<text
 			font-size = 10
 			font-family = "sans-serif"
 			dominant-baseline = "hanging"
-			x = {usaMapProjection(cordMap[city].COORD)[0]}
-			y = {usaMapProjection(cordMap[city].COORD)[1]}
+			x = {usaMapProjection(cordMap[city].COORD)[0] + 4}
+			y = {usaMapProjection(cordMap[city].COORD)[1] + 4}
 		>
 			{city.split("_")[0]}
 		</text>
@@ -147,18 +164,21 @@
 		<!-- todo, refactor to a separate file/component?-->
 		<!--  drawing a line, need to extract coordinates and draw city end points -->
 
+		<!-- conditionally render color based on hover? -->
 		<line
 			x1={routeToCords(route, 0, 0)}
 			y1={routeToCords(route, 0, 1)}
 			x2={routeToCords(route, 1, 0)}
 			y2={routeToCords(route, 1, 1)}
-			stroke="blue"
-			stroke-width=1
+			stroke={ROUTE_STROKE_COL}
+			stroke-width={ROUTE_STROKE_WID}
+			on:mouseover={() => onhover(route)}
+			on:mouseleave={() => onhover(null)}
+			on:focus={() => onhover(route)}
+			on:focusout={() => onhover(null)}
 		/>
 
-	
 		{/each}
-
 
 
 	</svg>
@@ -168,6 +188,12 @@
 <style>
 	.maps {
 		border-style: solid;
+		/* the weight? */
+		flex:2;
 	}
-
+	line:hover {
+		stroke: "#669977";
+		/* can't access js variables in <style> section? */
+		stroke-width: 4; 
+	}
 </style>

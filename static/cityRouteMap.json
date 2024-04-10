@@ -1,0 +1,1853 @@
+{
+  "Boston_MA": [
+    "Acela",
+    "Lake Shore Limited",
+    "Northeast Regional"
+  ],
+  "Providence_RI": [
+    "Acela",
+    "Northeast Regional"
+  ],
+  "New Haven Union_CT": [
+    "Acela",
+    "Hartford Line",
+    "Northeast Regional",
+    "Vermonter"
+  ],
+  "Stamford_CT": [
+    "Acela",
+    "Northeast Regional",
+    "Vermonter"
+  ],
+  "New York_NY": [
+    "Acela",
+    "Adirondack",
+    "Cardinal",
+    "Carolinian",
+    "Crescent",
+    "Empire Service",
+    "Ethan Allen Express",
+    "Keystone Service",
+    "Lake Shore Limited",
+    "Maple Leaf",
+    "Northeast Regional",
+    "Pennsylvanian",
+    "Silver Service/Palmetto",
+    "Vermonter"
+  ],
+  "Newark_NJ": [
+    "Acela",
+    "Cardinal",
+    "Carolinian",
+    "Crescent",
+    "Keystone Service",
+    "Northeast Regional",
+    "Pennsylvanian",
+    "Silver Service/Palmetto",
+    "Vermonter"
+  ],
+  "Metropark_NJ": [
+    "Acela",
+    "Keystone Service",
+    "Northeast Regional",
+    "Silver Service/Palmetto",
+    "Vermonter"
+  ],
+  "Trenton_NJ": [
+    "Acela",
+    "Cardinal",
+    "Carolinian",
+    "Crescent",
+    "Keystone Service",
+    "Northeast Regional",
+    "Pennsylvanian",
+    "Silver Service/Palmetto",
+    "Vermonter"
+  ],
+  "Philadelphia_PA": [
+    "Acela",
+    "Cardinal",
+    "Carolinian",
+    "Crescent",
+    "Keystone Service",
+    "Northeast Regional",
+    "Pennsylvanian",
+    "Silver Service/Palmetto",
+    "Vermonter"
+  ],
+  "Wilmington_DE": [
+    "Acela",
+    "Cardinal",
+    "Carolinian",
+    "Crescent",
+    "Northeast Regional",
+    "Silver Service/Palmetto",
+    "Vermonter"
+  ],
+  "Baltimore_MD": [
+    "Acela",
+    "Cardinal",
+    "Carolinian",
+    "Crescent",
+    "Northeast Regional",
+    "Silver Service/Palmetto",
+    "Vermonter"
+  ],
+  "Washington_DC": [
+    "Acela",
+    "Capitol Limited",
+    "Cardinal",
+    "Carolinian",
+    "Crescent",
+    "Northeast Regional",
+    "Silver Service/Palmetto",
+    "Vermonter"
+  ],
+  "Rouses Point_NY": [
+    "Adirondack"
+  ],
+  "Plattsburgh_NY": [
+    "Adirondack"
+  ],
+  "Port Kent_NY": [
+    "Adirondack"
+  ],
+  "Westport_NY": [
+    "Adirondack"
+  ],
+  "Port Henry_NY": [
+    "Adirondack"
+  ],
+  "Ticonderoga_NY": [
+    "Adirondack"
+  ],
+  "Whitehall_NY": [
+    "Adirondack"
+  ],
+  "Fort Edward-Glens Falls_NY": [
+    "Adirondack",
+    "Ethan Allen Express"
+  ],
+  "Saratoga Springs_NY": [
+    "Adirondack",
+    "Ethan Allen Express"
+  ],
+  "Schenectady_NY": [
+    "Adirondack",
+    "Empire Service",
+    "Ethan Allen Express",
+    "Lake Shore Limited",
+    "Maple Leaf"
+  ],
+  "Albany-Rensselaer_NY": [
+    "Adirondack",
+    "Empire Service",
+    "Ethan Allen Express",
+    "Lake Shore Limited",
+    "Maple Leaf"
+  ],
+  "Hudson_NY": [
+    "Adirondack",
+    "Empire Service",
+    "Ethan Allen Express",
+    "Lake Shore Limited",
+    "Maple Leaf"
+  ],
+  "Rhinecliff_NY": [
+    "Adirondack",
+    "Empire Service",
+    "Ethan Allen Express",
+    "Lake Shore Limited",
+    "Maple Leaf"
+  ],
+  "Poughkeepsie_NY": [
+    "Adirondack",
+    "Empire Service",
+    "Ethan Allen Express",
+    "Lake Shore Limited",
+    "Maple Leaf"
+  ],
+  "Croton-Harmon_NY": [
+    "Adirondack",
+    "Empire Service",
+    "Ethan Allen Express",
+    "Lake Shore Limited",
+    "Maple Leaf"
+  ],
+  "Yonkers_NY": [
+    "Adirondack",
+    "Empire Service",
+    "Ethan Allen Express",
+    "Maple Leaf"
+  ],
+  "Lorton_VA": [
+    "Auto Train"
+  ],
+  "Sanford_FL": [
+    "Auto Train"
+  ],
+  "Chicago_IL": [
+    "Blue Water",
+    "California Zephyr",
+    "Capitol Limited",
+    "Cardinal",
+    "City of New Orleans",
+    "Empire Builder",
+    "Hiawatha",
+    "Illinois Zephyr",
+    "Illinois Zephyr",
+    "Lake Shore Limited",
+    "Lincoln Service",
+    "Pere Marquette",
+    "Saluki",
+    "Southwest Chief",
+    "Texas Eagle",
+    "Wolverine"
+  ],
+  "New Buffalo_MI": [
+    "Blue Water",
+    "Wolverine"
+  ],
+  "Niles_MI": [
+    "Blue Water",
+    "Wolverine"
+  ],
+  "Dowagiac_MI": [
+    "Blue Water",
+    "Wolverine"
+  ],
+  "Kalamazoo_MI": [
+    "Blue Water",
+    "Wolverine"
+  ],
+  "Battle Creek_MI": [
+    "Blue Water",
+    "Wolverine"
+  ],
+  "East Lansing_MI": [
+    "Blue Water"
+  ],
+  "Durand_MI": [
+    "Blue Water"
+  ],
+  "Flint_MI": [
+    "Blue Water"
+  ],
+  "Lapeer_MI": [
+    "Blue Water"
+  ],
+  "Port Huron_MI": [
+    "Blue Water"
+  ],
+  "Emeryville_CA": [
+    "California Zephyr",
+    "Capitol Corridor",
+    "Coast Starlight",
+    "San Joaquins"
+  ],
+  "Richmond_CA": [
+    "California Zephyr",
+    "Capitol Corridor",
+    "San Joaquins"
+  ],
+  "Martinez_CA": [
+    "California Zephyr",
+    "Capitol Corridor",
+    "Coast Starlight",
+    "San Joaquins"
+  ],
+  "Davis_CA": [
+    "California Zephyr",
+    "Capitol Corridor",
+    "Coast Starlight"
+  ],
+  "Sacramento_CA": [
+    "California Zephyr",
+    "Capitol Corridor",
+    "Coast Starlight",
+    "San Joaquins"
+  ],
+  "Roseville_CA": [
+    "California Zephyr",
+    "Capitol Corridor"
+  ],
+  "Colfax_CA": [
+    "California Zephyr"
+  ],
+  "Truckee_CA": [
+    "California Zephyr"
+  ],
+  "Reno_NV": [
+    "California Zephyr"
+  ],
+  "Winnemucca_NV": [
+    "California Zephyr"
+  ],
+  "Elko_NV": [
+    "California Zephyr"
+  ],
+  "Salt Lake City_UT": [
+    "California Zephyr"
+  ],
+  "Provo_UT": [
+    "California Zephyr"
+  ],
+  "Helper_UT": [
+    "California Zephyr"
+  ],
+  "Green River_UT": [
+    "California Zephyr"
+  ],
+  "Grand Junction_CO": [
+    "California Zephyr"
+  ],
+  "Glenwood Springs_CO": [
+    "California Zephyr"
+  ],
+  "Granby_CO": [
+    "California Zephyr"
+  ],
+  "Fraser-Winter Park_CO": [
+    "California Zephyr"
+  ],
+  "Denver_CO": [
+    "California Zephyr"
+  ],
+  "Fort Morgan_CO": [
+    "California Zephyr"
+  ],
+  "McCook_NE": [
+    "California Zephyr"
+  ],
+  "Holdrege_NE": [
+    "California Zephyr"
+  ],
+  "Hastings_NE": [
+    "California Zephyr"
+  ],
+  "Lincoln_NE": [
+    "California Zephyr"
+  ],
+  "Omaha_NE": [
+    "California Zephyr"
+  ],
+  "Creston_IA": [
+    "California Zephyr"
+  ],
+  "Osceola_IA": [
+    "California Zephyr"
+  ],
+  "Ottumwa_IA": [
+    "California Zephyr"
+  ],
+  "Mount Pleasant_IA": [
+    "California Zephyr"
+  ],
+  "Burlington_IA": [
+    "California Zephyr"
+  ],
+  "Galesburg_IL": [
+    "California Zephyr",
+    "Illinois Zephyr",
+    "Illinois Zephyr",
+    "Southwest Chief"
+  ],
+  "Princeton_IL": [
+    "California Zephyr",
+    "Illinois Zephyr",
+    "Illinois Zephyr",
+    "Southwest Chief"
+  ],
+  "Naperville_IL": [
+    "California Zephyr",
+    "Illinois Zephyr",
+    "Illinois Zephyr",
+    "Southwest Chief"
+  ],
+  "Auburn_CA": [
+    "Capitol Corridor"
+  ],
+  "Rocklin_CA": [
+    "Capitol Corridor"
+  ],
+  "Fairfield-Vacaville_CA": [
+    "Capitol Corridor"
+  ],
+  "Suisun-Fairfield_CA": [
+    "Capitol Corridor"
+  ],
+  "Berkeley_CA": [
+    "Capitol Corridor"
+  ],
+  "Oakland–Jack London Square_CA": [
+    "Capitol Corridor",
+    "Coast Starlight",
+    "San Joaquins"
+  ],
+  "Oakland Coliseum_CA": [
+    "Capitol Corridor"
+  ],
+  "Hayward_CA": [
+    "Capitol Corridor"
+  ],
+  "Fremont_CA": [
+    "Capitol Corridor"
+  ],
+  "Santa Clara_CA": [
+    "Capitol Corridor"
+  ],
+  "San Jose_CA": [
+    "Capitol Corridor",
+    "Coast Starlight"
+  ],
+  "South Bend_IN": [
+    "Capitol Limited",
+    "Lake Shore Limited"
+  ],
+  "Elkhart_IN": [
+    "Capitol Limited",
+    "Lake Shore Limited"
+  ],
+  "Waterloo_IN": [
+    "Capitol Limited",
+    "Lake Shore Limited"
+  ],
+  "Toledo_OH": [
+    "Capitol Limited",
+    "Lake Shore Limited"
+  ],
+  "Sandusky_OH": [
+    "Capitol Limited",
+    "Lake Shore Limited"
+  ],
+  "Elyria_OH": [
+    "Capitol Limited",
+    "Lake Shore Limited"
+  ],
+  "Cleveland_OH": [
+    "Capitol Limited",
+    "Lake Shore Limited"
+  ],
+  "Alliance_OH": [
+    "Capitol Limited"
+  ],
+  "Pittsburgh_PA": [
+    "Capitol Limited",
+    "Pennsylvanian"
+  ],
+  "Connellsville_PA": [
+    "Capitol Limited"
+  ],
+  "Cumberland_MD": [
+    "Capitol Limited"
+  ],
+  "Martinsburg_WV": [
+    "Capitol Limited"
+  ],
+  "Harpers Ferry_WV": [
+    "Capitol Limited"
+  ],
+  "Rockville_MD": [
+    "Capitol Limited"
+  ],
+  "Dyer_IN": [
+    "Cardinal"
+  ],
+  "Rensselaer_IN": [
+    "Cardinal"
+  ],
+  "Lafayette_IN": [
+    "Cardinal"
+  ],
+  "Crawfordsville_IN": [
+    "Cardinal"
+  ],
+  "Indianapolis_IN": [
+    "Cardinal"
+  ],
+  "Connersville_IN": [
+    "Cardinal"
+  ],
+  "Cincinnati_OH": [
+    "Cardinal"
+  ],
+  "Maysville_KY": [
+    "Cardinal"
+  ],
+  "South Shore-South Portsmouth_KY": [
+    "Cardinal"
+  ],
+  "Ashland_KY": [
+    "Cardinal"
+  ],
+  "Huntington_WV": [
+    "Cardinal"
+  ],
+  "Charleston_WV": [
+    "Cardinal"
+  ],
+  "Montgomery_WV": [
+    "Cardinal"
+  ],
+  "Thurmond_WV": [
+    "Cardinal"
+  ],
+  "Prince_WV": [
+    "Cardinal"
+  ],
+  "Hinton_WV": [
+    "Cardinal"
+  ],
+  "Alderson_WV": [
+    "Cardinal"
+  ],
+  "White Sulphur Springs_WV": [
+    "Cardinal"
+  ],
+  "Clifton Forge_VA": [
+    "Cardinal"
+  ],
+  "Staunton_VA": [
+    "Cardinal"
+  ],
+  "Charlottesville_VA": [
+    "Cardinal",
+    "Crescent",
+    "Northeast Regional"
+  ],
+  "Culpeper_VA": [
+    "Cardinal",
+    "Crescent",
+    "Northeast Regional"
+  ],
+  "Manassas_VA": [
+    "Cardinal",
+    "Crescent",
+    "Northeast Regional"
+  ],
+  "Alexandria_VA": [
+    "Cardinal",
+    "Carolinian",
+    "Crescent",
+    "Northeast Regional",
+    "Silver Service/Palmetto"
+  ],
+  "Quantico_VA": [
+    "Carolinian",
+    "Northeast Regional"
+  ],
+  "Fredericksburg_VA": [
+    "Carolinian",
+    "Northeast Regional",
+    "Silver Service/Palmetto"
+  ],
+  "Richmond Staples Mill Road_VA": [
+    "Carolinian",
+    "Northeast Regional",
+    "Silver Service/Palmetto"
+  ],
+  "Petersburg_VA": [
+    "Carolinian",
+    "Northeast Regional",
+    "Silver Service/Palmetto"
+  ],
+  "Rocky Mount_NC": [
+    "Carolinian",
+    "Silver Service/Palmetto"
+  ],
+  "Wilson_NC": [
+    "Carolinian",
+    "Silver Service/Palmetto"
+  ],
+  "Selma-Smithfield_NC": [
+    "Carolinian",
+    "Silver Service/Palmetto"
+  ],
+  "Raleigh_NC": [
+    "Carolinian",
+    "Piedmont",
+    "Silver Service/Palmetto"
+  ],
+  "North Carolina State Fair_NC": [
+    "Carolinian"
+  ],
+  "Cary_NC": [
+    "Carolinian",
+    "Piedmont",
+    "Silver Service/Palmetto"
+  ],
+  "Durham_NC": [
+    "Carolinian",
+    "Piedmont"
+  ],
+  "Burlington_NC": [
+    "Carolinian",
+    "Piedmont"
+  ],
+  "Greensboro_NC": [
+    "Carolinian",
+    "Crescent",
+    "Piedmont"
+  ],
+  "High Point_NC": [
+    "Carolinian",
+    "Crescent",
+    "Piedmont"
+  ],
+  "Lexington Barbeque Festival_NC": [
+    "Carolinian",
+    "Piedmont"
+  ],
+  "Salisbury_NC": [
+    "Carolinian",
+    "Crescent",
+    "Piedmont"
+  ],
+  "Kannapolis_NC": [
+    "Carolinian",
+    "Piedmont"
+  ],
+  "Charlotte_NC": [
+    "Carolinian",
+    "Crescent",
+    "Piedmont"
+  ],
+  "Vancouver_BC": [
+    "Cascades"
+  ],
+  "Bellingham_WA": [
+    "Cascades"
+  ],
+  "Mount Vernon_WA": [
+    "Cascades"
+  ],
+  "Stanwood_WA": [
+    "Cascades"
+  ],
+  "Everett_WA": [
+    "Cascades",
+    "Empire Builder"
+  ],
+  "Edmonds_WA": [
+    "Cascades",
+    "Empire Builder"
+  ],
+  "Seattle_WA": [
+    "Cascades",
+    "Coast Starlight",
+    "Empire Builder"
+  ],
+  "Tukwila_WA": [
+    "Cascades"
+  ],
+  "Tacoma_WA": [
+    "Cascades",
+    "Coast Starlight"
+  ],
+  "Centralia_WA": [
+    "Cascades",
+    "Coast Starlight"
+  ],
+  "Kelso-Longview_WA": [
+    "Cascades",
+    "Coast Starlight"
+  ],
+  "Vancouver_WA": [
+    "Cascades",
+    "Coast Starlight",
+    "Empire Builder"
+  ],
+  "Portland_OR": [
+    "Cascades",
+    "Coast Starlight",
+    "Empire Builder"
+  ],
+  "Oregon City_OR": [
+    "Cascades"
+  ],
+  "Salem_OR": [
+    "Cascades",
+    "Coast Starlight"
+  ],
+  "Albany_OR": [
+    "Cascades",
+    "Coast Starlight"
+  ],
+  "Eugene_OR": [
+    "Cascades",
+    "Coast Starlight"
+  ],
+  "Homewood_IL": [
+    "City of New Orleans",
+    "Saluki"
+  ],
+  "Kankakee_IL": [
+    "City of New Orleans",
+    "Saluki"
+  ],
+  "Champaign-Urbana_IL": [
+    "City of New Orleans",
+    "Saluki"
+  ],
+  "Mattoon_IL": [
+    "City of New Orleans",
+    "Saluki"
+  ],
+  "Effingham_IL": [
+    "City of New Orleans",
+    "Saluki"
+  ],
+  "Centralia_IL": [
+    "City of New Orleans",
+    "Saluki"
+  ],
+  "Carbondale_IL": [
+    "City of New Orleans",
+    "Saluki"
+  ],
+  "Fulton_KY": [
+    "City of New Orleans"
+  ],
+  "Newbern-Dyersburg_TN": [
+    "City of New Orleans"
+  ],
+  "Memphis_TN": [
+    "City of New Orleans"
+  ],
+  "Marks_MS": [
+    "City of New Orleans"
+  ],
+  "Greenwood_MS": [
+    "City of New Orleans"
+  ],
+  "Yazoo City_MS": [
+    "City of New Orleans"
+  ],
+  "Jackson_MS": [
+    "City of New Orleans"
+  ],
+  "Hazlehurst_MS": [
+    "City of New Orleans"
+  ],
+  "Brookhaven_MS": [
+    "City of New Orleans"
+  ],
+  "McComb_MS": [
+    "City of New Orleans"
+  ],
+  "Hammond_LA": [
+    "City of New Orleans"
+  ],
+  "New Orleans_LA": [
+    "City of New Orleans",
+    "Crescent",
+    "Sunset Limited"
+  ],
+  "Chemult_OR": [
+    "Coast Starlight"
+  ],
+  "Klamath Falls_OR": [
+    "Coast Starlight"
+  ],
+  "Dunsmuir_CA": [
+    "Coast Starlight"
+  ],
+  "Redding_CA": [
+    "Coast Starlight"
+  ],
+  "Chico_CA": [
+    "Coast Starlight"
+  ],
+  "Salinas_CA": [
+    "Coast Starlight"
+  ],
+  "Paso Robles_CA": [
+    "Coast Starlight"
+  ],
+  "San Luis Obispo_CA": [
+    "Coast Starlight",
+    "Pacific Surfliner"
+  ],
+  "Santa Barbara_CA": [
+    "Coast Starlight",
+    "Pacific Surfliner"
+  ],
+  "Oxnard_CA": [
+    "Coast Starlight",
+    "Pacific Surfliner"
+  ],
+  "Simi Valley_CA": [
+    "Coast Starlight",
+    "Pacific Surfliner"
+  ],
+  "Van Nuys_CA": [
+    "Coast Starlight",
+    "Pacific Surfliner"
+  ],
+  "Burbank_CA": [
+    "Coast Starlight",
+    "Pacific Surfliner"
+  ],
+  "Los Angeles_CA": [
+    "Coast Starlight",
+    "Pacific Surfliner",
+    "Southwest Chief",
+    "Sunset Limited",
+    "Texas Eagle"
+  ],
+  "Lynchburg_VA": [
+    "Crescent",
+    "Northeast Regional"
+  ],
+  "Danville_VA": [
+    "Crescent"
+  ],
+  "Gastonia_NC": [
+    "Crescent"
+  ],
+  "Spartanburg_SC": [
+    "Crescent"
+  ],
+  "Greenville_SC": [
+    "Crescent"
+  ],
+  "Clemson_SC": [
+    "Crescent"
+  ],
+  "Toccoa_GA": [
+    "Crescent"
+  ],
+  "Gainesville_GA": [
+    "Crescent"
+  ],
+  "Atlanta_GA": [
+    "Crescent"
+  ],
+  "Anniston_AL": [
+    "Crescent"
+  ],
+  "Birmingham_AL": [
+    "Crescent"
+  ],
+  "Tuscaloosa_AL": [
+    "Crescent"
+  ],
+  "Meridian_MS": [
+    "Crescent"
+  ],
+  "Laurel_MS": [
+    "Crescent"
+  ],
+  "Hattiesburg_MS": [
+    "Crescent"
+  ],
+  "Picayune_MS": [
+    "Crescent"
+  ],
+  "Slidell_LA": [
+    "Crescent"
+  ],
+  "Brunswick_ME": [
+    "Downeaster"
+  ],
+  "Freeport_ME": [
+    "Downeaster"
+  ],
+  "Portland_ME": [
+    "Downeaster"
+  ],
+  "Old Orchard Beach_ME": [
+    "Downeaster"
+  ],
+  "Saco_ME": [
+    "Downeaster"
+  ],
+  "Wells_ME": [
+    "Downeaster"
+  ],
+  "Dover_NH": [
+    "Downeaster"
+  ],
+  "Durham_NH": [
+    "Downeaster"
+  ],
+  "Exeter_NH": [
+    "Downeaster"
+  ],
+  "Haverhill_MA": [
+    "Downeaster"
+  ],
+  "Woburn_MA": [
+    "Downeaster"
+  ],
+  "Boston North_MA": [
+    "Downeaster"
+  ],
+  "Spokane_WA": [
+    "Empire Builder"
+  ],
+  "Sandpoint_ID": [
+    "Empire Builder"
+  ],
+  "Libby_MT": [
+    "Empire Builder"
+  ],
+  "Whitefish_MT": [
+    "Empire Builder"
+  ],
+  "West Glacier_MT": [
+    "Empire Builder"
+  ],
+  "Essex_MT": [
+    "Empire Builder"
+  ],
+  "East Glacier Park_MT": [
+    "Empire Builder"
+  ],
+  "Browning_MT": [
+    "Empire Builder"
+  ],
+  "Cut Bank_MT": [
+    "Empire Builder"
+  ],
+  "Shelby_MT": [
+    "Empire Builder"
+  ],
+  "Havre_MT": [
+    "Empire Builder"
+  ],
+  "Malta_MT": [
+    "Empire Builder"
+  ],
+  "Glasgow_MT": [
+    "Empire Builder"
+  ],
+  "Wolf Point_MT": [
+    "Empire Builder"
+  ],
+  "Williston_ND": [
+    "Empire Builder"
+  ],
+  "Stanley_ND": [
+    "Empire Builder"
+  ],
+  "Minot_ND": [
+    "Empire Builder"
+  ],
+  "Rugby_ND": [
+    "Empire Builder"
+  ],
+  "Devils Lake_ND": [
+    "Empire Builder"
+  ],
+  "Grand Forks_ND": [
+    "Empire Builder"
+  ],
+  "Fargo_ND": [
+    "Empire Builder"
+  ],
+  "Detroit Lakes_MN": [
+    "Empire Builder"
+  ],
+  "Staples_MN": [
+    "Empire Builder"
+  ],
+  "St. Cloud_MN": [
+    "Empire Builder"
+  ],
+  "Minneapolis_MN": [
+    "Empire Builder"
+  ],
+  "St. Paul_MN": [
+    "Empire Builder"
+  ],
+  "Red Wing_MN": [
+    "Empire Builder"
+  ],
+  "Winona_MN": [
+    "Empire Builder"
+  ],
+  "La Crosse_WI": [
+    "Empire Builder"
+  ],
+  "Tomah_WI": [
+    "Empire Builder"
+  ],
+  "Wisconsin Dells_WI": [
+    "Empire Builder"
+  ],
+  "Portage_WI": [
+    "Empire Builder"
+  ],
+  "Columbus_WI": [
+    "Empire Builder"
+  ],
+  "Milwaukee_WI": [
+    "Empire Builder",
+    "Hiawatha"
+  ],
+  "Glenview_IL": [
+    "Empire Builder",
+    "Hiawatha"
+  ],
+  "Leavenworth_WA": [
+    "Empire Builder"
+  ],
+  "Wenatchee_WA": [
+    "Empire Builder"
+  ],
+  "Ephrata_WA": [
+    "Empire Builder"
+  ],
+  "Bingen-White Salmon_WA": [
+    "Empire Builder"
+  ],
+  "Wishram_WA": [
+    "Empire Builder"
+  ],
+  "Pasco_WA": [
+    "Empire Builder"
+  ],
+  "Niagara Falls_NY": [
+    "Empire Service",
+    "Maple Leaf"
+  ],
+  "Buffalo–Exchange Street_NY": [
+    "Empire Service",
+    "Maple Leaf"
+  ],
+  "Buffalo–Depew_NY": [
+    "Empire Service",
+    "Lake Shore Limited",
+    "Maple Leaf"
+  ],
+  "Rochester_NY": [
+    "Empire Service",
+    "Lake Shore Limited",
+    "Maple Leaf"
+  ],
+  "New York State Fair_NY": [
+    "Empire Service",
+    "Maple Leaf"
+  ],
+  "Syracuse_NY": [
+    "Empire Service",
+    "Lake Shore Limited",
+    "Maple Leaf"
+  ],
+  "Rome_NY": [
+    "Empire Service",
+    "Maple Leaf"
+  ],
+  "Utica_NY": [
+    "Empire Service",
+    "Lake Shore Limited",
+    "Maple Leaf"
+  ],
+  "Amsterdam_NY": [
+    "Empire Service",
+    "Maple Leaf"
+  ],
+  "Rutland_VT": [
+    "Ethan Allen Express"
+  ],
+  "Castleton_VT": [
+    "Ethan Allen Express"
+  ],
+  "Springfield_MA": [
+    "Hartford Line",
+    "Lake Shore Limited",
+    "Northeast Regional",
+    "Vermonter"
+  ],
+  "Windsor Locks_CT": [
+    "Hartford Line",
+    "Northeast Regional",
+    "Vermonter"
+  ],
+  "Windsor_CT": [
+    "Hartford Line",
+    "Northeast Regional"
+  ],
+  "Hartford_CT": [
+    "Hartford Line",
+    "Northeast Regional",
+    "Vermonter"
+  ],
+  "Berlin_CT": [
+    "Hartford Line",
+    "Northeast Regional",
+    "Vermonter"
+  ],
+  "Meriden_CT": [
+    "Hartford Line",
+    "Northeast Regional",
+    "Vermonter"
+  ],
+  "Wallingford_CT": [
+    "Hartford Line",
+    "Northeast Regional"
+  ],
+  "New Haven_CT": [
+    "Hartford Line",
+    "Northeast Regional"
+  ],
+  "Oklahoma City_OK": [
+    "Heartland Flyer"
+  ],
+  "Norman_OK": [
+    "Heartland Flyer"
+  ],
+  "Purcell_OK": [
+    "Heartland Flyer"
+  ],
+  "Pauls Valley_OK": [
+    "Heartland Flyer"
+  ],
+  "Ardmore_OK": [
+    "Heartland Flyer"
+  ],
+  "Gainesville_TX": [
+    "Heartland Flyer"
+  ],
+  "Fort Worth_TX": [
+    "Heartland Flyer",
+    "Texas Eagle"
+  ],
+  "Sturtevant_WI": [
+    "Hiawatha"
+  ],
+  "La Grange_IL": [
+    "Illinois Zephyr",
+    "Illinois Zephyr"
+  ],
+  "Plano_IL": [
+    "Illinois Zephyr",
+    "Illinois Zephyr"
+  ],
+  "Mendota_IL": [
+    "Illinois Zephyr",
+    "Illinois Zephyr",
+    "Southwest Chief"
+  ],
+  "Kewanee_IL": [
+    "Illinois Zephyr",
+    "Illinois Zephyr"
+  ],
+  "Macomb_IL": [
+    "Illinois Zephyr",
+    "Illinois Zephyr"
+  ],
+  "Quincy_IL": [
+    "Illinois Zephyr",
+    "Illinois Zephyr"
+  ],
+  "Harrisburg_PA": [
+    "Keystone Service",
+    "Pennsylvanian"
+  ],
+  "Middletown_PA": [
+    "Keystone Service"
+  ],
+  "Elizabethtown_PA": [
+    "Keystone Service",
+    "Pennsylvanian"
+  ],
+  "Mount Joy_PA": [
+    "Keystone Service"
+  ],
+  "Lancaster_PA": [
+    "Keystone Service",
+    "Pennsylvanian"
+  ],
+  "Parkesburg_PA": [
+    "Keystone Service"
+  ],
+  "Coatesville_PA": [
+    "Keystone Service"
+  ],
+  "Downingtown_PA": [
+    "Keystone Service"
+  ],
+  "Exton_PA": [
+    "Keystone Service",
+    "Pennsylvanian"
+  ],
+  "Paoli_PA": [
+    "Keystone Service",
+    "Pennsylvanian"
+  ],
+  "Ardmore_PA": [
+    "Keystone Service"
+  ],
+  "North Philadelphia_PA": [
+    "Keystone Service",
+    "Northeast Regional"
+  ],
+  "Cornwells Heights_PA": [
+    "Keystone Service",
+    "Northeast Regional"
+  ],
+  "Princeton Junction_NJ": [
+    "Keystone Service",
+    "Northeast Regional",
+    "Silver Service/Palmetto"
+  ],
+  "New Brunswick_NJ": [
+    "Keystone Service",
+    "Northeast Regional",
+    "Silver Service/Palmetto"
+  ],
+  "Pittsfield_MA": [
+    "Lake Shore Limited"
+  ],
+  "Worcester_MA": [
+    "Lake Shore Limited"
+  ],
+  "Framingham_MA": [
+    "Lake Shore Limited"
+  ],
+  "Bryan_OH": [
+    "Lake Shore Limited"
+  ],
+  "Erie_PA": [
+    "Lake Shore Limited"
+  ],
+  "Summit_IL": [
+    "Lincoln Service"
+  ],
+  "Joliet_IL": [
+    "Lincoln Service",
+    "Texas Eagle"
+  ],
+  "Dwight_IL": [
+    "Lincoln Service"
+  ],
+  "Pontiac_IL": [
+    "Lincoln Service",
+    "Texas Eagle"
+  ],
+  "Bloomington-Normal_IL": [
+    "Lincoln Service",
+    "Texas Eagle"
+  ],
+  "Lincoln_IL": [
+    "Lincoln Service",
+    "Texas Eagle"
+  ],
+  "Springfield_IL": [
+    "Lincoln Service",
+    "Texas Eagle"
+  ],
+  "Carlinville_IL": [
+    "Lincoln Service",
+    "Texas Eagle"
+  ],
+  "Alton_IL": [
+    "Lincoln Service",
+    "Texas Eagle"
+  ],
+  "St. Louis_MO": [
+    "Lincoln Service",
+    "Missouri River Runner",
+    "Texas Eagle"
+  ],
+  "Toronto_ON": [
+    "Maple Leaf"
+  ],
+  "Oakville_ON": [
+    "Maple Leaf"
+  ],
+  "Aldershot_ON": [
+    "Maple Leaf"
+  ],
+  "Grimsby_ON": [
+    "Maple Leaf"
+  ],
+  "St. Catharines_ON": [
+    "Maple Leaf"
+  ],
+  "Niagara Falls_ON": [
+    "Maple Leaf"
+  ],
+  "Kansas City_MO": [
+    "Missouri River Runner",
+    "Southwest Chief"
+  ],
+  "Independence_MO": [
+    "Missouri River Runner"
+  ],
+  "Lee's Summit_MO": [
+    "Missouri River Runner"
+  ],
+  "Warrensburg_MO": [
+    "Missouri River Runner"
+  ],
+  "Sedalia_MO": [
+    "Missouri River Runner"
+  ],
+  "Jefferson City_MO": [
+    "Missouri River Runner"
+  ],
+  "Hermann_MO": [
+    "Missouri River Runner"
+  ],
+  "Washington_MO": [
+    "Missouri River Runner"
+  ],
+  "Kirkwood_MO": [
+    "Missouri River Runner"
+  ],
+  "Richmond_VA": [
+    "Northeast Regional"
+  ],
+  "Williamsburg_VA": [
+    "Northeast Regional"
+  ],
+  "Newport News_VA": [
+    "Northeast Regional"
+  ],
+  "Norfolk_VA": [
+    "Northeast Regional"
+  ],
+  "Woodbridge_VA": [
+    "Northeast Regional"
+  ],
+  "Ashland_VA": [
+    "Northeast Regional"
+  ],
+  "Burke Centre_VA": [
+    "Northeast Regional"
+  ],
+  "Roanoke_VA": [
+    "Northeast Regional"
+  ],
+  "Bridgeport_CT": [
+    "Northeast Regional",
+    "Vermonter"
+  ],
+  "New Rochelle_NY": [
+    "Northeast Regional"
+  ],
+  "Newark_DE": [
+    "Northeast Regional"
+  ],
+  "Aberdeen_MD": [
+    "Northeast Regional"
+  ],
+  "New Carrollton_MD": [
+    "Northeast Regional",
+    "Silver Service/Palmetto",
+    "Vermonter"
+  ],
+  "Kingston_RI": [
+    "Northeast Regional"
+  ],
+  "Westerly_RI": [
+    "Northeast Regional"
+  ],
+  "Mystic_CT": [
+    "Northeast Regional"
+  ],
+  "New London_CT": [
+    "Northeast Regional"
+  ],
+  "Old Saybrook_CT": [
+    "Northeast Regional"
+  ],
+  "Grover Beach_CA": [
+    "Pacific Surfliner"
+  ],
+  "Guadalupe_CA": [
+    "Pacific Surfliner"
+  ],
+  "Lompoc-Surf_CA": [
+    "Pacific Surfliner"
+  ],
+  "Goleta_CA": [
+    "Pacific Surfliner"
+  ],
+  "Carpinteria_CA": [
+    "Pacific Surfliner"
+  ],
+  "Ventura_CA": [
+    "Pacific Surfliner"
+  ],
+  "Camarillo_CA": [
+    "Pacific Surfliner"
+  ],
+  "Moorpark_CA": [
+    "Pacific Surfliner"
+  ],
+  "Chatsworth_CA": [
+    "Pacific Surfliner"
+  ],
+  "Glendale_CA": [
+    "Pacific Surfliner"
+  ],
+  "Fullerton_CA": [
+    "Pacific Surfliner",
+    "Southwest Chief"
+  ],
+  "Anaheim_CA": [
+    "Pacific Surfliner"
+  ],
+  "Santa Ana_CA": [
+    "Pacific Surfliner"
+  ],
+  "Irvine_CA": [
+    "Pacific Surfliner"
+  ],
+  "San Juan Capistrano_CA": [
+    "Pacific Surfliner"
+  ],
+  "San Clemente Pier_CA": [
+    "Pacific Surfliner"
+  ],
+  "Oceanside_CA": [
+    "Pacific Surfliner"
+  ],
+  "Solana Beach_CA": [
+    "Pacific Surfliner"
+  ],
+  "San Diego_CA": [
+    "Pacific Surfliner"
+  ],
+  "Greensburg_PA": [
+    "Pennsylvanian"
+  ],
+  "Latrobe_PA": [
+    "Pennsylvanian"
+  ],
+  "Johnstown_PA": [
+    "Pennsylvanian"
+  ],
+  "Altoona_PA": [
+    "Pennsylvanian"
+  ],
+  "Tyrone_PA": [
+    "Pennsylvanian"
+  ],
+  "Huntingdon_PA": [
+    "Pennsylvanian"
+  ],
+  "Lewistown_PA": [
+    "Pennsylvanian"
+  ],
+  "St. Joseph-Benton Harbor_MI": [
+    "Pere Marquette"
+  ],
+  "Bangor_MI": [
+    "Pere Marquette"
+  ],
+  "Holland_MI": [
+    "Pere Marquette"
+  ],
+  "Grand Rapids_MI": [
+    "Pere Marquette"
+  ],
+  "Gilman_IL": [
+    "Saluki"
+  ],
+  "Rantoul_IL": [
+    "Saluki"
+  ],
+  "Du Quoin_IL": [
+    "Saluki"
+  ],
+  "Modesto_CA": [
+    "San Joaquins"
+  ],
+  "Turlock-Denair_CA": [
+    "San Joaquins"
+  ],
+  "Merced_CA": [
+    "San Joaquins"
+  ],
+  "Fresno_CA": [
+    "San Joaquins"
+  ],
+  "Hanford_CA": [
+    "San Joaquins"
+  ],
+  "Corcoran_CA": [
+    "San Joaquins"
+  ],
+  "Col Allensworth State Park_CA": [
+    "San Joaquins"
+  ],
+  "Wasco_CA": [
+    "San Joaquins"
+  ],
+  "Bakersfield_CA": [
+    "San Joaquins"
+  ],
+  "Lodi_CA": [
+    "San Joaquins"
+  ],
+  "Stockton Downtown_CA": [
+    "San Joaquins"
+  ],
+  "Antioch-Pittsburg_CA": [
+    "San Joaquins"
+  ],
+  "Stockton San Joaquin Street_CA": [
+    "San Joaquins"
+  ],
+  "Winter Haven_FL": [
+    "Silver Service/Palmetto"
+  ],
+  "Sebring_FL": [
+    "Silver Service/Palmetto"
+  ],
+  "Okeechobee_FL": [
+    "Silver Service/Palmetto"
+  ],
+  "West Palm Beach_FL": [
+    "Silver Service/Palmetto"
+  ],
+  "Delray Beach_FL": [
+    "Silver Service/Palmetto"
+  ],
+  "Deerfield Beach_FL": [
+    "Silver Service/Palmetto"
+  ],
+  "Fort Lauderdale_FL": [
+    "Silver Service/Palmetto"
+  ],
+  "Hollywood_FL": [
+    "Silver Service/Palmetto"
+  ],
+  "Miami_FL": [
+    "Silver Service/Palmetto"
+  ],
+  "Lakeland_FL": [
+    "Silver Service/Palmetto"
+  ],
+  "Tampa_FL": [
+    "Silver Service/Palmetto"
+  ],
+  "Savannah_GA": [
+    "Silver Service/Palmetto"
+  ],
+  "Jesup_GA": [
+    "Silver Service/Palmetto"
+  ],
+  "Jacksonville_FL": [
+    "Silver Service/Palmetto"
+  ],
+  "Palatka_FL": [
+    "Silver Service/Palmetto"
+  ],
+  "DeLand_FL": [
+    "Silver Service/Palmetto"
+  ],
+  "Winter Park_FL": [
+    "Silver Service/Palmetto"
+  ],
+  "Orlando_FL": [
+    "Silver Service/Palmetto"
+  ],
+  "Kissimmee_FL": [
+    "Silver Service/Palmetto"
+  ],
+  "Fayetteville_NC": [
+    "Silver Service/Palmetto"
+  ],
+  "Dillon_SC": [
+    "Silver Service/Palmetto"
+  ],
+  "Florence_SC": [
+    "Silver Service/Palmetto"
+  ],
+  "Kingstree_SC": [
+    "Silver Service/Palmetto"
+  ],
+  "Charleston_SC": [
+    "Silver Service/Palmetto"
+  ],
+  "Yemassee_SC": [
+    "Silver Service/Palmetto"
+  ],
+  "Southern Pines_NC": [
+    "Silver Service/Palmetto"
+  ],
+  "Hamlet_NC": [
+    "Silver Service/Palmetto"
+  ],
+  "Camden_SC": [
+    "Silver Service/Palmetto"
+  ],
+  "Columbia_SC": [
+    "Silver Service/Palmetto"
+  ],
+  "Denmark_SC": [
+    "Silver Service/Palmetto"
+  ],
+  "Riverside_CA": [
+    "Southwest Chief"
+  ],
+  "San Bernardino_CA": [
+    "Southwest Chief"
+  ],
+  "Victorville_CA": [
+    "Southwest Chief"
+  ],
+  "Barstow_CA": [
+    "Southwest Chief"
+  ],
+  "Needles_CA": [
+    "Southwest Chief"
+  ],
+  "Kingman_AZ": [
+    "Southwest Chief"
+  ],
+  "Flagstaff_AZ": [
+    "Southwest Chief"
+  ],
+  "Winslow_AZ": [
+    "Southwest Chief"
+  ],
+  "Gallup_NM": [
+    "Southwest Chief"
+  ],
+  "Albuquerque_NM": [
+    "Southwest Chief"
+  ],
+  "Lamy_NM": [
+    "Southwest Chief"
+  ],
+  "Las Vegas_NM": [
+    "Southwest Chief"
+  ],
+  "Raton_NM": [
+    "Southwest Chief"
+  ],
+  "Trinidad_CO": [
+    "Southwest Chief"
+  ],
+  "La Junta_CO": [
+    "Southwest Chief"
+  ],
+  "Lamar_CO": [
+    "Southwest Chief"
+  ],
+  "Garden City_KS": [
+    "Southwest Chief"
+  ],
+  "Dodge City_KS": [
+    "Southwest Chief"
+  ],
+  "Hutchinson_KS": [
+    "Southwest Chief"
+  ],
+  "Newton_KS": [
+    "Southwest Chief"
+  ],
+  "Topeka_KS": [
+    "Southwest Chief"
+  ],
+  "Lawrence_KS": [
+    "Southwest Chief"
+  ],
+  "La Plata_MO": [
+    "Southwest Chief"
+  ],
+  "Fort Madison_IA": [
+    "Southwest Chief"
+  ],
+  "Pomona_CA": [
+    "Sunset Limited",
+    "Texas Eagle"
+  ],
+  "Ontario_CA": [
+    "Sunset Limited",
+    "Texas Eagle"
+  ],
+  "Palm Springs_CA": [
+    "Sunset Limited",
+    "Texas Eagle"
+  ],
+  "Yuma_AZ": [
+    "Sunset Limited",
+    "Texas Eagle"
+  ],
+  "Maricopa_AZ": [
+    "Sunset Limited",
+    "Texas Eagle"
+  ],
+  "Tucson_AZ": [
+    "Sunset Limited",
+    "Texas Eagle"
+  ],
+  "Benson_AZ": [
+    "Sunset Limited",
+    "Texas Eagle"
+  ],
+  "Lordsburg_NM": [
+    "Sunset Limited",
+    "Texas Eagle"
+  ],
+  "Deming_NM": [
+    "Sunset Limited",
+    "Texas Eagle"
+  ],
+  "El Paso_TX": [
+    "Sunset Limited",
+    "Texas Eagle"
+  ],
+  "Alpine_TX": [
+    "Sunset Limited",
+    "Texas Eagle"
+  ],
+  "Sanderson_TX": [
+    "Sunset Limited",
+    "Texas Eagle"
+  ],
+  "Del Rio_TX": [
+    "Sunset Limited",
+    "Texas Eagle"
+  ],
+  "San Antonio_TX": [
+    "Sunset Limited",
+    "Texas Eagle"
+  ],
+  "Houston_TX": [
+    "Sunset Limited"
+  ],
+  "Beaumont_TX": [
+    "Sunset Limited"
+  ],
+  "Lake Charles_LA": [
+    "Sunset Limited"
+  ],
+  "Lafayette_LA": [
+    "Sunset Limited"
+  ],
+  "New Iberia_LA": [
+    "Sunset Limited"
+  ],
+  "Schriever_LA": [
+    "Sunset Limited"
+  ],
+  "San Marcos_TX": [
+    "Texas Eagle"
+  ],
+  "Austin_TX": [
+    "Texas Eagle"
+  ],
+  "Taylor_TX": [
+    "Texas Eagle"
+  ],
+  "Temple_TX": [
+    "Texas Eagle"
+  ],
+  "McGregor_TX": [
+    "Texas Eagle"
+  ],
+  "Cleburne_TX": [
+    "Texas Eagle"
+  ],
+  "Dallas_TX": [
+    "Texas Eagle"
+  ],
+  "Mineola_TX": [
+    "Texas Eagle"
+  ],
+  "Longview_TX": [
+    "Texas Eagle"
+  ],
+  "Marshall_TX": [
+    "Texas Eagle"
+  ],
+  "Texarkana_AR": [
+    "Texas Eagle"
+  ],
+  "Hope_AR": [
+    "Texas Eagle"
+  ],
+  "Arkadelphia_AR": [
+    "Texas Eagle"
+  ],
+  "Malvern_AR": [
+    "Texas Eagle"
+  ],
+  "Little Rock_AR": [
+    "Texas Eagle"
+  ],
+  "Walnut Ridge_AR": [
+    "Texas Eagle"
+  ],
+  "Poplar Bluff_MO": [
+    "Texas Eagle"
+  ],
+  "Arcadia_MO": [
+    "Texas Eagle"
+  ],
+  "St. Albans_VT": [
+    "Vermonter"
+  ],
+  "Essex Junction-Burlington_VT": [
+    "Vermonter"
+  ],
+  "Waterbury-Stowe_VT": [
+    "Vermonter"
+  ],
+  "Montpelier-Berlin_VT": [
+    "Vermonter"
+  ],
+  "Randolph_VT": [
+    "Vermonter"
+  ],
+  "White River Junction_VT": [
+    "Vermonter"
+  ],
+  "Windsor-Mt. Ascutney_VT": [
+    "Vermonter"
+  ],
+  "Claremont_NH": [
+    "Vermonter"
+  ],
+  "Bellows Falls_VT": [
+    "Vermonter"
+  ],
+  "Brattleboro_VT": [
+    "Vermonter"
+  ],
+  "Greenfield_MA": [
+    "Vermonter"
+  ],
+  "Northampton_MA": [
+    "Vermonter"
+  ],
+  "Holyoke_MA": [
+    "Vermonter"
+  ],
+  "Hammond-Whiting_IN": [
+    "Wolverine"
+  ],
+  "Albion_MI": [
+    "Wolverine"
+  ],
+  "Jackson_MI": [
+    "Wolverine"
+  ],
+  "Ann Arbor_MI": [
+    "Wolverine"
+  ],
+  "Dearborn_MI": [
+    "Wolverine"
+  ],
+  "Detroit_MI": [
+    "Wolverine"
+  ],
+  "Royal Oak_MI": [
+    "Wolverine"
+  ],
+  "Troy_MI": [
+    "Wolverine"
+  ],
+  "Pontiac_MI": [
+    "Wolverine"
+  ]
+}
