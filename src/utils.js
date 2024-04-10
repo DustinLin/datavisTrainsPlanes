@@ -28,3 +28,9 @@ export let cityStToPair = (city, state) => {
 export let numberWithCommas = (x) => {
   return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
+
+// add a function to convert seconds to hours (+ 1 decimals?) for flight data
+// need a param for the total num of flights performed since it's cumulative
+export let minToHours = (time, numFlights) => {
+	return ((time/numFlights)/60).toFixed(1)
+}
