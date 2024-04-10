@@ -24,12 +24,14 @@
 	const bigCities = data.dataPayload.citiesBig;
 	const cityCordMap = data.dataPayload.cityCordMap;
 	const amtrakMap = data.dataPayload.amtrakMap;
+	const filteredCityPairToInfo = data.dataPayload.filteredCityPairToInfo;
 
 
 	console.log(`there are many states: ${usaGeoContig.features.length}`)
 	console.log(`There are many big cities: ${bigCities.length}`)
 	console.log(`There are many cities in the cord map: ${Object.keys(cityCordMap).length}`)
 	console.log(`there are many amtrak routes: ${amtrakMap.features.length}`)
+	console.log(`there are many city pairs: ${filteredCityPairToInfo.length}`)
 
 
 

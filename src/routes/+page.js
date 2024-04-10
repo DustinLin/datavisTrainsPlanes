@@ -20,6 +20,9 @@ export async function load({ fetch }) {
 	const res4 = await fetch('/AmtrakRoutes.geojson');
 	const amtrakMap= await res4.json();
 
+	const res5 = await fetch('/filteredCityPairToInfo.json');
+	const filteredCityPairToInfo = await res5.json();
+
 
 
 	// old code/dataset can remove?
@@ -35,7 +38,8 @@ export async function load({ fetch }) {
 		usaGeo: datasetUSAGeo,
 		citiesBig: datasetCitiesBig,
 		cityCordMap: cityCordMap,
-		amtrakMap: amtrakMap
+		amtrakMap: amtrakMap,
+		filteredCityPairToInfo: filteredCityPairToInfo
 	}
 
 
