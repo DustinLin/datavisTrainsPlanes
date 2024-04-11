@@ -49,7 +49,7 @@ BKX,Brookings,USA
 BQK,Brunswick,USA
 BUF,Buffalo,USA
 BHC,Bullhead City,USA
-BUR,Burbank,USA
+BUR,Los Angeles,USA
 BRL,Burlington IA,USA
 BTV,Burlington,USA
 BTM,Butte,USA
@@ -251,7 +251,7 @@ LEX,Lexington,USA
 LIH,Lihue,USA
 LNK,Lincoln,USA
 LIT,Little Rock,USA
-LGB,Long Beach,USA
+LGB,Los Angeles,USA
 LIJ,Long Island,USA
 ISP,Long Island,USA
 GGG,Longview,USA
@@ -314,11 +314,11 @@ IAG,Niagara Falls International,USA
 OME,Nome,USA
 ORF,Norfolk,USA
 OTH,North Bend,USA
-OAK,Oakland,USA
+OAK,San Francisco,USA
 OKC,Oklahoma City,USA
 OMA,Omaha,USA
-ONT,Ontario,USA
-SNA,Santa Ana,USA
+ONT,Los Angeles,USA
+SNA,Los Angeles,USA
 ORL,Orlando Metropolitan Area,USA
 MCO,Orlando,USA
 OSH,Oshkosh,USA
@@ -339,7 +339,7 @@ PSG,Petersburg,USA
 PHL,Philadelphia,USA
 PHX,Phoenix,USA
 PIR,Pierre,USA
-PIT,Pittsburgh International Airport,USA
+PIT,Pittsburgh,USA
 PLB,Plattsburgh,USA
 PIH,Pocatello,USA
 CLM,Port Angeles,USA
@@ -377,9 +377,8 @@ SJT,San Angelo,USA
 SAT,San Antonio,USA
 SAN,San Diego,USA
 SFO,San Francisco,USA
-SJC,San Jose,USA
+SJC,San Francisco,USA
 SBP,San Luis Obisco,USA
-SNA,Santa Ana,USA
 SBA,Santa Barbara,USA
 SMX,Santa Maria,USA
 STS,Santa Rosa,USA
