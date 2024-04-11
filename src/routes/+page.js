@@ -23,6 +23,11 @@ export async function load({ fetch }) {
 	const res5 = await fetch('/filteredCityPairToInfo.json');
 	const filteredCityPairToInfo = await res5.json();
 
+	const res6 = await fetch('/mlb-hitters-2023.csv');
+	const text = await res6.text();
+	const baseballPlayers = d3.csvParse(text, d3.autoType);
+
+
 
 
 	// old code/dataset can remove?
@@ -39,7 +44,8 @@ export async function load({ fetch }) {
 		citiesBig: datasetCitiesBig,
 		cityCordMap: cityCordMap,
 		amtrakMap: amtrakMap,
-		filteredCityPairToInfo: filteredCityPairToInfo
+		filteredCityPairToInfo: filteredCityPairToInfo,
+		baseballPlayers: baseballPlayers
 	}
 
 

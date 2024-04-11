@@ -15,7 +15,7 @@
 	import Map from './Map.svelte'
   	import RouteDisplay from './RouteDisplay.svelte';
 	import RailMap from './RailMap.svelte';
-	
+
   import TopChart from './TopChart.svelte';
 
 	// data comes from the load function in +page.js
@@ -26,6 +26,7 @@
 	const cityCordMap = data.dataPayload.cityCordMap;
 	const amtrakMap = data.dataPayload.amtrakMap;
 	const filteredCityPairToInfo = data.dataPayload.filteredCityPairToInfo;
+	const baseballPlayers = data.dataPayload.baseballPlayers;
 
 
 	console.log(`there are many states: ${usaGeoContig.features.length}`)
@@ -67,10 +68,17 @@
 	}
 	*/
 
+	$: categories = d3
+		.groupSort(
+			baseballPlayers,
+			(g) => g.length,
+			(d) => d[colorFeature]
+		)
+		.reverse();
 
 
-
-	//$: color = d3.scaleOrdinal().domain(categories).range(d3.schemeTableau10);
+	$: color = d3.scaleOrdinal().domain(categories).range(d3.schemeTableau10);
+	let colorFeature = 'all_star';
 </script>
 
 <div class="container">
@@ -90,6 +98,11 @@
 		<div class="infoMap">
 			<RailMap map={usaGeoContig} railMap={amtrakMap} cordMap={cityCordMap}/>
 			<!-- <RouteDisplay highlightedRoute={highlightedRouteRail}/> -->
+		</div>
+
+		<p>Here's a bar chart</p>
+		<div class="barChart">
+			<BarChart dataset={baseballPlayers} feature={colorFeature} selectedIndices={[0,3]} {color} />
 		</div>
 		<TopChart/>
 
@@ -136,5 +149,9 @@
 		display: flex;
 		gap: 2em;
 
+	}
+
+	.barChart {
+		gap: 2em;
 	}
 </style>
