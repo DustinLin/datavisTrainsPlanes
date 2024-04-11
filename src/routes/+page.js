@@ -23,6 +23,12 @@ export async function load({ fetch }) {
 	const res5 = await fetch('/filteredCityPairToInfo.json');
 	const filteredCityPairToInfo = await res5.json();
 
+	const res6 = await fetch('/Amtrak_Routes-simplified.geojson');
+	const amtrakMapSimp= await res6.json();
+
+	const res7 = await fetch('/cityRouteMap.json');
+	const cityAmtrakRouteMap = await res7.json();
+
 
 
 	// old code/dataset can remove?
@@ -39,7 +45,9 @@ export async function load({ fetch }) {
 		citiesBig: datasetCitiesBig,
 		cityCordMap: cityCordMap,
 		amtrakMap: amtrakMap,
-		filteredCityPairToInfo: filteredCityPairToInfo
+		filteredCityPairToInfo: filteredCityPairToInfo,
+		amtrakMapSimp: amtrakMapSimp,
+		cityAmtrakRouteMap: cityAmtrakRouteMap
 	}
 
 

@@ -10,7 +10,7 @@
 	// prov want to rename "dataset" to like map data or smth
 	export let map;
 	export let cities; // remove "cities" data when sure not being used, replacing with cordMap rn
-	export let cordMap;  
+	export let cityCordMap;  
 
 	export let onhover;
 
@@ -61,7 +61,7 @@
 	 * to get the 4 points: x1 = (route, 0, 0), y1 =(route, 0, 1),  x2 = (route, 1, 0), y2 = (route, 1,1)
 	 */
 	const routeToCords = (route, city, cord) => {
-		return usaMapProjection(cordMap[cityPairsToCities(route[0])[city]].COORD)[cord]
+		return usaMapProjection(cityCordMap[cityPairsToCities(route[0])[city]].COORD)[cord]
 	}
 
 
@@ -143,8 +143,8 @@
 		<!-- for "cities", look at "city.geometry.coordinates", and "city.properties.NAME" -->
 		{#each citiesPlotSet as city}
 		<circle
-			cx = {usaMapProjection(cordMap[city].COORD)[0]}
-			cy = {usaMapProjection(cordMap[city].COORD)[1]}
+			cx = {usaMapProjection(cityCordMap[city].COORD)[0]}
+			cy = {usaMapProjection(cityCordMap[city].COORD)[1]}
 			fill = {CITY_CIRCLE_COL}
 			r = {CITY_CIRCLE_R}
 		/>
@@ -153,8 +153,8 @@
 			font-size = 10
 			font-family = "sans-serif"
 			dominant-baseline = "hanging"
-			x = {usaMapProjection(cordMap[city].COORD)[0] + 4}
-			y = {usaMapProjection(cordMap[city].COORD)[1] + 4}
+			x = {usaMapProjection(cityCordMap[city].COORD)[0] + 4}
+			y = {usaMapProjection(cityCordMap[city].COORD)[1] + 4}
 		>
 			{city.split("_")[0]}
 		</text>

@@ -15,7 +15,8 @@
 	import Map from './Map.svelte'
   	import RouteDisplay from './RouteDisplay.svelte';
 	import RailMap from './RailMap.svelte';
-  import TopChart from './TopChart.svelte';
+  	import TopChart from './TopChart.svelte';
+  	import RailMapSubset from './RailMapSubset.svelte';
 
 	// data comes from the load function in +page.js
 	export let data;
@@ -25,6 +26,8 @@
 	const cityCordMap = data.dataPayload.cityCordMap;
 	const amtrakMap = data.dataPayload.amtrakMap;
 	const filteredCityPairToInfo = data.dataPayload.filteredCityPairToInfo;
+	const amtrakMapSimp = data.dataPayload.amtrakMapSimp;
+	const cityAmtrakRouteMap = data.dataPayload.cityAmtrakRouteMap;
 
 
 	console.log(`there are many states: ${usaGeoContig.features.length}`)
@@ -82,15 +85,16 @@
 		<p>Here is where we want to start putting out visuals?, and implement a scroll</p>
 		<!-- compoenent -->
 		<div class="infoMap">
-			<Map map={usaGeoContig} cities={bigCities} cordMap={cityCordMap} onhover={onhover} highlightedRoute={highlightedRoute}/>
+			<Map map={usaGeoContig} cities={bigCities} cityCordMap={cityCordMap} onhover={onhover} highlightedRoute={highlightedRoute}/>
 			<RouteDisplay highlightedRoute={highlightedRoute}/>
 		</div>
 		<p>More text/transition, how to make pretty...</p>
 		<div class="infoMap">
-			<RailMap map={usaGeoContig} railMap={amtrakMap} cordMap={cityCordMap}/>
+			<RailMap map={usaGeoContig} railMap={amtrakMapSimp} cityCordMap={cityCordMap}/>
 			<!-- <RouteDisplay highlightedRoute={highlightedRouteRail}/> -->
 		</div>
 		<TopChart/>
+		<RailMapSubset map={usaGeoContig} railMap={amtrakMapSimp} {cityCordMap} {cityAmtrakRouteMap}/>
 
 	</div>
 </div>

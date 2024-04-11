@@ -8,7 +8,7 @@
 
 	export let map; // the USA map
 	export let railMap; // amtrak map
-	export let cordMap;  // mapping from US cities for coordinates
+	export let cityCordMap;  // mapping from US cities for coordinates
 
 
 
@@ -73,8 +73,8 @@
 		<!-- for "cities", look at "city.geometry.coordinates", and "city.properties.NAME" -->
 		{#each citiesPlotSet as city}
 		<circle
-			cx = {usaMapProjection(cordMap[city].COORD)[0]}
-			cy = {usaMapProjection(cordMap[city].COORD)[1]}
+			cx = {usaMapProjection(cityCordMap[city].COORD)[0]}
+			cy = {usaMapProjection(cityCordMap[city].COORD)[1]}
 			fill = "red"
 			r = {5}
 		/>
@@ -82,8 +82,8 @@
 			font-size = 10
 			font-family = "sans-serif"
 			dominant-baseline = "hanging"
-			x = {usaMapProjection(cordMap[city].COORD)[0] + 4}
-			y = {usaMapProjection(cordMap[city].COORD)[1] + 4}
+			x = {usaMapProjection(cityCordMap[city].COORD)[0] + 4}
+			y = {usaMapProjection(cityCordMap[city].COORD)[1] + 4}
 		>
 			{city.split("_")[0]}
 		</text>
