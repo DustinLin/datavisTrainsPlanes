@@ -8,7 +8,8 @@
 	import * as d3 from 'd3';
 	import Scatterplot from './Scatterplot.svelte';
 	import FeatureControls from './FeatureControls.svelte';
-	import BarChart from './BarChart.svelte';
+	//import BarChart from './BarChart.svelte';
+	import BarChart from './BarChartNew.svelte';
 	import PlayerList from './PlayerList.svelte';
 	import ColorLegend from './ColorLegend.svelte';
 
@@ -68,6 +69,9 @@
 	}
 	*/
 
+	
+	let colorFeature = 'all_star';
+
 	$: categories = d3
 		.groupSort(
 			baseballPlayers,
@@ -76,9 +80,12 @@
 		)
 		.reverse();
 
+	//  console.log(categories);
 
 	$: color = d3.scaleOrdinal().domain(categories).range(d3.schemeTableau10);
-	let colorFeature = 'all_star';
+	
+	
+	
 </script>
 
 <div class="container">
@@ -102,7 +109,9 @@
 
 		<p>Here's a bar chart</p>
 		<div class="barChart">
-			<BarChart dataset={baseballPlayers} feature={colorFeature} selectedIndices={[0,3]} {color} />
+			<!--<BarChart dataset={baseballPlayers} feature={colorFeature} selectedIndices={[0,3]} {color} /> -->
+			<BarChart dataset={filteredCityPairToInfo} /> 
+			<!--BarChart dataset={filteredCityPairToInfo} /> -->
 		</div>
 		<TopChart/>
 
