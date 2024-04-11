@@ -73,24 +73,62 @@
 </script>
 
 <div class="container">
-	<h2>Title: I like trains</h2>
 	<div class="header">
 		<h3>Header class to put stuff?</h3>
 	</div>
 
 	<div class="main">
-		<p>Here is where we want to start putting out visuals?, and implement a scroll</p>
+		<h2>How do people travel between cities in the US</h2>
 		<!-- compoenent -->
-		<div class="infoMap">
+		<h2>What are the popular airline routes in the US?</h2>
+		<div class="infoMap" id="popularAirlines">
 			<Map map={usaGeoContig} cities={bigCities} cordMap={cityCordMap} onhover={onhover} highlightedRoute={highlightedRoute}/>
 			<RouteDisplay highlightedRoute={highlightedRoute}/>
+			<TopChart/>
 		</div>
-		<p>More text/transition, how to make pretty...</p>
-		<div class="infoMap">
+		<h2>How much time is spent taking these routes?</h2>
+		<div class="infoMap" id="airlineTimes">
+			<p>idea to put the histogram that haneen made here as well as a bar chart the breaks down the flying time, maybe could give a few flight examples<p/>
+			<!-- <BarChart/> -->
+			<!-- <Histogram/> -->
+		</div>
+
+		<h2>Is there a faster way?</h2>
+		<p>introduction into the ideas of the time triangle</p>
+		<div class="infoMap" id="timeTriangle">
+			<!-- <TimeTriangle/> -->
+		</div>
+
+		<h2>Airline routes that would be faster on HSR</h2>
+		<div class="infoMap" id="airlineSpeedUp">
+			<Map map={usaGeoContig} cities={bigCities} cordMap={cityCordMap} highlightedRoute={highlightedRoute}/>
+			<!-- <HighlightedHistogram highlightedRoute={highlightedRouteRail}/> -->
+			<!-- <newHistogram highlightedRoute={highlightedRouteRail}/> -->
+			<!-- <Comparison Bar Chart/> -->
+		</div>
+
+		<p>The United states currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the Internation Union of Railways defintion of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
+		
+		<h2>Intersection with current rail</h2>
+		<div class="infoMap" id="railIntersection">
 			<RailMap map={usaGeoContig} railMap={amtrakMap} cordMap={cityCordMap}/>
 			<!-- <RouteDisplay highlightedRoute={highlightedRouteRail}/> -->
 		</div>
-		<TopChart/>
+
+		<h2>Room for upgrade how to decide which</h2>
+		<div class="infoMap" id="iterativeGravity">
+			<!-- <GravityModel highlightedRoute={highlightedRouteRail}/> -->
+		</div>
+
+		<h2>Proposed HSR</h2>
+		<div class="infoMap" id="proposedHSRMap">
+			<Map map={usaGeoContig} cities={bigCities} cordMap={cityCordMap} onhover={onhover} highlightedRoute={highlightedRoute}/>
+			<!-- <FinalMapDisplay highlightedRoute={highlightedRouteRail}/> -->
+		</div>
+
+
+		<p>What to access the data? click <a href="https://github.com/DustinLin/datavisTrainsPlanes">here</a>.</p>
+		
 
 	</div>
 </div>

@@ -56,16 +56,16 @@
     <th>Origin City</th>
     <th>Destination City</th>
     <th>Num. Passengers</th>
-    <th>Distance (miles)</th>
-    <th>Time: Ramp to Ramp (hours)</th>
+    <!-- <th>Distance (miles)</th>
+    <th>Time: Ramp to Ramp (hours)</th> -->
   </tr>
   {#each mockData as route}
   <tr>
     <td>{cityStToCity(cityPairsToCities(route[0])[0])}</td>
     <td>{cityStToCity(cityPairsToCities(route[0])[1])}</td>
     <td>{numberWithCommas(route[1].PASSENGERS)} People</td>
-    <td>{numberWithCommas(route[1].DISTANCE)} Miles</td>
-    <td>{minToHours(route[1].RAMP_TO_RAMP, route[1].DEPARTURES_PERFORMED)} Hours</td>
+    <!-- <td>{numberWithCommas(route[1].DISTANCE)} Miles</td>
+    <td>{minToHours(route[1].RAMP_TO_RAMP, route[1].DEPARTURES_PERFORMED)} Hours</td> -->
   </tr>
 
   {/each}
