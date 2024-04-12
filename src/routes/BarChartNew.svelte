@@ -3,19 +3,28 @@
 	import Axis from './Axis.svelte';
 
 	export let dataset;
-	//export let feature;
+	export let feature;
+        export let xLabel;
+        export let color;
+        export let roundValue;
 	// export let selectedIndices;
 	//export let color;
 
-        const sortedGravity = dataset
+        let sortedFeature = dataset
                 .sort(([cities1, data1], [cities2, data2]) => {
-                const score1 = data1.GRAVITY
-                const score2 = data2.GRAVITY
+                const score1 = data1[feature]
+                const score2 = data2[feature]
                 return d3.descending(score1, score2)
-                }).map(([pair, info]) => [pair, info.GRAVITY]).slice(0,10)
+                }).map(([pair, info]) => [pair, info[feature]]).slice(0,10)
 
         
+                //sortedFeature = 0;
+        
+        if (feature == "PASSENGERS") {
+                sortedFeature = sortedFeature.map(([pair, info]) => [pair, info/1000])
+        }
 
+        console.log("sorted feature", sortedFeature);
 	// dimensions
 
 	let borderBoxSize;
@@ -34,7 +43,7 @@
         const height = 750;
 
 	//const margin = { top: 25, right: 20, bottom: 50, left: 60 };
-        const margin = {top: 45, bottom: 45, left: 150, right: 80};
+        //const margin = {top: 45, bottom: 45, left: 150, right: 80};
 
 	// filter the dataset by index
 	// $: filteredDataset = selectedIndices.map((i) => sortedGravity[i]);
@@ -51,17 +60,22 @@
 
 	// scales
 
-	const maxVal = sortedGravity[0][1].GRAVITY
+	const maxVal = sortedFeature[0][1];
+        console.log("max val", maxVal);
+
+        const margin = {top: 45, bottom: 45, left: 270, right: 80};
+
+        
 
 	const x = d3
 		.scaleLinear()
-		.domain([0, 75])
+		.domain([0, maxVal])
 		//.nice()
 		.range([margin.left, width - margin.right]);
 
 	const y = d3
 		.scaleBand()
-		.domain(sortedGravity.slice(0,10).map(([pair, info]) => pair))
+		.domain(sortedFeature.slice(0,10).map(([pair, info]) => pair))
 		.range([margin.top, height - margin.bottom])
 		.padding(0.1);
 
@@ -69,25 +83,37 @@
         console.log("y range: ", y.range());
         console.log("x domain: ", x.domain());
         console.log("y domain: ", y.domain());
+
+        
 </script>
 
 <div class="barchart" bind:borderBoxSize>
 	<svg {height} {width}>
 		<!-- bars -->
 		<g>
-			{#each sortedGravity as [cityPair, gravity] (cityPair)}
+			{#each sortedFeature as [cityPair, feature] (cityPair)}
 				<rect
 					x={x(0)}
 					y={y(cityPair)}
 					height={y.bandwidth()}
-					width={x(gravity) - x(0)}
-					fill={"#cfe6ce"}
+					width={x(feature) - x(0)}
+					fill={color}
 				/>
+                                <text
+                                        class="bar-label"
+                                        font-family="sans-serif"
+                                        font-size="12px"
+                                        x={x(feature) + 5}
+                                        y={y(cityPair) + y.bandwidth() / 2 + 5}
+                                        text-anchor="start"
+                                        >
+                                        {Math.round((feature * roundValue) / roundValue)}
+                                </text>
 			{/each}
 		</g>
 
 		<!-- axes -->
-		<Axis orientation="bottom" scale={x} {width} {height} {margin} label={'Count'} />
+		<Axis orientation="bottom" scale={x} {width} {height} {margin} label={xLabel} />
 		<Axis orientation="left" scale={y} {width} {height} {margin} />
 	</svg>
 </div>

@@ -110,7 +110,8 @@
 		<p>Here's a bar chart</p>
 		<div class="barChart">
 			<!--<BarChart dataset={baseballPlayers} feature={colorFeature} selectedIndices={[0,3]} {color} /> -->
-			<BarChart dataset={filteredCityPairToInfo} /> 
+			<BarChart dataset={filteredCityPairToInfo} feature={"GRAVITY"} xLabel={"Gravity Score"} color={"#cfe6ce"} roundValue={10}/> 
+			<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in thousands)"} color={'#88aed0'} roundValue={1}/> 
 			<!--BarChart dataset={filteredCityPairToInfo} /> -->
 		</div>
 		<TopChart/>
