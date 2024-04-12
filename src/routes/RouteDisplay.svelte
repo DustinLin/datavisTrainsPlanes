@@ -44,9 +44,7 @@
 <div class="routeInfo">
 	<ul>
 		<li>Origin City: N/A</li>
-		<li>Origin Airport: N/A</li>
 		<li>Destination City: N/A</li>
-		<li>Destination Airport: N/A</li>
 		<li>Distance: N/A</li>
 		<li>Passengers: N/A</li>
 	</ul>
