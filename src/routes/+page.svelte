@@ -16,6 +16,7 @@
   	import RouteDisplay from './RouteDisplay.svelte';
 	import RailMap from './RailMap.svelte';
   import TopChart from './TopChart.svelte';
+    import TimeTriangle from './TimeTriangle.svelte';
 
 	// data comes from the load function in +page.js
 	export let data;
@@ -77,6 +78,8 @@
 	<div class="header">
 		<h3>Header class to put stuff?</h3>
 	</div>
+
+	<TimeTriangle/>
 
 	<div class="main">
 		<p>Here is where we want to start putting out visuals?, and implement a scroll</p>
