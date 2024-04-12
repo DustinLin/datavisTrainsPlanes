@@ -15,6 +15,9 @@
 	export let onhover;
 
 	export let showCityName; // to toggle if map wants to plot city names or not for clutter
+
+	// [width, height]
+	export let dims;
 	
 
 	// trying to plot lines and add interaction?
@@ -47,10 +50,6 @@
 	]
 
 	
-	// projections
-	const usaMapProjection = d3.geoAlbersUsa().fitSize([975, 610], map);
-
-	const mapPath = d3.geoPath().projection(usaMapProjection);
 
 
 	/**
@@ -133,10 +132,15 @@
 	let borderBoxSize;
 	// borderBoxSize: has 2 entires: inline-size - width of div, block-size - height of div
 	// borderBoxSize could be undefined
-	let width = 975
-	let height = 610
+	let width = dims[0]
+	let height = dims[1]
 	//$: width = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 975
 	//$: height = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 610
+
+	// projections
+	const usaMapProjection = d3.geoAlbersUsa().fitSize([width, height], map);
+
+	const mapPath = d3.geoPath().projection(usaMapProjection);
 
 	const CITY_CIRCLE_R = 5
 	const CITY_CIRCLE_COL = "red"

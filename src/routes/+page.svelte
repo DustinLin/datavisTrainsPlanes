@@ -113,37 +113,37 @@
 		-->
 		<h2>map of all the routes</h2>
 		<div class="infoMap">
-			<Map map={usaGeoContig} cities={manyRouteCities} cityCordMap={cityCordMap} onhover={onhover} showCityName={false}/>
+			<Map map={usaGeoContig} cities={manyRouteCities} cityCordMap={cityCordMap} onhover={onhover} showCityName={false} dims={[975, 610]}/>
 			<RouteDisplay highlightedRoute={highlightedRoute}/>
 		</div>
 
 		<h2>top routes by passengers</h2>
 		<div class="infoMap">
-			<Map map={usaGeoContig} cities={topFlightRoutesPass} cityCordMap={cityCordMap} onhover={onhover} showCityName={true}/>
+			<Map map={usaGeoContig} cities={topFlightRoutesPass} cityCordMap={cityCordMap} onhover={onhover} showCityName={true} dims={[975,610]}/>
 			<RouteDisplay highlightedRoute={highlightedRoute}/>
 		</div>
 
 		<h2>map of all the routes that are in triangle</h2>
 		<div class="infoMap">
-			<Map map={usaGeoContig} cities={triangleRouteCities} cityCordMap={cityCordMap} onhover={onhover} showCityName={false}/>
+			<Map map={usaGeoContig} cities={triangleRouteCities} cityCordMap={cityCordMap} onhover={onhover} showCityName={false} dims={[975,610]}/>
 			<RouteDisplay highlightedRoute={highlightedRoute}/>
 		</div>
 
 		<h2>map of all the routes that we want ot build HSR</h2>
 		<div class="infoMap">
-			<MapStatic map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap}/>
+			<MapStatic map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} dims={[975,610]}/>
 		</div>
 
 		<h2>map of all the routes colored by if there is existing rail</h2>
+		<h2>Just the Amtrak map with the cities that we want to build HSR overlayed on</h2>
 		<div class="infoMap">
-			<RailMapIntersect map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} cityAmtrakRouteMap={cityAmtrakRouteMap}/>
+			<RailMapIntersect map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} cityAmtrakRouteMap={cityAmtrakRouteMap} dims={[800,500]}/>
+			<RailMap map={usaGeoContig} railMap={amtrakMapSimp} cityCordMap={cityCordMap} citiesPlotSet={citiesPlotSet} dims={[800,500]}/>
 		</div>
 
 
 
-		<h2>Just the Amtrak map with the cities that we want to build HSR overlayed on</h2>
 		<div class="infoMap">
-			<RailMap map={usaGeoContig} railMap={amtrakMapSimp} cityCordMap={cityCordMap} citiesPlotSet={citiesPlotSet}/>
 			<!-- <RouteDisplay highlightedRoute={highlightedRouteRail}/> -->
 		</div>
 		<p>More text/transition, how to make pretty...</p>

@@ -12,12 +12,11 @@
 
 	export let citiesPlotSet; // which cities to plot
 
+	// [width, height]
+	export let dims;
 
 
-	// projections
-	const usaMapProjection = d3.geoAlbersUsa().fitSize([975, 610], map);
 
-	const mapPath = d3.geoPath().projection(usaMapProjection);
 
 	// hard code some cities to place?
 	/*
@@ -50,11 +49,15 @@
 	let borderBoxSize;
 	// borderBoxSize: has 2 entires: inline-size - width of div, block-size - height of div
 	// borderBoxSize could be undefined
-	let width = 975
-	let height = 610
+	let width = dims[0]
+	let height = dims[1]
 	//$: width = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 975
 	//$: height = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 610
 
+	// projections
+	const usaMapProjection = d3.geoAlbersUsa().fitSize([width, height], map);
+
+	const mapPath = d3.geoPath().projection(usaMapProjection);
 </script>
 
 <div class="maps">
