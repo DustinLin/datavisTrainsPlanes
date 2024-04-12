@@ -10,6 +10,8 @@
 	export let railMap; // amtrak map
 	export let cityCordMap;  // mapping from US cities for coordinates
 
+	export let citiesPlotSet; // which cities to plot
+
 
 
 	// projections
@@ -18,6 +20,7 @@
 	const mapPath = d3.geoPath().projection(usaMapProjection);
 
 	// hard code some cities to place?
+	/*
 	const citiesPlotSet  = [
 		"Boston_MA",
 		"New York_NY",
@@ -35,6 +38,13 @@
 		"Houston_TX",
 		"Miami_FL"
 	]
+	*/
+
+	citiesPlotSet.forEach(city => {
+		if(cityCordMap[city] === undefined){
+			console.log(`ERRROR RENDERING RAIL MAP FOR CITY ${city}`)
+		}
+	});
 
 	// TODO try to make display reactive
 	let borderBoxSize;
@@ -75,7 +85,7 @@
 		<circle
 			cx = {usaMapProjection(cityCordMap[city].COORD)[0]}
 			cy = {usaMapProjection(cityCordMap[city].COORD)[1]}
-			fill = "red"
+			fill = "orange"
 			r = {5}
 		/>
 		<text

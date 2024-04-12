@@ -10,10 +10,6 @@ export async function load({ fetch }) {
 	const res = await fetch('/usaContGeojson.json');
 	const datasetUSAGeo = await res.json();
 
-	// will eventually phase out, and use usaCitiesMap in the end?
-	const res2 = await fetch('/usaCities.geojson');
-	const datasetCities = await res2.json();
-
 	const res3 = await fetch('/cityCordMap.json');
 	const cityCordMap = await res3.json();
 
@@ -29,25 +25,22 @@ export async function load({ fetch }) {
 	const res7 = await fetch('/cityRouteMap.json');
 	const cityAmtrakRouteMap = await res7.json();
 
+	const res8 = await fetch('/formatedIteratedGravityResults.json');
+	const gravityTopResRoutes = await res8.json();
 
 
-	// old code/dataset can remove?
-	const datasetCitiesBig =  datasetCities.features.filter(
-    (city) =>
-      city.properties.POPULATION > 600000 &&
-      !(city.properties.ST === "AK" && city.properties.ST === "HI")
-  	);
+
 
 	// include more stuff as we load in more data?
 	const dataPayload = {
 		// want to pass the entire GEO obj as that helps make the projection?
 		usaGeo: datasetUSAGeo,
-		citiesBig: datasetCitiesBig,
 		cityCordMap: cityCordMap,
 		amtrakMap: amtrakMap,
 		filteredCityPairToInfo: filteredCityPairToInfo,
 		amtrakMapSimp: amtrakMapSimp,
-		cityAmtrakRouteMap: cityAmtrakRouteMap
+		cityAmtrakRouteMap: cityAmtrakRouteMap,
+		gravityTopResRoutes: gravityTopResRoutes
 	}
 
 

@@ -6,7 +6,8 @@
 export let cutoffs = {
 	triangleUpper: 451.75,
 	triangleLower: 75.25,
-	topRoutesNumber: 30
+	topRoutesNumber: 100,
+	topGravNumber: 30
 }
 
 /**
