@@ -16,6 +16,7 @@
 	import Map from './Map.svelte'
   	import RouteDisplay from './RouteDisplay.svelte';
 	import RailMap from './RailMap.svelte';
+	import Histogram from './Histogram.svelte';
 
   import TopChart from './TopChart.svelte';
 
@@ -107,14 +108,25 @@
 			<!-- <RouteDisplay highlightedRoute={highlightedRouteRail}/> -->
 		</div>
 
-		<p>Here's a bar chart</p>
+		<p>Here's a bar chart of the most popular airplane routes, by number of passengers in 2023.</p>
 		<div class="barChart">
 			<!--<BarChart dataset={baseballPlayers} feature={colorFeature} selectedIndices={[0,3]} {color} /> -->
-			<BarChart dataset={filteredCityPairToInfo} feature={"GRAVITY"} xLabel={"Gravity Score"} color={"#cfe6ce"} roundValue={10}/> 
-			<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in thousands)"} color={'#88aed0'} roundValue={1}/> 
+			<!-- BarChart dataset={filteredCityPairToInfo} feature={"GRAVITY"} xLabel={"Gravity Score"} color={"#cfe6ce"} roundValue={10}/> --> 
+			<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100}/> 
 			<!--BarChart dataset={filteredCityPairToInfo} /> -->
 		</div>
-		<TopChart/>
+
+		<p>Here's a histogram of the number of flights within each travel time</p>
+		<div class="histogram">
+			<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#88aed0'}/> 
+		</div>
+
+		<p>Here's a histogram of the number of flights within each travel time, with flights inside the triangle highlighted</p>
+		<div class="histogram">
+			<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#cfe6ce'}/> 
+		</div>
+		
+		
 
 	</div>
 </div>
@@ -162,6 +174,10 @@
 	}
 
 	.barChart {
+		gap: 2em;
+	}
+
+	.histogram {
 		gap: 2em;
 	}
 </style>

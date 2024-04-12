@@ -21,7 +21,7 @@
                 //sortedFeature = 0;
         
         if (feature == "PASSENGERS") {
-                sortedFeature = sortedFeature.map(([pair, info]) => [pair, info/1000])
+                sortedFeature = sortedFeature.map(([pair, info]) => [pair, info/1000000])
         }
 
         console.log("sorted feature", sortedFeature);
@@ -107,7 +107,7 @@
                                         y={y(cityPair) + y.bandwidth() / 2 + 5}
                                         text-anchor="start"
                                         >
-                                        {Math.round((feature * roundValue) / roundValue)}
+                                        {Math.round(feature * roundValue) / roundValue}
                                 </text>
 			{/each}
 		</g>
