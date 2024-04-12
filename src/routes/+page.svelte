@@ -103,8 +103,10 @@
 
 	<div class="main">
 		<h2>How do people travel between cities in the US</h2>
-		<Map map={usaGeoContig} cities={manyRouteCities} cityCordMap={cityCordMap} onhover={onhover} showCityName={false} dims={[975, 610]}/>
-		<RouteDisplay highlightedRoute={highlightedRoute}/>
+		<div class="infoMap" id="allRoutes">
+			<Map map={usaGeoContig} cities={manyRouteCities} cityCordMap={cityCordMap} onhover={onhover} showCityName={false} dims={[975, 610]}/>
+			<RouteDisplay highlightedRoute={highlightedRoute}/>
+		</div>
 
 		<!-- compoenent -->
 		<h2>What are the popular airline routes in the US?</h2>
@@ -116,15 +118,16 @@
 
 		<h2>How much time is spent taking these routes?</h2>
 		<div class="infoMap" id="airlineTimes">
-			<p>idea to put the histogram that haneen made here as well as a bar chart the breaks down the flying time, maybe could give a few flight examples<p/>
-			<!-- <BarChart/> for times -->
-			<!-- <Histogram/> -->
+			<p>idea to put a barchart that outlines different histogram that haneen made here as well as a bar chart the breaks down the flying time, maybe could give a few flight examples<p/>
+			<!-- <BarChart/>
+			<Histogram/> -->
 		</div>
 
 		<h2>Is there a faster way?</h2>
 		<p>introduction into the ideas of the time triangle</p>
 		<div class="infoMap" id="timeTriangle">
 			<!-- <TimeTriangle/> -->
+			<p>Paragraph explaining time triangle</p>
 		</div>
 
 		<h2>Airline routes that would be faster on HSR</h2>
@@ -140,27 +143,45 @@
 		<p>The United states currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the Internation Union of Railways defintion of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
 		
 
+
+		<div class="infoMap" id="modifiedHistograms">
+			<!-- <HighlightedHistogram highlightedRoute={highlightedRouteRail}/> -->
+			<!-- <newHistogram highlightedRoute={highlightedRouteRail}/> -->
+		</div>
+
+		<div class="infoMap" id="comparisonBarChart">
+			<!-- <ComparisonBarChart highlightedRoute={highlightedRouteRail}/> -->
+		</div>
+		
+
+		<h2>Which of the X routes should we build</h2>
+		<div class="infoMap" id="iterativeGravityExplanation"><p>
+			Explanation of the iterative gravity model
+		</p></div>
+
+		<h2>Results</h2>
 		<h2>Proposed HSR</h2>
 		<div class="infoMap" id="proposedHSRMap">
 			<MapStatic map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} dims={[975,610]}/>
 			<!-- <FinalMapDisplay highlightedRoute={highlightedRouteRail}/> -->
 		</div>
-
+		
 		<h2>Intersection with current rail</h2>
+
+		<p>The United states currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the Internation Union of Railways defintion of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
+		<p>Consider making the above information partly into a table? Comparing speeds?</p>
 		<div class="infoMap" id="railIntersection">
 			<RailMapIntersect map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} cityAmtrakRouteMap={cityAmtrakRouteMap} dims={[800,500]}/>
 			<RailMap map={usaGeoContig} railMap={amtrakMapSimp} cityCordMap={cityCordMap} citiesPlotSet={citiesPlotSet} dims={[800,500]}/>
 			<!-- <RouteDisplay highlightedRoute={highlightedRouteRail}/> -->
-		</div>
-
-		<h2>Room for upgrade how to decide which</h2>
-		<div class="infoMap" id="iterativeGravity">
-			<!-- <GravityModel highlightedRoute={highlightedRouteRail}/> -->
+			<!-- <Comparison Bar Chart/> -->
 		</div>
 
 
-
-		<p>What to access the data? click <a href="https://github.com/DustinLin/datavisTrainsPlanes">here</a>.</p>
+		<h2>What Now?</h2>
+		<p>Want to learn more? go to these rouceses @cityNerd</p>
+		<p>What to play around with the data? click <a href="https://github.com/DustinLin/datavisTrainsPlanes">here</a>.</p>
+		<p>Want to get involved? takes these steps: Share our and other resources with others</p>
 		
 		<TopChart/>
 
