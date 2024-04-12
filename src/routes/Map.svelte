@@ -8,14 +8,14 @@
 
 
 	// prov want to rename "dataset" to like map data or smth
-	export let map;
-	export let cities; // remove "cities" data when sure not being used, replacing with cordMap rn
-	export let cityCordMap;  
+	export let map; // the usa geo map to plot
+	export let cities; // the obj containing all the routes want to plot
+	export let cityCordMap;  // map from city to coordiates
 
 	export let onhover;
 
-	// want to make the highlighted route more noticeable, so re-draw it like the example?
-	export let highlightedRoute;
+	export let showCityName; // to toggle if map wants to plot city names or not for clutter
+
 
 	// trying to plot lines and add interaction?
 	// from observable its an array of arrays
@@ -65,29 +65,33 @@
 	}
 
 
-	// ideally only want to plot cities that we are drawing routes between
-	// all cities that we are drawing lines for
+	// for filtering incoming data in "cities" to eliminate runtime errors
 	let citiesRoutePoints = []
-	mockData.forEach( (route) => {
-		citiesRoutePoints.push(cityPairsToCities(route[0])[0])
-		citiesRoutePoints.push(cityPairsToCities(route[0])[1])
+	let citiesRouteFiltered = []
+
+	// for debugging
+	let unMap = 0
+
+	// filter routes to make sure they aren't undefined?
+	cities.forEach( (route) => {
+		let c1 = cityPairsToCities(route[0])[0]
+		let c2 = cityPairsToCities(route[0])[1]
+
+		if (cityCordMap[c1] === undefined || cityCordMap[c2] === undefined){
+			console.log(`ROUTE ERROR: city ${c1} or city ${c2} doesn't exist, skipping`)
+			unMap = unMap + 1
+		} else {
+			citiesRoutePoints.push(c1)
+			citiesRoutePoints.push(c2)
+			citiesRouteFiltered.push(route)
+		}
 	})
 	
 	const citiesPlotSet  = new Set(citiesRoutePoints)
+	console.log(`total unmapped cities: ${unMap}`)
 
 	// now have some cities that we want to plot
 
-
-	/**
-	 * 
-	 * debugging
-		let city = cities[0]
-		cx = {usaMapProjection(city.geometry.coordinates)[0]}
-		cy = {usaMapProjection(city.geometry.coordinates)[1]}
-
-		console.log(`for city ${city}, the cx and cy coordinates are ${cx}, ${cy}`)
-	 * 
-	*/
 
 	/**
 	 *  reference code
@@ -124,7 +128,6 @@
 	const ROUTE_STROKE_COL = "blue"
 	const ROUTE_STROKE_WID = 3
 
-
 </script>
 
 <div class="maps">
@@ -139,28 +142,8 @@
 
 		{/each}
 
-		<!-- toggle between "cities" and "citiesPlot"-->
-		<!-- for "cities", look at "city.geometry.coordinates", and "city.properties.NAME" -->
-		{#each citiesPlotSet as city}
-		<circle
-			cx = {usaMapProjection(cityCordMap[city].COORD)[0]}
-			cy = {usaMapProjection(cityCordMap[city].COORD)[1]}
-			fill = {CITY_CIRCLE_COL}
-			r = {CITY_CIRCLE_R}
-		/>
-		<!-- adding a bit of buffer room to x,y cords -->
-		<text
-			font-size = 10
-			font-family = "sans-serif"
-			dominant-baseline = "hanging"
-			x = {usaMapProjection(cityCordMap[city].COORD)[0] + 4}
-			y = {usaMapProjection(cityCordMap[city].COORD)[1] + 4}
-		>
-			{city.split("_")[0]}
-		</text>
-		{/each}
-
-		{#each mockData as route}
+		<!-- todo: change to "cities" if want to plot the whole thing, "citiesRouteFiltered" contains ones that won't cause error-->
+		{#each citiesRouteFiltered as route}
 		<!-- todo, refactor to a separate file/component?-->
 		<!--  drawing a line, need to extract coordinates and draw city end points -->
 
@@ -179,6 +162,39 @@
 		/>
 
 		{/each}
+
+
+		<!-- toggle between "cities" and "citiesPlot"-->
+		<!-- for "cities", look at "city.geometry.coordinates", and "city.properties.NAME" -->
+		{#each citiesPlotSet as city}
+
+		<circle
+			cx = {usaMapProjection(cityCordMap[city].COORD)[0]}
+			cy = {usaMapProjection(cityCordMap[city].COORD)[1]}
+			fill = {CITY_CIRCLE_COL}
+			r = {CITY_CIRCLE_R}
+		/>
+		{/each}
+
+		<!-- adding a bit of buffer room to x,y cords, want the text to appear at the top, so draw the all last, requires an extra loop but -->
+		{#if showCityName}
+
+			{#each citiesPlotSet as city}
+
+			<text
+				font-size = 10
+				font-family = "sans-serif"
+				dominant-baseline = "hanging"
+				x = {usaMapProjection(cityCordMap[city].COORD)[0] + 4}
+				y = {usaMapProjection(cityCordMap[city].COORD)[1] + 4}
+			>
+				{city.split("_")[0]}
+			</text>
+			{/each}
+
+		{/if}
+
+
 
 
 	</svg>

@@ -18,6 +18,14 @@ export let cityStToCity = (cityStStr) => {
 	return cityStStr.split("_")[0]
 }
 
+/**
+ * eg: "Los Angeles_CA", returns "CA"
+ * useful for working with `cityCordMap.json` data, which encodes city+state names to avoid duplicated
+ */
+export let cityStToState = (cityStStr) => {
+	return cityStStr.split("_")[1]
+}
+
 // simple string operation but is being used
 export let cityStToPair = (city, state) => {
 	return `${city}_${state}`

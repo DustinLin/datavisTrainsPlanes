@@ -73,6 +73,12 @@
 
 
 	//$: color = d3.scaleOrdinal().domain(categories).range(d3.schemeTableau10);
+
+	// doing some route processing to plot certain routes on different <Map>
+	let manyRouteCities = filteredCityPairToInfo.slice(0,150)
+
+	let otherRouteCities = filteredCityPairToInfo.slice(100,103)
+
 </script>
 
 <div class="container">
@@ -84,10 +90,24 @@
 	<div class="main">
 		<p>Here is where we want to start putting out visuals?, and implement a scroll</p>
 		<!-- compoenent -->
-		<div class="infoMap">
+		<!--
+
+		<div class="infoMap"
 			<Map map={usaGeoContig} cities={bigCities} cityCordMap={cityCordMap} onhover={onhover} highlightedRoute={highlightedRoute}/>
 			<RouteDisplay highlightedRoute={highlightedRoute}/>
 		</div>
+
+		-->
+		<div class="infoMap">
+			<Map map={usaGeoContig} cities={manyRouteCities} cityCordMap={cityCordMap} onhover={onhover} showCityName={false}/>
+			<RouteDisplay highlightedRoute={highlightedRoute}/>
+		</div>
+
+		<div class="infoMap">
+			<Map map={usaGeoContig} cities={otherRouteCities} cityCordMap={cityCordMap} onhover={onhover} showCityName={true}/>
+			<RouteDisplay highlightedRoute={highlightedRoute}/>
+		</div>
+
 		<p>More text/transition, how to make pretty...</p>
 		<div class="infoMap">
 			<RailMap map={usaGeoContig} railMap={amtrakMapSimp} cityCordMap={cityCordMap}/>
