@@ -113,3 +113,8 @@ export let numberWithCommas = (x) => {
 export let minToHours = (time, numFlights) => {
 	return ((time/numFlights)/60).toFixed(1)
 }
+
+// function for coloring bars in histogram based on time triangle
+export let inTriangle = (flightTime) => {
+	return true;
+}

@@ -8,7 +8,8 @@
 	import * as d3 from 'd3';
 	import Scatterplot from './Scatterplot.svelte';
 	import FeatureControls from './FeatureControls.svelte';
-	import BarChart from './BarChart.svelte';
+	//import BarChart from './BarChart.svelte';
+	import BarChart from './BarChartNew.svelte';
 	import PlayerList from './PlayerList.svelte';
 	import ColorLegend from './ColorLegend.svelte';
 
@@ -22,6 +23,8 @@
 	import RailMapIntersect from './RailMapIntersect.svelte';
 
 	import { cutoffs, cityPairsToCities  } from '../utils';
+	import Histogram from './Histogram.svelte';
+
 
 	// data comes from the load function in +page.js
 	export let data;
@@ -91,6 +94,7 @@
 	});
 	
 
+	//  console.log(categories);
 
 </script>
 
@@ -99,7 +103,6 @@
 		<h3>Header class to put stuff?</h3>
 	</div>
 
-	<TimeTriangle/>
 
 	<div class="main">
 		<h2>How do people travel between cities in the US</h2>
@@ -114,20 +117,22 @@
 			<Map map={usaGeoContig} cities={topFlightRoutesPass} cityCordMap={cityCordMap} onhover={onhover} showCityName={true} dims={[975,610]}/>
 			<RouteDisplay highlightedRoute={highlightedRoute}/>
 			<!-- <BarChart/> for top routes -->
+			<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100}/> 
 		</div>
 
 		<h2>How much time is spent taking these routes?</h2>
 		<div class="infoMap" id="airlineTimes">
 			<p>idea to put a barchart that outlines different histogram that haneen made here as well as a bar chart the breaks down the flying time, maybe could give a few flight examples<p/>
-			<!-- <BarChart/>
-			<Histogram/> -->
+			<!-- <BarChart/> -->
+			<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#88aed0'}/> 
 		</div>
+
 
 		<h2>Is there a faster way?</h2>
 		<p>introduction into the ideas of the time triangle</p>
 		<div class="infoMap" id="timeTriangle">
-			<!-- <TimeTriangle/> -->
 			<p>Paragraph explaining time triangle</p>
+			<TimeTriangle/>
 		</div>
 
 		<h2>Airline routes that would be faster on HSR</h2>
@@ -135,12 +140,13 @@
 			<Map map={usaGeoContig} cities={triangleRouteCities} cityCordMap={cityCordMap} onhover={onhover} showCityName={false} dims={[975,610]}/>
 			<RouteDisplay highlightedRoute={highlightedRoute}/>
 
-			<!-- <HighlightedHistogram highlightedRoute={highlightedRouteRail}/> -->
+			<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#cfe6ce'}/> 
 			<!-- <newHistogram highlightedRoute={highlightedRouteRail}/> -->
+
 			<!-- <Comparison Bar Chart/> -->
 		</div>
 
-		<p>The United states currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the Internation Union of Railways defintion of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
+		<p>The United States currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the International Union of Railways definition of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
 		
 
 
@@ -168,7 +174,7 @@
 		
 		<h2>Intersection with current rail</h2>
 
-		<p>The United states currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the Internation Union of Railways defintion of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
+		<p>The United states currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the International Union of Railways definition of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
 		<p>Consider making the above information partly into a table? Comparing speeds?</p>
 		<div class="infoMap" id="railIntersection">
 			<RailMapIntersect map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} cityAmtrakRouteMap={cityAmtrakRouteMap} dims={[800,500]}/>
@@ -177,9 +183,8 @@
 			<!-- <Comparison Bar Chart/> -->
 		</div>
 
-
 		<h2>What Now?</h2>
-		<p>Want to learn more? go to these rouceses @cityNerd</p>
+		<p>Want to learn more? go to these resources @cityNerd</p>
 		<p>What to play around with the data? click <a href="https://github.com/DustinLin/datavisTrainsPlanes">here</a>.</p>
 		<p>Want to get involved? takes these steps: Share our and other resources with others</p>
 		
@@ -228,5 +233,13 @@
 		display: flex;
 		gap: 2em;
 
+	}
+
+	.barChart {
+		gap: 2em;
+	}
+
+	.histogram {
+		gap: 2em;
 	}
 </style>
