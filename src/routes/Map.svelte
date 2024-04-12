@@ -8,14 +8,17 @@
 
 
 	// prov want to rename "dataset" to like map data or smth
-	export let map;
-	export let cities; // remove "cities" data when sure not being used, replacing with cordMap rn
-	export let cordMap;  
+	export let map; // the usa geo map to plot
+	export let cities; // the obj containing all the routes want to plot
+	export let cityCordMap;  // map from city to coordiates
 
 	export let onhover;
 
-	// want to make the highlighted route more noticeable, so re-draw it like the example?
-	export let highlightedRoute;
+	export let showCityName; // to toggle if map wants to plot city names or not for clutter
+
+	// [width, height]
+	export let dims;
+	
 
 	// trying to plot lines and add interaction?
 	// from observable its an array of arrays
@@ -47,10 +50,6 @@
 	]
 
 	
-	// projections
-	const usaMapProjection = d3.geoAlbersUsa().fitSize([975, 610], map);
-
-	const mapPath = d3.geoPath().projection(usaMapProjection);
 
 
 	/**
@@ -61,33 +60,54 @@
 	 * to get the 4 points: x1 = (route, 0, 0), y1 =(route, 0, 1),  x2 = (route, 1, 0), y2 = (route, 1,1)
 	 */
 	const routeToCords = (route, city, cord) => {
-		return usaMapProjection(cordMap[cityPairsToCities(route[0])[city]].COORD)[cord]
+		return usaMapProjection(cityCordMap[cityPairsToCities(route[0])[city]].COORD)[cord]
+	}
+
+	// given a city, determine if it is a highlighted city
+	// not being used at the moment, will try to use for hover highlighting
+	const cityHighlightColor = (city) => {
+		if (highlightedRoute === null || highlightedRoute === undefined ){
+			return CITY_CIRCLE_COL
+		} else {
+			let curr = cityPairsToCities(highlightedRoute[0])
+			if (city === curr[0] || city === curr[1]) {
+				return "yellow"
+
+			} else {
+				// return basic color
+				return CITY_CIRCLE_COL
+			}
+		}
 	}
 
 
-	// ideally only want to plot cities that we are drawing routes between
-	// all cities that we are drawing lines for
+	// for filtering incoming data in "cities" to eliminate runtime errors
 	let citiesRoutePoints = []
-	mockData.forEach( (route) => {
-		citiesRoutePoints.push(cityPairsToCities(route[0])[0])
-		citiesRoutePoints.push(cityPairsToCities(route[0])[1])
+	let citiesRouteFiltered = []
+
+	// for debugging
+	let unMap = 0
+
+	// filter routes to make sure they aren't undefined?
+	cities.forEach( (route) => {
+		let c1 = cityPairsToCities(route[0])[0]
+		let c2 = cityPairsToCities(route[0])[1]
+
+		if (cityCordMap[c1] === undefined || cityCordMap[c2] === undefined){
+			//console.log(`ROUTE ERROR: city ${c1} or city ${c2} doesn't exist, skipping`)
+			unMap = unMap + 1
+		} else {
+			citiesRoutePoints.push(c1)
+			citiesRoutePoints.push(c2)
+			citiesRouteFiltered.push(route)
+		}
 	})
 	
 	const citiesPlotSet  = new Set(citiesRoutePoints)
+	console.log(`total unmapped cities: ${unMap}`)
 
 	// now have some cities that we want to plot
 
-
-	/**
-	 * 
-	 * debugging
-		let city = cities[0]
-		cx = {usaMapProjection(city.geometry.coordinates)[0]}
-		cy = {usaMapProjection(city.geometry.coordinates)[1]}
-
-		console.log(`for city ${city}, the cx and cy coordinates are ${cx}, ${cy}`)
-	 * 
-	*/
 
 	/**
 	 *  reference code
@@ -112,18 +132,22 @@
 	let borderBoxSize;
 	// borderBoxSize: has 2 entires: inline-size - width of div, block-size - height of div
 	// borderBoxSize could be undefined
-	let width = 975
-	let height = 610
+	let width = dims[0]
+	let height = dims[1]
 	//$: width = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 975
 	//$: height = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 610
+
+	// projections
+	const usaMapProjection = d3.geoAlbersUsa().fitSize([width, height], map);
+
+	const mapPath = d3.geoPath().projection(usaMapProjection);
 
 	const CITY_CIRCLE_R = 5
 	const CITY_CIRCLE_COL = "red"
 
 	// BUG?: the <style> section doesn't seem to have this var in scope
 	const ROUTE_STROKE_COL = "blue"
-	const ROUTE_STROKE_WID = 3
-
+	const ROUTE_STROKE_WID = 0.5
 
 </script>
 
@@ -139,28 +163,8 @@
 
 		{/each}
 
-		<!-- toggle between "cities" and "citiesPlot"-->
-		<!-- for "cities", look at "city.geometry.coordinates", and "city.properties.NAME" -->
-		{#each citiesPlotSet as city}
-		<circle
-			cx = {usaMapProjection(cordMap[city].COORD)[0]}
-			cy = {usaMapProjection(cordMap[city].COORD)[1]}
-			fill = {CITY_CIRCLE_COL}
-			r = {CITY_CIRCLE_R}
-		/>
-		<!-- adding a bit of buffer room to x,y cords -->
-		<text
-			font-size = 10
-			font-family = "sans-serif"
-			dominant-baseline = "hanging"
-			x = {usaMapProjection(cordMap[city].COORD)[0] + 4}
-			y = {usaMapProjection(cordMap[city].COORD)[1] + 4}
-		>
-			{city.split("_")[0]}
-		</text>
-		{/each}
-
-		{#each mockData as route}
+		<!-- todo: change to "cities" if want to plot the whole thing, "citiesRouteFiltered" contains ones that won't cause error-->
+		{#each citiesRouteFiltered as route}
 		<!-- todo, refactor to a separate file/component?-->
 		<!--  drawing a line, need to extract coordinates and draw city end points -->
 
@@ -181,6 +185,39 @@
 		{/each}
 
 
+		<!-- toggle between "cities" and "citiesPlot"-->
+		<!-- for "cities", look at "city.geometry.coordinates", and "city.properties.NAME" -->
+		<!-- city of the form "Boston_MA"-->
+		{#each citiesPlotSet as city}
+
+		<circle
+			cx = {usaMapProjection(cityCordMap[city].COORD)[0]}
+			cy = {usaMapProjection(cityCordMap[city].COORD)[1]}
+			fill = {"red"}
+			r = {CITY_CIRCLE_R}
+		/>
+		{/each}
+
+		<!-- adding a bit of buffer room to x,y cords, want the text to appear at the top, so draw the all last, requires an extra loop but -->
+		{#if showCityName}
+
+			{#each citiesPlotSet as city}
+
+			<text
+				font-size = 10
+				font-family = "sans-serif"
+				dominant-baseline = "hanging"
+				x = {usaMapProjection(cityCordMap[city].COORD)[0] + 4}
+				y = {usaMapProjection(cityCordMap[city].COORD)[1] + 4}
+			>
+				{city.split("_")[0]}
+			</text>
+			{/each}
+
+		{/if}
+
+
+
 	</svg>
 
 </div>
@@ -192,7 +229,7 @@
 		flex:2;
 	}
 	line:hover {
-		stroke: "#669977";
+		stroke: rgb(40, 147, 65);
 		/* can't access js variables in <style> section? */
 		stroke-width: 4; 
 	}

@@ -15,7 +15,7 @@
       43.1939371010001
     ]
   },
-  "Boise City_ID": {
+  "Boise_ID": {
     "ST": "ID",
     "POPULATION": 225405,
     "COORD": [
@@ -31054,5 +31054,232 @@
       -77.07409075,
       38.791389123
     ]
+  },
+  "Glendive_MT": {
+    "ST": "MT",
+    "POPULATION": 4873,
+    "COORD": [
+      -104.71523,
+      47.10250
+    ]
+  },
+  "Sidney_MT": {
+    "ST": "MT",
+    "POPULATION": 6346,
+    "COORD": [
+      -104.15698,
+      47.71407
+    ]
+  },
+
+  "Nantucket_MA": {
+    "ST": "MA",
+    "POPULATION": 14255,
+    "COORD": [
+      -70.9914,
+      41.28523
+    ]
+  },
+  "Glasgow_MT": {
+    "ST": "MT",
+    "POPULATION": 3322,
+    "COORD": [
+      -106.63486,
+      48.19183
+    ]
+  },
+  "Martha_MA": {
+    "ST": "MA",
+    "POPULATION": 20600,
+    "COORD": [
+      -70.61911,
+      41.40676
+    ]
+  },
+  "Hyannis_MA": {
+    "ST": "MA",
+    "POPULATION": 14089,
+    "COORD": [
+      -70.28375,
+      41.65698
+    ]
+  },
+  "Rhinelander_WI": {
+    "ST": "WI",
+    "POPULATION": 7642,
+    "COORD": [
+      -89.41065,
+      45.63618
+    ]
+  },
+  "Pellston_MI": {
+    "ST": "MI",
+    "POPULATION": 843,
+    "COORD": [
+      -84.78541,
+      45.55178
+    ]
+  },
+  "West Yellowstone_MT": {
+    "ST": "MT",
+    "POPULATION": 1272,
+    "COORD": [
+      -111.10804,
+      44.65875
+    ]
+  },
+  "Sun Valley_ID": {
+    "ST": "ID",
+    "POPULATION": 1486,
+    "COORD": [
+      -114.34618,
+      43.69251
+    ]
+  },
+  "Aspen_CO": {
+    "ST": "CO",
+    "POPULATION": 7004,
+    "COORD": [
+      -106.81825,
+      39.18981
+    ]
+  },
+  "Gunnison_CO": {
+    "ST": "CO",
+    "POPULATION": 6640,
+    "COORD": [
+      -106.92870,
+      38.54556
+    ]
+  },
+  "Cody_WY": {
+    "ST": "WY",
+    "POPULATION": 9788,
+    "COORD": [
+      -109.06089,
+      44.52717
+    ]
+  },
+  "Devils Lake_ND": {
+    "ST": "ND",
+    "POPULATION": 7229,
+    "COORD": [
+      -98.85910,
+      48.11380
+    ]
+  },
+
+  "Hancock_MI": {
+    "ST": "MI",
+    "POPULATION": 8386,
+    "COORD": [
+      -88.58469,
+      47.12665
+    ]
+  },
+  "Veil_CO": {
+    "ST": "CO",
+    "POPULATION": 4835,
+    "COORD": [
+      -106.38090,
+      39.64384
+    ]
+  },
+  "North Bend_OR": {
+    "ST": "OR",
+    "POPULATION": 10317,
+    "COORD": [
+      -124.22533,
+      43.40771
+    ]
+  },
+  "Latrobe_PA": {
+    "ST": "PA",
+    "POPULATION": 7830,
+    "COORD": [
+      -79.38522,
+      40.31548
+    ]
+  },
+  "International Falls_MN": {
+    "ST": "MN",
+    "POPULATION": 5811,
+    "COORD": [
+      -93.40868,
+      48.60174
+    ]
+  },
+  "Telluride_CO": {
+    "ST": "CO",
+    "POPULATION": 2479,
+    "COORD": [
+      -107.81061,
+      37.93801
+    ]
+  },
+  "Bradford_PA": {
+    "ST": "PA",
+    "POPULATION": 8210,
+    "COORD": [
+      -78.64742,
+      41.95689
+    ]
+  },
+  "Presque Island_ME": {
+    "ST": "ME",
+    "POPULATION": 9171,
+    "COORD": [
+      -68.01393,
+      46.68247
+    ]
+  },
+  "Thief River Falls_MN": {
+    "ST": "MN",
+    "POPULATION": 8573,
+    "COORD": [
+      -96.17616,
+      48.11913
+    ]
+  },
+  "Havre_MT": {
+    "ST": "MT",
+    "POPULATION": 9834,
+    "COORD": [
+      -109.67493,
+      48.55004
+    ]
+  },
+  "Dubois_PA": {
+    "ST": "PA",
+    "POPULATION": 7510,
+    "COORD": [
+      -78.76167,
+      41.11967
+    ]
+  },
+  "Rockland_ME": {
+    "ST": "ME",
+    "POPULATION": 7165,
+    "COORD": [
+      -69.12884,
+      44.09759
+    ]
+  },
+  "Pendelton_OR": {
+    "ST": "OR",
+    "POPULATION": 16789,
+    "COORD": [
+      -118.79122,
+      45.67030
+    ]
+  },
+  "Wolf Point_MT": {
+    "ST": "MT",
+    "POPULATION": 2621,
+    "COORD": [
+      -105.64310,
+      48.08988
+    ]
   }
+
 }

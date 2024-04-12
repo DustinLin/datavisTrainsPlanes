@@ -3,7 +3,7 @@
 
 	export let highlightedRoute; 
 
-	import {cityPairsToCities, cityStToCity, numberWithCommas} from '../utils';
+	import {cityPairsToCities, cityStToCity, cityStToState, numberWithCommas} from '../utils';
 
 
 	/* What a highlightedRoute looks like:
@@ -19,16 +19,22 @@
 		GRAVITY: 65.42354467661713 }
 	 ]
 	 */
+
+	/**
+	 * only show cities, airports are unreliable, and not matched: city pairs sorted by alpha order so could be a mismatch
+	 * 
+	 * 
+		<li>Origin Airport: {highlightedRoute[1].ORIGIN} </li>
+		<li>Destination Airport: {highlightedRoute[1].DEST} </li>
+	*/
 </script>
 
 {#if highlightedRoute}
 <div class="routeInfo">
 	<ul>
-		<li>Origin City: {cityStToCity(cityPairsToCities(highlightedRoute[0])[0])}</li>
-		<li>Origin Airport: {highlightedRoute[1].ORIGIN} </li>
-		<li>Destination City: {cityStToCity(cityPairsToCities(highlightedRoute[0])[1])}</li>
-		<li>Destination Airport: {highlightedRoute[1].DEST} </li>
-		<li>Distance: {highlightedRoute[1].DISTANCE} miles </li>
+		<li>Origin City: {cityStToCity(cityPairsToCities(highlightedRoute[0])[0])}, {cityStToState(cityPairsToCities(highlightedRoute[0])[0])}</li>
+		<li>Destination City: {cityStToCity(cityPairsToCities(highlightedRoute[0])[1])}, {cityStToState(cityPairsToCities(highlightedRoute[0])[1])}</li>
+		<li>Distance: {Math.floor(highlightedRoute[1].DISTANCE)} miles </li>
 		<li>Passengers: {numberWithCommas(highlightedRoute[1].PASSENGERS)}</li>
 	</ul>
 
@@ -38,9 +44,7 @@
 <div class="routeInfo">
 	<ul>
 		<li>Origin City: N/A</li>
-		<li>Origin Airport: N/A</li>
 		<li>Destination City: N/A</li>
-		<li>Destination Airport: N/A</li>
 		<li>Distance: N/A</li>
 		<li>Passengers: N/A</li>
 	</ul>

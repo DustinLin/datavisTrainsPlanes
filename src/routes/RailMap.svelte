@@ -8,16 +8,18 @@
 
 	export let map; // the USA map
 	export let railMap; // amtrak map
-	export let cordMap;  // mapping from US cities for coordinates
+	export let cityCordMap;  // mapping from US cities for coordinates
+
+	export let citiesPlotSet; // which cities to plot
+
+	// [width, height]
+	export let dims;
 
 
 
-	// projections
-	const usaMapProjection = d3.geoAlbersUsa().fitSize([975, 610], map);
-
-	const mapPath = d3.geoPath().projection(usaMapProjection);
 
 	// hard code some cities to place?
+	/*
 	const citiesPlotSet  = [
 		"Boston_MA",
 		"New York_NY",
@@ -35,16 +37,27 @@
 		"Houston_TX",
 		"Miami_FL"
 	]
+	*/
+
+	citiesPlotSet.forEach(city => {
+		if(cityCordMap[city] === undefined){
+			console.log(`ERRROR RENDERING RAIL MAP FOR CITY ${city}`)
+		}
+	});
 
 	// TODO try to make display reactive
 	let borderBoxSize;
 	// borderBoxSize: has 2 entires: inline-size - width of div, block-size - height of div
 	// borderBoxSize could be undefined
-	let width = 975
-	let height = 610
+	let width = dims[0]
+	let height = dims[1]
 	//$: width = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 975
 	//$: height = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 610
 
+	// projections
+	const usaMapProjection = d3.geoAlbersUsa().fitSize([width, height], map);
+
+	const mapPath = d3.geoPath().projection(usaMapProjection);
 </script>
 
 <div class="maps">
@@ -73,17 +86,17 @@
 		<!-- for "cities", look at "city.geometry.coordinates", and "city.properties.NAME" -->
 		{#each citiesPlotSet as city}
 		<circle
-			cx = {usaMapProjection(cordMap[city].COORD)[0]}
-			cy = {usaMapProjection(cordMap[city].COORD)[1]}
-			fill = "red"
+			cx = {usaMapProjection(cityCordMap[city].COORD)[0]}
+			cy = {usaMapProjection(cityCordMap[city].COORD)[1]}
+			fill = "orange"
 			r = {5}
 		/>
 		<text
 			font-size = 10
 			font-family = "sans-serif"
 			dominant-baseline = "hanging"
-			x = {usaMapProjection(cordMap[city].COORD)[0] + 4}
-			y = {usaMapProjection(cordMap[city].COORD)[1] + 4}
+			x = {usaMapProjection(cityCordMap[city].COORD)[0] + 4}
+			y = {usaMapProjection(cityCordMap[city].COORD)[1] + 4}
 		>
 			{city.split("_")[0]}
 		</text>
