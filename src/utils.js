@@ -2,8 +2,15 @@
  * contain useful functions for data parsing?
  */
 
+
+export let cutoffs = {
+	triangleUpper: 451.75,
+	triangleLower: 75.25,
+	topRoutesNumber: 30
+}
+
 /**
- * eg: "(Boston, Los Angeles)", returns "["Boston", "Los Angeles"]
+ * eg: "(Boston_MA, Los Angeles_CA)", returns "["Boston_MA", "Los Angeles_CA"]
  * useful for working with Jack plane routes data
  */
 export let cityPairsToCities = (cityPair) => {
