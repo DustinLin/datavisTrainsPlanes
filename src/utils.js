@@ -2,6 +2,70 @@
  * contain useful functions for data parsing?
  */
 
+const SECURITY_TIMES = {
+	'plane': 120,
+	'train': 15,
+	'car': 0 
+}
+
+const TRAVEL_TO_AND_FROM_TIMES = {
+	'plane': 60,
+	'train': 60,
+	'car': 0
+}
+
+
+export let planeTime = (distance) => {
+	return 44.5957 + 0.117441*distance
+}
+
+export let carTime = (distance) => {
+	return 30 + (60 / 55) * distance
+}
+
+export let trainTime = (distance) => {
+	return (25 + 0.36 * distance)
+}
+
+export let createDatapoints = (functionToPlot, maxDistance, xScale, yScale) => {
+	const pointNum = 500;
+	const data = [];
+	const step = maxDistance / 500
+	for (let x = 0; x <= maxDistance; x += step) {
+	  const y = functionToPlot(x);
+	  data.push([xScale(x), yScale(y)])
+	}
+	return data;
+}
+
+
+/**
+ * 
+ * @param {*} distance : distance in miles being traveled
+ * @returns the time it takes to travel distance x on a plane while accounding for non-riding travel times
+ */
+export let planeTotalTime = (distance) =>  {
+	return planeTime(distance) + SECURITY_TIMES.plane + TRAVEL_TO_AND_FROM_TIMES.plane
+}
+
+/**
+ * 
+ * @param {*} distance : distance in miles being traveled
+ * @returns the time it takes to travel distance x on a train while accounding for non-riding travel times
+ */
+export let trainTotalTime = (distance) => {
+	return trainTime(distance) + SECURITY_TIMES.train + TRAVEL_TO_AND_FROM_TIMES.train
+}
+
+/**
+ * 
+ * @param {*} distance : distance in miles being traveled
+ * @returns the time it takes to travel distance x in a car while accounding for non-riding travel times
+ */
+export let carTotalTime = (distance) => {
+	return carTime(distance) + SECURITY_TIMES.car + TRAVEL_TO_AND_FROM_TIMES.car
+}
+
 /**
  * eg: "(Boston, Los Angeles)", returns "["Boston", "Los Angeles"]
  * useful for working with Jack plane routes data

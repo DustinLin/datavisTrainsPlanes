@@ -1,0 +1,130 @@
+<script>
+	import * as d3 from 'd3';
+	import Axis from './Axis.svelte';
+	import {planeTotalTime, trainTotalTime, carTotalTime, createDatapoints} from '../utils'
+
+	
+
+	const marginTriangle = { top: 10, right: 50, bottom: 50, left: 50 };
+	const widthTriangle = 500;
+	const heightTriangle = 400;
+
+	const STROKE_WIDTH = 2.5;
+
+	const MAX_DISTANCE = 2724
+	const functions = [planeTotalTime, trainTotalTime, carTotalTime];
+
+	const smallXScale = d3.scaleLinear()
+		.domain([0, 500])
+		.range([marginTriangle.left, widthTriangle - marginTriangle.right]);
+
+	const smallYScale = d3.scaleLinear()
+		.domain([0, 500])
+		.range([heightTriangle - marginTriangle.bottom, marginTriangle.top]);
+
+	const transportTypeColorScale = d3.scaleOrdinal()
+		.domain(functions)
+		//.range(d3.schemeCategory10)
+		.range(['#88aed0', '#ffb347', '#9cc599'])
+
+
+//   // add x axis to chart
+//  // const xAxes = triangleSvg.append('g')
+//     // move it to the bottom
+//     //.attr('transform', d => `translate(0,${gridRow.bandwidth()})`)
+//   //  .call(xAxis)
+//     // remove the baseline
+//   //  .call(g => g.select('.domain').remove())
+//     // change the tick color to gray
+//   //  .call(g => g.selectAll('line').attr('stroke', '#c0c0c0'));
+
+//     triangleSvg.append('g')
+//       // move x-axis to the bottom 
+//       .attr('transform', d => `translate(0,${heightTriangle})`)
+//       .call(xAxis)
+      
+//       .append('text')
+//         .attr('fill', 'black')
+//         .attr('font-family', 'sans-serif')
+//         .attr('x', 270)
+//         .attr('y', 40)
+//         .text("Distance (miles)");
+
+
+//     triangleSvg.append('g')
+//       .attr('transform', d => `translate(${marginTriangle.left}, 0)`)
+//       .call(yAxis)
+//       .append('text')
+//         .attr('fill', 'black')
+//         .attr('font-family', 'sans-serif')
+//         .attr("transform", "rotate(-90)")
+//         .attr('x', -heightTriangle/2)
+//         .attr('y', -30)
+//         .text("Time");
+
+
+	///////////// OLD CODE
+	// dimensions
+
+	// let borderBoxSize;
+
+	// $: width = borderBoxSize
+	// 	? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize)
+	// 	: 400;
+
+	// $: height = borderBoxSize
+	// 	? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize)
+	// 	: 400;
+
+	// const margin = { top: 25, right: 20, bottom: 50, left: 60 };
+
+
+	// scales
+
+	// $: maxCount = d3.max(counts.values());
+
+	// $: x = d3
+	// 	.scaleLinear()
+	// 	.domain([0, maxCount])
+	// 	.nice()
+	// 	.range([margin.left, width - margin.right]);
+
+	// $: y = d3
+	// 	.scaleBand()
+	// 	.domain(color.domain())
+	// 	.range([margin.top, height - margin.bottom])
+	// 	.padding(0.1);
+</script>
+
+<div class="barchart">
+	<svg height={heightTriangle} width={widthTriangle}>
+		<!-- bars -->
+		<g>
+			{#each functions as theFunction}
+				<path
+					d={d3.line()(createDatapoints(theFunction, MAX_DISTANCE, smallXScale, smallYScale))}
+					stroke={transportTypeColorScale(theFunction)}
+					stroke-width={STROKE_WIDTH}
+				/>
+			{/each}
+		</g>
+
+		<!-- axes -->
+		<Axis orientation="bottom" scale={smallXScale} width={widthTriangle} height={heightTriangle} margin={marginTriangle} label={'Count'} />
+		<Axis orientation="left" scale={smallYScale} width={widthTriangle} height={heightTriangle} margin={marginTriangle} />
+	</svg>
+</div>
+
+<style>
+	.barchart {
+		/* take up extra horizontal space in the parent */
+		flex: 1;
+		/* be as tall as the parent div */
+		height: 100%;
+	}
+
+	/* animate changes to the lengths of the bars
+	rect {
+		transition: width 250ms;
+	} */
+</style>
