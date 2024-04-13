@@ -10,7 +10,7 @@ const SECURITY_TIMES = {
 
 const TRAVEL_TO_AND_FROM_TIMES = {
 	'plane': 60,
-	'train': 60,
+	'train': 45,
 	'car': 0
 }
 
@@ -45,7 +45,16 @@ export let createDatapoints = (functionToPlot, maxDistance, xScale, yScale) => {
  * @returns the time it takes to travel distance x on a plane while accounding for non-riding travel times
  */
 export let planeTotalTime = (distance) =>  {
-	return planeTime(distance) + SECURITY_TIMES.plane + TRAVEL_TO_AND_FROM_TIMES.plane
+	return planeTimeToTotalTime(planeTime(distance));
+}
+
+/**
+ * 
+ * @param {*} time : time for just the flight
+ * @returns : the expected total time of the flight
+ */
+export let planeTimeToTotalTime = (time) => {
+	return time + SECURITY_TIMES.plane + TRAVEL_TO_AND_FROM_TIMES.plane;
 }
 
 /**
@@ -77,7 +86,7 @@ export let computeIntersection = (line1, line2) => {
 	const slope1 = (line1(delta) - intercept1) / delta
 
 	const intercept2 = line2(0)
-	const slope2 = (line2(delta) - intercept1) / delta
+	const slope2 = (line2(delta) - intercept2) / delta
 	return (intercept1 - intercept2) / (slope2 - slope1)
 }
 
@@ -96,8 +105,8 @@ export let computeInverse = (lineFunction, y) => {
 
 export let cutoffs = {
 	triangleUpper: computeIntersection(trainTotalTime, planeTotalTime), // intersection of train with plane
-	triangleLower: computeIntersection(carTime, planeTotalTime), // intersection of train with car
-	carPlaneIntersection: computeIntersection(carTime, planeTime),
+	triangleLower: computeIntersection(carTotalTime, trainTotalTime), // intersection of train with car
+	carPlaneIntersection: computeIntersection(carTotalTime, planeTotalTime),
 	topRoutesNumber: 100,
 	topGravNumber: 30
 }
@@ -145,7 +154,8 @@ export let minToHours = (time, numFlights) => {
 
 // function for coloring bars in histogram based on time triangle
 export let inTriangle = (flightTime) => {
-	const lowerTime = planeTotalTime(triangleLower)
-	const upperTime = planeTotalTime(triangleUpper)
-	return (flightTime <= lowerTime) && (flightTime >= upperTime)
+	const lowerTime = planeTotalTime(cutoffs.triangleLower)
+	const upperTime = planeTotalTime(cutoffs.triangleUpper)
+	console.log(`lowerX: ${cutoffs.triangleLower}, lowerTime: ${lowerTime}, upperX: ${cutoffs.triangleUpper}, upperTime: ${upperTime}, flightTime: ${flightTime}, bool value: ${(flightTime <= lowerTime) && (flightTime >= upperTime)}`)
+	return (flightTime >= lowerTime) && (flightTime <= upperTime)
 }
