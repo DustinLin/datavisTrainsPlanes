@@ -18,6 +18,25 @@
 
 	// [width, height]
 	export let dims;
+
+	let borderBoxSize;
+
+	console.log(`the dims ${dims}`)
+
+	let width;
+	let height;
+	$: width = borderBoxSize
+		? d3.max([borderBoxSize[0].inlineSize, dims[0]])
+		: dims[0];
+
+	$: height = borderBoxSize
+		? d3.max([borderBoxSize[0].blockSize, dims[1]])
+		: dims[0];
+
+	// $: width = dims[0];
+	// height = 800;
+
+	$: console.log(`width and height ${width}, ${height}`)
 	
 
 	// trying to plot lines and add interaction?
@@ -50,7 +69,7 @@
 	]
 
 	
-
+	
 
 	/**
 	 * helper function to compute the PROJECTED coordinates for lines
@@ -59,7 +78,7 @@
 	 * @param 0 or 1 for which cord (x,y) you want
 	 * to get the 4 points: x1 = (route, 0, 0), y1 =(route, 0, 1),  x2 = (route, 1, 0), y2 = (route, 1,1)
 	 */
-	const routeToCords = (route, city, cord) => {
+	$: routeToCords = (route, city, cord) => {
 		return usaMapProjection(cityCordMap[cityPairsToCities(route[0])[city]].COORD)[cord]
 	}
 
@@ -110,18 +129,15 @@
 	// now have some cities that we want to plot
 
 	// TODO try to make display reactive
-	let borderBoxSize;
 	// borderBoxSize: has 2 entires: inline-size - width of div, block-size - height of div
 	// borderBoxSize could be undefined
-	let width = dims[0]
-	let height = dims[1]
 	//$: width = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 975
 	//$: height = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 610
 
 	// projections
-	const usaMapProjection = d3.geoAlbersUsa().fitSize([width, height], map);
+	$: usaMapProjection = d3.geoAlbersUsa().fitSize([width, height], map);
 
-	const mapPath = d3.geoPath().projection(usaMapProjection);
+	$: mapPath = d3.geoPath().projection(usaMapProjection);
 
 	const CITY_CIRCLE_R = 5
 	const CITY_CIRCLE_COL = "red"
@@ -129,11 +145,11 @@
 	// BUG?: the <style> section doesn't seem to have this var in scope
 	const ROUTE_STROKE_COL = "blue"
 	const ROUTE_STROKE_WID = 0.5
-
+	console.log(`Got here`)
 </script>
 
-<div class="maps">
-	<svg width={width} height={height}>
+<div class="maps" bind:borderBoxSize={borderBoxSize}>
+	<svg width={width} height={height} bind:borderBoxSize>
 		<!-- drawing paths for each state, using projections -->
 		{#each map.features as state}
 			<path

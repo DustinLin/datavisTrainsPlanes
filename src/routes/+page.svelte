@@ -66,6 +66,8 @@
 	// doing some route processing to plot certain routes on different <Map>
 	let manyRouteCities = filteredCityPairToInfo
 
+	let minMapDims = [500, 500];
+
 	let triangleRouteCities= filteredCityPairToInfo.filter(route => 
 		route[1].DISTANCE >= cutoffs.triangleLower && route[1].DISTANCE <= cutoffs.triangleUpper
 	)
@@ -103,23 +105,26 @@
 	<div class="main">
 		<h2>How do people travel between cities in the US</h2>
 		<div class="infoMap" id="allRoutes">
-			<Map map={usaGeoContig} cities={manyRouteCities} cityCordMap={cityCordMap} onhover={onhover} showCityName={false} dims={[975, 610]}/>
+			<Map map={usaGeoContig} cities={manyRouteCities} cityCordMap={cityCordMap} onhover={onhover} showCityName={false} dims={minMapDims}/>
 			<RouteDisplay highlightedRoute={highlightedRoute}/>
 		</div>
 
 		<!-- compoenent -->
 		<h2>What are the popular airline routes in the US?</h2>
 		<div class="infoMap" id="popularAirlines">
-			<Map map={usaGeoContig} cities={topFlightRoutesPass} cityCordMap={cityCordMap} onhover={onhover} showCityName={true} dims={[975,610]}/>
-			<RouteDisplay highlightedRoute={highlightedRoute}/>
-			<!-- <BarChart/> for top routes -->
-			<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100}/> 
+			<Map map={usaGeoContig} cities={topFlightRoutesPass} cityCordMap={cityCordMap} onhover={onhover} showCityName={true} dims={minMapDims}/>
+			<div class="stackBox">
+				<RouteDisplay highlightedRoute={highlightedRoute}/>
+				<!-- <BarChart/> for top routes -->
+				<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100}/> 
+		
+			</div>
 		</div>
 
 		<h2>How much time is spent taking these routes?</h2>
 		<div class="infoMap" id="airlineTimes">
-			<p>idea to put a barchart that outlines different histogram that haneen made here as well as a bar chart the breaks down the flying time, maybe could give a few flight examples<p/>
-			<!-- <BarChart/> -->
+			<!-- <p>idea to put a barchart that outlines different histogram that haneen made here as well as a bar chart the breaks down the flying time, maybe could give a few flight examples<p/> -->
+			<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100}/> 
 			<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#88aed0'}/> 
 		</div>
 
@@ -133,7 +138,7 @@
 
 		<h2>Airline routes that would be faster on HSR</h2>
 		<div class="infoMap" id="airlineSpeedUp">
-			<Map map={usaGeoContig} cities={triangleRouteCities} cityCordMap={cityCordMap} onhover={onhover} showCityName={false} dims={[975,610]}/>
+			<Map map={usaGeoContig} cities={triangleRouteCities} cityCordMap={cityCordMap} onhover={onhover} showCityName={false} dims={minMapDims}/>
 			<RouteDisplay highlightedRoute={highlightedRoute}/>
 
 			<!-- <Comparison Bar Chart/> -->
@@ -168,9 +173,9 @@
 		</div>
 		
 		<h2>Intersection with current rail</h2>
-
 		<p>The United states currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the International Union of Railways definition of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
 		<p>Consider making the above information partly into a table? Comparing speeds?</p>
+		<p>The US does contain a lot of rail infrastructure already which would allows for cheap cost to build... fix the wording but something along this idea</p>
 		<div class="infoMap" id="railIntersection">
 			<RailMapIntersect map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} cityAmtrakRouteMap={cityAmtrakRouteMap} dims={[800,500]}/>
 			<RailMap map={usaGeoContig} railMap={amtrakMapSimp} cityCordMap={cityCordMap} citiesPlotSet={citiesPlotSet} dims={[800,500]}/>
@@ -182,8 +187,6 @@
 		<p>Want to learn more? go to these resources @cityNerd</p>
 		<p>What to play around with the data? click <a href="https://github.com/DustinLin/datavisTrainsPlanes">here</a>.</p>
 		<p>Want to get involved? takes these steps: Share our and other resources with others</p>
-		
-		<TopChart/>
 
 	</div>
 </div>
@@ -224,10 +227,22 @@
 	}
 
 	.infoMap {
-		/* want a horizonal flex? */
+		/* Creating a horizontal flex */
 		display: flex;
 		gap: 2em;
+		/* make the div take up the entire screen */
+		height: 100vh;
+		width: 100vw;
+	}
 
+	.maps {
+		height: 100vh;
+		width: 100vw;
+	}
+
+	.stackBox {
+		/* create a vertical stacking */
+		gap: 2em;
 	}
 
 	.barChart {
