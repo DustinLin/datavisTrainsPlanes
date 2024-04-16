@@ -16,24 +16,13 @@
 	export let dims;
 
 
-
-
 	// hard code some cities to place?
 	/*
 	const citiesPlotSet  = [
 		"Boston_MA",
-		"New York_NY",
-		"Philadelphia_PA",
-		"Washington_DC",
-		"Seattle_WA",
 		"Los Angeles_CA",
 		"San Francisco_CA",
 		"Denver_CO",
-		"Phoenix_AZ",
-		"Atlanta_GA",
-		"Chicago_IL",
-		"Oklahoma City_OK",
-		"Dallas_TX",
 		"Houston_TX",
 		"Miami_FL"
 	]

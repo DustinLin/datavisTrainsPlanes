@@ -6,12 +6,8 @@
 
 	import './style.css';
 	import * as d3 from 'd3';
-	import Scatterplot from './Scatterplot.svelte';
-	import FeatureControls from './FeatureControls.svelte';
 	//import BarChart from './BarChart.svelte';
 	import BarChart from './BarChartNew.svelte';
-	import PlayerList from './PlayerList.svelte';
-	import ColorLegend from './ColorLegend.svelte';
 
 	import Map from './Map.svelte'
   	import RouteDisplay from './RouteDisplay.svelte';

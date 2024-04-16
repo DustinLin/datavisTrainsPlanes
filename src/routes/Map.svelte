@@ -104,29 +104,10 @@
 	})
 	
 	const citiesPlotSet  = new Set(citiesRoutePoints)
-	console.log(`total unmapped cities: ${unMap}`)
+
+	//console.log(`total unmapped cities: ${unMap}`)
 
 	// now have some cities that we want to plot
-
-
-	/**
-	 *  reference code
-		.join("text")
-		.attr('font-size', 10)
-		.attr('font-family', 'sans-serif')
-		.attr('dominant-baseline', 'hanging') // to edit to make pretty
-		.attr('x', city => usaMapProjection(city.geometry.coordinates)[0]) // using same projection as circles for cities
-		.attr('y', city => usaMapProjection(city.geometry.coordinates)[1])
-		.text(city => city.properties.NAME);
-
-	   // code for making a path in d3
-		  g.selectAll("path")
-    		.data(usaGeo.features)
-    		.join("path")
-			.attr("d", mapPath)
-			.attr("fill", '#d3d3d3')
-			.attr("stroke", "white");
-	*/
 
 	// TODO try to make display reactive
 	let borderBoxSize;
@@ -202,7 +183,6 @@
 		{#if showCityName}
 
 			{#each citiesPlotSet as city}
-
 			<text
 				font-size = 10
 				font-family = "sans-serif"

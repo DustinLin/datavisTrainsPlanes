@@ -57,10 +57,9 @@
 	})
 	
 	const citiesPlotSet  = new Set(citiesRoutePoints)
-	console.log(`total unmapped cities: ${unMap}`)
+	//console.log(`total unmapped cities: ${unMap}`)
 
 	// now have some cities that we want to plot
-
 
 	// TODO try to make display reactive
 	let borderBoxSize;
