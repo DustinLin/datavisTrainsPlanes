@@ -47,25 +47,30 @@
 	// idea is to pass highlightedRoute to some other component
 	// TODO: for multiple maps will need to create a diff variable.. or else they all point to the same thing
 	// data type is the the route object
-	let highlightedRoute = null;
 
-	function onhover(route){
+	// total of 3 hover maps: one for all the routes, one for top popular routes, one for routes in triangle
+	let hRoutes = {
+		highlightedRouteAll: null,
+		highlightedRoutePopular: null,
+		highlightedRouteTriangle: null
+	}
+
+	function onhover(route, vis){
 		// set params for route
-		console.log(`hihglighted route is: ${route}`)
 		if (route === null) {
-			highlightedRoute = null
+			hRoutes[vis] = null
 		} else {
 			// interesting that these print statements end up printing on the web browser/client side, not sure why
 			//console.log(`hovering over route ${route}`)
-			highlightedRoute = route
+			hRoutes[vis] = route
 		}
 	}
 
+	// filtering top routes to show in vis
 	let GravTopRes = gravityTopResRoutes[0].slice(0, cutoffs.topGravNumber)
 
 	// doing some route processing to plot certain routes on different <Map>
 	let manyRouteCities = filteredCityPairToInfo
-
 	let triangleRouteCities= filteredCityPairToInfo.filter(route => 
 		route[1].DISTANCE >= cutoffs.triangleLower && route[1].DISTANCE <= cutoffs.triangleUpper
 	)
@@ -103,15 +108,29 @@
 	<div class="main">
 		<h2>How do people travel between cities in the US</h2>
 		<div class="infoMap" id="allRoutes">
-			<Map map={usaGeoContig} cities={manyRouteCities} cityCordMap={cityCordMap} onhover={onhover} showCityName={false} dims={[975, 610]}/>
-			<RouteDisplay highlightedRoute={highlightedRoute}/>
+			<Map
+				map={usaGeoContig} 
+				cities={manyRouteCities} 
+				cityCordMap={cityCordMap} 
+				showCityName={false} 
+				dims={[975, 610]} 
+				onhover={onhover} 
+				mapId={"highlightedRouteAll"}/>
+			<RouteDisplay highlightedRoute={hRoutes["highlightedRouteAll"]}/>
 		</div>
 
 		<!-- compoenent -->
 		<h2>What are the popular airline routes in the US?</h2>
 		<div class="infoMap" id="popularAirlines">
-			<Map map={usaGeoContig} cities={topFlightRoutesPass} cityCordMap={cityCordMap} onhover={onhover} showCityName={true} dims={[975,610]}/>
-			<RouteDisplay highlightedRoute={highlightedRoute}/>
+			<Map 
+				map={usaGeoContig} 
+				cities={topFlightRoutesPass} 
+				cityCordMap={cityCordMap} 
+				onhover={onhover} 
+				showCityName={true} 
+				dims={[975,610]} 
+				mapId={"highlightedRoutePopular"}/>
+			<RouteDisplay highlightedRoute={hRoutes["highlightedRoutePopular"]}/>
 			<!-- <BarChart/> for top routes -->
 			<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100}/> 
 		</div>
@@ -133,8 +152,15 @@
 
 		<h2>Airline routes that would be faster on HSR</h2>
 		<div class="infoMap" id="airlineSpeedUp">
-			<Map map={usaGeoContig} cities={triangleRouteCities} cityCordMap={cityCordMap} onhover={onhover} showCityName={false} dims={[975,610]}/>
-			<RouteDisplay highlightedRoute={highlightedRoute}/>
+			<Map 
+				map={usaGeoContig} 
+				cities={triangleRouteCities} 
+				cityCordMap={cityCordMap} 
+				onhover={onhover} 
+				mapId={"highlightedRouteTriangle"}
+				showCityName={false} 
+				dims={[975,610]}/>
+			<RouteDisplay highlightedRoute={hRoutes["highlightedRouteTriangle"]}/>
 
 			<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#cfe6ce'}/> 
 			<!-- <newHistogram highlightedRoute={highlightedRouteRail}/> -->

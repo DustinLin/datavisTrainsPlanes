@@ -13,6 +13,7 @@
 	export let cityCordMap;  // map from city to coordiates
 
 	export let onhover;
+	export let mapId; // a string to update the hover variable
 
 	export let showCityName; // to toggle if map wants to plot city names or not for clutter
 
@@ -157,10 +158,10 @@
 			y2={routeToCords(route, 1, 1)}
 			stroke={ROUTE_STROKE_COL}
 			stroke-width={ROUTE_STROKE_WID}
-			on:mouseover={() => onhover(route)}
-			on:mouseleave={() => onhover(null)}
-			on:focus={() => onhover(route)}
-			on:focusout={() => onhover(null)}
+			on:mouseover={() => onhover(route, mapId)}
+			on:mouseleave={() => onhover(null, mapId)}
+			on:focus={() => onhover(route, mapId)}
+			on:focusout={() => onhover(null, mapId)}
 		/>
 
 		{/each}
