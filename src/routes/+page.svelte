@@ -18,7 +18,7 @@
 	import MapStatic from './MapStatic.svelte';
 	import RailMapIntersect from './RailMapIntersect.svelte';
 
-	import { cutoffs, cityPairsToCities  } from '../utils';
+	import { cutoffs, cityPairsToCities, MOCK_DATA  } from '../utils';
 	import Histogram from './Histogram.svelte';
 
 
@@ -70,12 +70,12 @@
 	let GravTopRes = gravityTopResRoutes[0].slice(0, cutoffs.topGravNumber)
 
 	// doing some route processing to plot certain routes on different <Map>
-	let manyRouteCities = filteredCityPairToInfo
+	let allRouteCities = filteredCityPairToInfo
 	let triangleRouteCities= filteredCityPairToInfo.filter(route => 
 		route[1].DISTANCE >= cutoffs.triangleLower && route[1].DISTANCE <= cutoffs.triangleUpper
 	)
 
-	console.log(`there is a diff between many routes and triangle routes: ${manyRouteCities.length}, ${triangleRouteCities.length}`)
+	console.log(`there is a diff between all routes and triangle routes: ${allRouteCities.length}, ${triangleRouteCities.length}`)
 
 	// sorting data by top that carry passengers, taking top N
 	let topFlightRoutesPass = filteredCityPairToInfo 
@@ -110,11 +110,12 @@
 		<div class="infoMap" id="allRoutes">
 			<Map
 				map={usaGeoContig} 
-				cities={manyRouteCities} 
+				cities={allRouteCities} 
 				cityCordMap={cityCordMap} 
 				showCityName={false} 
 				dims={[975, 610]} 
 				onhover={onhover} 
+				highlightedRoute={hRoutes["highlightedRouteAll"]}
 				mapId={"highlightedRouteAll"}/>
 			<RouteDisplay highlightedRoute={hRoutes["highlightedRouteAll"]}/>
 		</div>
@@ -129,6 +130,7 @@
 				onhover={onhover} 
 				showCityName={true} 
 				dims={[975,610]} 
+				highlightedRoute={hRoutes["highlightedRoutePopular"]}
 				mapId={"highlightedRoutePopular"}/>
 			<RouteDisplay highlightedRoute={hRoutes["highlightedRoutePopular"]}/>
 			<!-- <BarChart/> for top routes -->
@@ -158,6 +160,7 @@
 				cityCordMap={cityCordMap} 
 				onhover={onhover} 
 				mapId={"highlightedRouteTriangle"}
+				highlightedRoute={hRoutes["highlightedRouteTriangle"]}
 				showCityName={false} 
 				dims={[975,610]}/>
 			<RouteDisplay highlightedRoute={hRoutes["highlightedRouteTriangle"]}/>

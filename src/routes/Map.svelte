@@ -14,6 +14,7 @@
 
 	export let onhover;
 	export let mapId; // a string to update the hover variable
+	export let highlightedRoute;
 
 	export let showCityName; // to toggle if map wants to plot city names or not for clutter
 
@@ -23,32 +24,6 @@
 
 	// trying to plot lines and add interaction?
 	// from observable its an array of arrays
-	const mockData = [ [ "(Boston_MA, New York_NY)",
-	  { DEPARTURES_PERFORMED: 35030,
-		SEATS: 3529952,
-		RAMP_TO_RAMP: 2707512,
-		PASSENGERS: 2662158,
-		FREIGHT: 577035,
-		DEST: "EWR",
-		ORIGIN: "BOS",
-		DISTANCE: 193,
-		GRAVITY: 65.42354467661713 }
-	 ],
-    
-  	[ "(Las Vegas_NV, Los Angeles_CA)",
-		{ DEPARTURES_PERFORMED: 19538,
-		SEATS: 3182337,
-		RAMP_TO_RAMP: 1426792,
-		PASSENGERS: 2504847,
-		FREIGHT: 3161983,
-		DEST: "LAX",
-		DEST_STATE: "CA",
-		ORIGIN: "LAS",
-		ORIGIN_STATE: "NV",
-		DISTANCE: 236,
-		GRAVITY: 34.3296697359362, }
-	]
-	]
 
 	
 
@@ -129,7 +104,13 @@
 
 	// BUG?: the <style> section doesn't seem to have this var in scope
 	const ROUTE_STROKE_COL = "blue"
-	const ROUTE_STROKE_WID = 0.5
+	const ROUTE_STROKE_WID =  0.5
+	const MAP_COLOR = "#d3d3d3"
+
+	const HL_CIRC_COLOR = "green"
+	const HL_CIRC_R = 7
+	const HL_ROUTE_STROKE_WID = 2
+	const HL_ROUTE_STROKE_COL = "green"
 
 </script>
 
@@ -139,7 +120,7 @@
 		{#each map.features as state}
 			<path
 				fill = "none"
-				stroke = "#d3d3d3"
+				stroke = {MAP_COLOR}
 				d={mapPath(state)}
 			/>
 
@@ -159,9 +140,7 @@
 			stroke={ROUTE_STROKE_COL}
 			stroke-width={ROUTE_STROKE_WID}
 			on:mouseover={() => onhover(route, mapId)}
-			on:mouseleave={() => onhover(null, mapId)}
 			on:focus={() => onhover(route, mapId)}
-			on:focusout={() => onhover(null, mapId)}
 		/>
 
 		{/each}
@@ -175,7 +154,7 @@
 		<circle
 			cx = {usaMapProjection(cityCordMap[city].COORD)[0]}
 			cy = {usaMapProjection(cityCordMap[city].COORD)[1]}
-			fill = {"red"}
+			fill = {CITY_CIRCLE_COL}
 			r = {CITY_CIRCLE_R}
 		/>
 		{/each}
@@ -197,6 +176,35 @@
 
 		{/if}
 
+		<!-- redraw highlighted route to be on top-->
+
+		{#if highlightedRoute}
+			<line
+				x1={routeToCords(highlightedRoute, 0, 0)}
+				y1={routeToCords(highlightedRoute, 0, 1)}
+				x2={routeToCords(highlightedRoute, 1, 0)}
+				y2={routeToCords(highlightedRoute, 1, 1)}
+				stroke={HL_ROUTE_STROKE_COL}
+				stroke-width={HL_ROUTE_STROKE_WID}
+			/>
+
+			<circle
+				cx = {usaMapProjection(cityCordMap[cityPairsToCities(highlightedRoute[0])[0]].COORD)[0]}
+				cy = {usaMapProjection(cityCordMap[cityPairsToCities(highlightedRoute[0])[0]].COORD)[1]}
+				fill = {HL_CIRC_COLOR}
+				r = {HL_CIRC_R}
+			/>
+
+			<circle
+				cx = {usaMapProjection(cityCordMap[cityPairsToCities(highlightedRoute[0])[1]].COORD)[0]}
+				cy = {usaMapProjection(cityCordMap[cityPairsToCities(highlightedRoute[0])[1]].COORD)[1]}
+				fill = {HL_CIRC_COLOR}
+				r = {HL_CIRC_R}
+			/>
+
+
+		{/if}
+
 
 
 	</svg>
@@ -208,10 +216,5 @@
 		border-style: solid;
 		/* the weight? */
 		flex:2;
-	}
-	line:hover {
-		stroke: rgb(40, 147, 65);
-		/* can't access js variables in <style> section? */
-		stroke-width: 4; 
 	}
 </style>
