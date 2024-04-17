@@ -115,6 +115,7 @@
 	const CITY_CIRCLE_R = VIS_PROPERTIES.CITY_CIRCLE_R
 	const CITY_CIRCLE_COL = VIS_PROPERTIES.CITY_CIRCLE_COL
 	const MAP_COLOR = VIS_PROPERTIES.MAP_COLOR
+	const LINE_OPACITY = VIS_PROPERTIES.LINE_OPACITY
 
 
 </script>
@@ -141,6 +142,7 @@
 			y2={routeToCords(route, 1, 1)}
 			stroke={railExist ? RAIL_EXISTS_COLOR : RAIL_DNE_COLOR}
 			stroke-width={ROUTE_STROKE_WID}
+			opacity={LINE_OPACITY}
 		/>
 
 		{/each}

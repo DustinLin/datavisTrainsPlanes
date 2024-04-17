@@ -77,6 +77,7 @@
 	const ROUTE_STROKE_COL = VIS_PROPERTIES.HSR_ROUTE_COL 
 	const ROUTE_STROKE_WID = VIS_PROPERTIES.ROUTE_STROKE_WID
 	const MAP_COL = VIS_PROPERTIES.MAP_COLOR
+	const LINE_OPACITY = VIS_PROPERTIES.LINE_OPACITY
 </script>
 
 
@@ -105,6 +106,7 @@
 			y2={routeToCords(route, 1, 1)}
 			stroke={ROUTE_STROKE_COL}
 			stroke-width={1.5}
+			opacity={LINE_OPACITY}
 		/>
 
 		{/each}

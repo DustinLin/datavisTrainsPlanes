@@ -100,6 +100,7 @@
 	const CITY_CIRCLE_R = VIS_PROPERTIES.CITY_CIRCLE_R
 	const CITY_CIRCLE_COL = VIS_PROPERTIES.CITY_CIRCLE_COL
 	const MAP_COLOR = VIS_PROPERTIES.MAP_COLOR
+	const LINE_OPACITY = VIS_PROPERTIES.LINE_OPACITY
 
 </script>
 
@@ -111,6 +112,7 @@
 				fill = "none"
 				stroke = {MAP_COLOR}
 				d={mapPath(state)}
+				opacity={LINE_OPACITY}
 			/>
 
 		{/each}

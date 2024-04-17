@@ -94,16 +94,17 @@ export const VIS_PROPERTIES = {
 	// light shade of red
 	CITY_CIRCLE_COL: "#737373", //"#fb9a99",
 
-	ROUTE_STROKE_COL: "#5eaee4",
+	ROUTE_STROKE_COL: "#b5b5b5", //"#5eaee4",
 	ROUTE_STROKE_WID:  0.75,
 
 	// highlighted route colors
 	HL_CIRC_COLOR: "#e31a1c", // more saturated red compared to above
 	HL_CIRC_R: 5,
 	HL_ROUTE_STROKE_WID: 1.5,
-	HL_ROUTE_STROKE_COL: "#0f3a57", // more saturated blue compared to reg route
+	HL_ROUTE_STROKE_COL: "#5eaee4", // more saturated blue compared to reg route
 
-	HSR_ROUTE_COL: "#cc6600"//"#ff7800",
+	HSR_ROUTE_COL: "#cc6600",//"#ff7800",
+	LINE_OPACITY: 0.6,
 
 }
 
