@@ -31,3 +31,10 @@ cleanup TODOs
 - `usaCities.geojson`: data of population, geo-location of various cities around the US 
 - `usaContGeojson.json`: US geojson map of the contiguous US, derived from `usaGeojson.json`, removing Alaska, Hawaii, etc.
 - `usaGeojson.json`: found online, geojson map of the "US"
+
+## potential data for amtrak speed?
+https://en.wikipedia.org/wiki/Long-distance_Amtrak_routes
+
+### nice/fast color picker
+[linked](https://coolors.co/b5b5b5)
+- can input hex, and adjust Hue, saturation, luminance separately
