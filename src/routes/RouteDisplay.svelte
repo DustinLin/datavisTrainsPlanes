@@ -3,8 +3,9 @@
 
 	export let highlightedRoute; 
 
-	import {cityPairsToCities, cityStToCity, cityStToState, numberWithCommas} from '../utils';
+	const hintString = "hover over route to see"
 
+	import {cityPairsToCities, cityStToCity, cityStToState, numberWithCommas} from '../utils';
 
 	/* What a highlightedRoute looks like:
 	[ [ "(Boston_MA, New York_NY)",
@@ -19,6 +20,7 @@
 		GRAVITY: 65.42354467661713 }
 	 ]
 	 */
+	const width = 450;
 
 	/**
 	 * only show cities, airports are unreliable, and not matched: city pairs sorted by alpha order so could be a mismatch
@@ -30,7 +32,7 @@
 </script>
 
 {#if highlightedRoute}
-<div class="routeInfo">
+<div class="routeDisplay" width={width}>
 	<ul>
 		<li>Origin City: {cityStToCity(cityPairsToCities(highlightedRoute[0])[0])}, {cityStToState(cityPairsToCities(highlightedRoute[0])[0])}</li>
 		<li>Destination City: {cityStToCity(cityPairsToCities(highlightedRoute[0])[1])}, {cityStToState(cityPairsToCities(highlightedRoute[0])[1])}</li>
@@ -41,21 +43,22 @@
 </div>
 
 {:else}
-<div class="routeInfo">
+<div class="routeDisplay" width={width}>
 	<ul>
-		<li>Origin City: N/A</li>
-		<li>Destination City: N/A</li>
-		<li>Distance: N/A</li>
-		<li>Passengers: N/A</li>
+		<li>Origin City: {hintString}</li>
+		<li>Destination City: {hintString}</li>
+		<li>Distance: {hintString}</li>
+		<li>Passengers: {hintString}</li>
 	</ul>
 </div>
-
 {/if}
+
 
 <style>
 	/* todo styling is scuffed but it looks ok with hard coded values */
-	.routeInfo {
-		width: 300px;
+	.routeDisplay {
+		height: 25%;
+		min-width: 450px;
 	}
 </style>
 

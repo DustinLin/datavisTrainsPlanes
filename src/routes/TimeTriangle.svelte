@@ -6,21 +6,31 @@
 	
 
 	const marginTriangle = { top: 10, right: 50, bottom: 50, left: 50 };
-	const widthTriangle = 500;
-	const heightTriangle = 400;
 
-	const STROKE_WIDTH = 2.5;
+	let borderBoxSize;
+	const ratio = 1.25
+	const baseSize = 500
+
+	$: width = borderBoxSize
+		? Math.max(Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize), baseSize) * ratio
+		: baseSize * ratio; 
+
+	$: height = borderBoxSize
+		? Math.max(Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize), baseSize)
+		: baseSize;
+
+	$: STROKE_WIDTH = width / 200;
 
 	const MAX_DISTANCE = 2724
 	const functions = [planeTotalTime, trainTotalTime, carTotalTime];
 
-	const smallXScale = d3.scaleLinear()
+	$: smallXScale = d3.scaleLinear()
 		.domain([0, 500])
-		.range([marginTriangle.left, widthTriangle - marginTriangle.right]);
+		.range([marginTriangle.left, width - marginTriangle.right]);
 
-	const smallYScale = d3.scaleLinear()
+	$: smallYScale = d3.scaleLinear()
 		.domain([0, 500])
-		.range([heightTriangle - marginTriangle.bottom, marginTriangle.top]);
+		.range([height - marginTriangle.bottom, marginTriangle.top]);
 
 	const transportTypeColorScale = d3.scaleOrdinal()
 		.domain(functions)
@@ -66,15 +76,7 @@
 	///////////// OLD CODE
 	// dimensions
 
-	// let borderBoxSize;
 
-	// $: width = borderBoxSize
-	// 	? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize)
-	// 	: 400;
-
-	// $: height = borderBoxSize
-	// 	? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize)
-	// 	: 400;
 
 	// const margin = { top: 25, right: 20, bottom: 50, left: 60 };
 
@@ -96,8 +98,8 @@
 	// 	.padding(0.1);
 </script>
 
-<div class="barchart">
-	<svg height={heightTriangle} width={widthTriangle}>
+<div class="barchart" bind:borderBoxSize={borderBoxSize}>
+	<svg height={height} width={width}>
 		<!-- bars -->
 		<g>
 			{#each functions as theFunction}
@@ -110,8 +112,8 @@
 		</g>
 
 		<!-- axes -->
-		<Axis orientation="bottom" scale={smallXScale} width={widthTriangle} height={heightTriangle} margin={marginTriangle} label={'Count'} />
-		<Axis orientation="left" scale={smallYScale} width={widthTriangle} height={heightTriangle} margin={marginTriangle} />
+		<Axis orientation="bottom" scale={smallXScale} width={width} height={height} margin={marginTriangle} label={'Count'} />
+		<Axis orientation="left" scale={smallYScale} width={width} height={height} margin={marginTriangle} />
 	</svg>
 </div>
 

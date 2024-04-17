@@ -21,8 +21,6 @@
 
 	let borderBoxSize;
 
-	console.log(`the dims ${dims}`)
-
 	let width;
 	let height;
 	$: width = borderBoxSize

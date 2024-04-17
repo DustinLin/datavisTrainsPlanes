@@ -20,8 +20,15 @@
 	// [width, height]
 	export let dims;
 
-	import {cityPairsToCities} from "../utils";
+	$: width = borderBoxSize
+		? Math.max(borderBoxSize[0].inlineSize, 400)
+		: 400;
 
+	$: height = borderBoxSize
+		? Math.max(borderBoxSize[0].blockSize, 400)
+		: 400;
+
+	import {cityPairsToCities} from "../utils";
 
 
 
@@ -79,7 +86,7 @@
 	 * @param 0 or 1 for which cord (x,y) you want
 	 * to get the 4 points: x1 = (route, 0, 0), y1 =(route, 0, 1),  x2 = (route, 1, 0), y2 = (route, 1,1)
 	 */
-	const routeToCords = (route, city, cord) => {
+	$: routeToCords = (route, city, cord) => {
 		return usaMapProjection(cityCordMap[cityPairsToCities(route)[city]].COORD)[cord]
 	}
 
@@ -98,15 +105,13 @@
 	let borderBoxSize;
 	// borderBoxSize: has 2 entires: inline-size - width of div, block-size - height of div
 	// borderBoxSize could be undefined
-	let width = dims[0]
-	let height = dims[1]
 	//$: width = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 975
 	//$: height = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 610
 
 	// projections
-	const usaMapProjection = d3.geoAlbersUsa().fitSize([width, height], map);
+	$: usaMapProjection = d3.geoAlbersUsa().fitSize([width, height], map);
 
-	const mapPath = d3.geoPath().projection(usaMapProjection);
+	$: mapPath = d3.geoPath().projection(usaMapProjection);
 
 	const RAIL_EXISTS_COLOR = "orange"
 	const RAIL_DNE_COLOR = "black"
@@ -118,7 +123,7 @@
 
 </script>
 
-<div class="maps">
+<div class="maps" bind:borderBoxSize={borderBoxSize}>
 	<svg width={width} height={height}>
 		<!-- drawing paths for each state, using projections -->
 		{#each map.features as state}

@@ -109,7 +109,7 @@
 			<RouteDisplay highlightedRoute={highlightedRoute}/>
 		</div>
 
-		<!-- compoenent -->
+		<!-- component -->
 		<h2>What are the popular airline routes in the US?</h2>
 		<div class="infoMap" id="popularAirlines">
 			<Map map={usaGeoContig} cities={topFlightRoutesPass} cityCordMap={cityCordMap} onhover={onhover} showCityName={true} dims={minMapDims}/>
@@ -137,28 +137,21 @@
 		</div>
 
 		<h2>Airline routes that would be faster on HSR</h2>
-		<div class="infoMap" id="airlineSpeedUp">
+		<div class="infoMap" id="fasterRoutes">
 			<Map map={usaGeoContig} cities={triangleRouteCities} cityCordMap={cityCordMap} onhover={onhover} showCityName={false} dims={minMapDims}/>
 			<RouteDisplay highlightedRoute={highlightedRoute}/>
-
-			<!-- <Comparison Bar Chart/> -->
 		</div>
-		<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#cfe6ce'}/> 
-			
-
-		<p>The United States currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the International Union of Railways definition of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
-		
-
-
 		<div class="infoMap" id="modifiedHistograms">
-			<!-- <HighlightedHistogram highlightedRoute={highlightedRouteRail}/> -->
-			<!-- <newHistogram highlightedRoute={highlightedRouteRail}/> -->
+			<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#cfe6ce'}/> 
+			<!-- <Comparison Bar Chart/> -->
 		</div>
 
 		<div class="infoMap" id="comparisonBarChart">
 			<!-- <ComparisonBarChart highlightedRoute={highlightedRouteRail}/> -->
 		</div>
-		
+			
+
+		<p>The United States currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the International Union of Railways definition of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
 
 		<h2>Which of the X routes should we build</h2>
 		<div class="infoMap" id="iterativeGravityExplanation"><p>
@@ -168,7 +161,7 @@
 		<h2>Results</h2>
 		<h2>Proposed HSR</h2>
 		<div class="infoMap" id="proposedHSRMap">
-			<MapStatic map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} dims={[975,610]}/>
+			<MapStatic map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} dims={minMapDims}/>
 			<!-- <FinalMapDisplay highlightedRoute={highlightedRouteRail}/> -->
 		</div>
 		
@@ -177,8 +170,8 @@
 		<p>Consider making the above information partly into a table? Comparing speeds?</p>
 		<p>The US does contain a lot of rail infrastructure already which would allows for cheap cost to build... fix the wording but something along this idea</p>
 		<div class="infoMap" id="railIntersection">
-			<RailMapIntersect map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} cityAmtrakRouteMap={cityAmtrakRouteMap} dims={[800,500]}/>
-			<RailMap map={usaGeoContig} railMap={amtrakMapSimp} cityCordMap={cityCordMap} citiesPlotSet={citiesPlotSet} dims={[800,500]}/>
+			<RailMapIntersect map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} cityAmtrakRouteMap={cityAmtrakRouteMap} dims={minMapDims}/>
+			<RailMap map={usaGeoContig} railMap={amtrakMapSimp} cityCordMap={cityCordMap} citiesPlotSet={citiesPlotSet} dims={minMapDims}/>
 			<!-- <RouteDisplay highlightedRoute={highlightedRouteRail}/> -->
 			<!-- <Comparison Bar Chart/> -->
 		</div>
@@ -231,8 +224,10 @@
 		display: flex;
 		gap: 2em;
 		/* make the div take up the entire screen */
-		height: 100vh;
+		height: 85vh;
 		width: 100vw;
+		min-height: 500px;
+		margin: auto;
 	}
 
 	.maps {
@@ -243,11 +238,15 @@
 	.stackBox {
 		/* create a vertical stacking */
 		gap: 2em;
+		height: 100vh;
 	}
 
 	.barChart {
 		gap: 2em;
+		/* be 75% as tall as the parent div */
+		height: 75%;
 	}
+
 
 	.histogram {
 		gap: 2em;
