@@ -20,7 +20,7 @@
 	// [width, height]
 	export let dims;
 
-	import {cityPairsToCities} from "../utils";
+	import {VIS_PROPERTIES, cityPairsToCities, cityNamePlacement} from "../utils";
 
 
 
@@ -108,12 +108,13 @@
 
 	const mapPath = d3.geoPath().projection(usaMapProjection);
 
-	const RAIL_EXISTS_COLOR = "orange"
-	const RAIL_DNE_COLOR = "black"
-	const ROUTE_STROKE_WID = 3
+	const RAIL_EXISTS_COLOR = VIS_PROPERTIES.HSR_ROUTE_COL
+	const RAIL_DNE_COLOR = "#33a02c"
+	const ROUTE_STROKE_WID = VIS_PROPERTIES.HL_ROUTE_STROKE_WID
 
-	const CITY_CIRCLE_R = 3
-	const CITY_CIRCLE_COL = "red"
+	const CITY_CIRCLE_R = VIS_PROPERTIES.CITY_CIRCLE_R
+	const CITY_CIRCLE_COL = VIS_PROPERTIES.CITY_CIRCLE_COL
+	const MAP_COLOR = VIS_PROPERTIES.MAP_COLOR
 
 
 </script>
@@ -124,7 +125,7 @@
 		{#each map.features as state}
 			<path
 				fill = "none"
-				stroke = "#d3d3d3"
+				stroke = {MAP_COLOR}
 				d={mapPath(state)}
 			/>
 
@@ -155,12 +156,16 @@
 			fill = {CITY_CIRCLE_COL}
 			r = {CITY_CIRCLE_R}
 		/>
+
+		{/each}
+
+		{#each citiesPlotSet as city}
 		<text
 			font-size = 10
 			font-family = "sans-serif"
 			dominant-baseline = "hanging"
-			x = {usaMapProjection(cityCordMap[city].COORD)[0] + 4}
-			y = {usaMapProjection(cityCordMap[city].COORD)[1] + 4}
+			x = {cityNamePlacement(city, usaMapProjection, cityCordMap)[0]}
+			y = {cityNamePlacement(city, usaMapProjection, cityCordMap)[1]}
 		>
 			{city.split("_")[0]}
 		</text>

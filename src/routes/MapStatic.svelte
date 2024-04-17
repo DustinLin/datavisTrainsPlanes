@@ -4,7 +4,7 @@
 	*/
 
 	import * as d3 from 'd3';
-	import {cityPairsToCities, cityStToCity} from '../utils';
+	import {VIS_PROPERTIES, cityPairsToCities, cityStToCity, cityNamePlacement} from '../utils';
 
 	// wont have onhover? Used for just plotting the cities we want to build HSR in? No interaction?
 
@@ -70,12 +70,13 @@
 	//$: width = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 975
 	//$: height = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 610
 
-	const CITY_CIRCLE_R = 3
-	const CITY_CIRCLE_COL = "red"
+	const CITY_CIRCLE_R = VIS_PROPERTIES.CITY_CIRCLE_R
+	const CITY_CIRCLE_COL = VIS_PROPERTIES.CITY_CIRCLE_COL
 
 	// BUG?: the <style> section doesn't seem to have this var in scope
-	const ROUTE_STROKE_COL = "orange"
-	const ROUTE_STROKE_WID = 3
+	const ROUTE_STROKE_COL = VIS_PROPERTIES.HSR_ROUTE_COL 
+	const ROUTE_STROKE_WID = VIS_PROPERTIES.ROUTE_STROKE_WID
+	const MAP_COL = VIS_PROPERTIES.MAP_COLOR
 </script>
 
 
@@ -85,7 +86,7 @@
 		{#each map.features as state}
 			<path
 				fill = "none"
-				stroke = "#d3d3d3"
+				stroke = {MAP_COL}
 				d={mapPath(state)}
 			/>
 
@@ -103,7 +104,7 @@
 			x2={routeToCords(route, 1, 0)}
 			y2={routeToCords(route, 1, 1)}
 			stroke={ROUTE_STROKE_COL}
-			stroke-width={ROUTE_STROKE_WID}
+			stroke-width={1.5}
 		/>
 
 		{/each}
@@ -117,7 +118,7 @@
 		<circle
 			cx = {usaMapProjection(cityCordMap[city].COORD)[0]}
 			cy = {usaMapProjection(cityCordMap[city].COORD)[1]}
-			fill = {"red"}
+			fill = {CITY_CIRCLE_COL}
 			r = {CITY_CIRCLE_R}
 		/>
 		{/each}
@@ -129,8 +130,8 @@
 			font-size = 10
 			font-family = "sans-serif"
 			dominant-baseline = "hanging"
-			x = {usaMapProjection(cityCordMap[city].COORD)[0] + 4}
-			y = {usaMapProjection(cityCordMap[city].COORD)[1] + 4}
+			x = {cityNamePlacement(city, usaMapProjection, cityCordMap)[0]}
+			y = {cityNamePlacement(city, usaMapProjection, cityCordMap)[1]}
 		>
 			{city.split("_")[0]}
 		</text>

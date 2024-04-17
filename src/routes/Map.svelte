@@ -4,7 +4,7 @@
 	*/
 
 	import * as d3 from 'd3';
-	import {cityPairsToCities, cityStToCity} from '../utils';
+	import {VIS_PROPERTIES, cityPairsToCities, cityStToCity} from '../utils';
 
 
 	// prov want to rename "dataset" to like map data or smth
@@ -99,18 +99,18 @@
 
 	const mapPath = d3.geoPath().projection(usaMapProjection);
 
-	const CITY_CIRCLE_R = 5
-	const CITY_CIRCLE_COL = "red"
+	const CITY_CIRCLE_R = VIS_PROPERTIES.CITY_CIRCLE_R
+	const CITY_CIRCLE_COL = VIS_PROPERTIES.CITY_CIRCLE_COL
 
 	// BUG?: the <style> section doesn't seem to have this var in scope
-	const ROUTE_STROKE_COL = "blue"
-	const ROUTE_STROKE_WID =  0.5
-	const MAP_COLOR = "#d3d3d3"
+	const ROUTE_STROKE_COL = VIS_PROPERTIES.ROUTE_STROKE_COL
+	const ROUTE_STROKE_WID =  VIS_PROPERTIES.ROUTE_STROKE_WID
+	const MAP_COLOR = VIS_PROPERTIES.MAP_COLOR
 
-	const HL_CIRC_COLOR = "green"
-	const HL_CIRC_R = 7
-	const HL_ROUTE_STROKE_WID = 2
-	const HL_ROUTE_STROKE_COL = "green"
+	const HL_CIRC_COLOR = VIS_PROPERTIES.HL_CIRC_COLOR // more saturated red compared to above
+	const HL_CIRC_R = VIS_PROPERTIES.HL_CIRC_R
+	const HL_ROUTE_STROKE_WID = VIS_PROPERTIES.HL_ROUTE_STROKE_WID
+	const HL_ROUTE_STROKE_COL = VIS_PROPERTIES.HL_ROUTE_STROKE_COL // more saturated blue compared to reg route
 
 </script>
 

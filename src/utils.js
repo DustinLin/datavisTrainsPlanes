@@ -42,6 +42,71 @@ export const MOCK_DATA = [ [ "(Boston_MA, New York_NY)",
 ]
 
 
+// cities to render around, hard coded?
+const CITY_COLLISIONS = [
+	"Seattle_WA",
+	"Austin_TX",
+	"Grand Rapids_MI",
+	"Nashville_TN",
+	"Knoxville_TN",
+	"Asheville_TN",
+	"Huntsville_TN"
+]
+
+/**
+ * Hard coding city name placements to move them around to look nicer
+ * @param {string} city 
+ * @param {function} projection 
+ * @param {map} cityCordMap 
+ * @returns  [x,y] cords
+ */
+export const cityNamePlacement = (city, projection, cityCordMap) => {
+	if (city === "Asheville_NC") {
+		return [
+		projection(cityCordMap[city].COORD)[0] + 5 ,
+		projection(cityCordMap[city].COORD)[1] - 7
+		]
+	}
+
+	if (CITY_COLLISIONS.includes(city)){
+		return [
+		projection(cityCordMap[city].COORD)[0] + 5,
+		projection(cityCordMap[city].COORD)[1] - 10
+		]
+	} else {
+		return [
+		projection(cityCordMap[city].COORD)[0] + 4,
+		projection(cityCordMap[city].COORD)[1] + 4
+		]
+	}
+}
+
+
+
+
+// based on: https://colorbrewer2.org/?type=qualitative&scheme=Paired&n=10
+// ['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a']
+
+export const VIS_PROPERTIES = {
+	MAP_COLOR: "#d3d3d3",
+
+	CITY_CIRCLE_R: 5,
+	// light shade of red
+	CITY_CIRCLE_COL: "#737373", //"#fb9a99",
+
+	ROUTE_STROKE_COL: "#5eaee4",
+	ROUTE_STROKE_WID:  0.75,
+
+	// highlighted route colors
+	HL_CIRC_COLOR: "#e31a1c", // more saturated red compared to above
+	HL_CIRC_R: 5,
+	HL_ROUTE_STROKE_WID: 1.5,
+	HL_ROUTE_STROKE_COL: "#0f3a57", // more saturated blue compared to reg route
+
+	HSR_ROUTE_COL: "#cc6600"//"#ff7800",
+
+}
+
 export let planeTime = (distance) => {
 	return 44.5957 + 0.117441*distance
 }
