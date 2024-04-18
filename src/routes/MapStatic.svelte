@@ -145,6 +145,7 @@
 			font-size = 10
 			font-family = "sans-serif"
 			dominant-baseline = "hanging"
+			font-weight = "bold"
 			x = {cityNamePlacement(city, usaMapProjection, cityCordMap)[0]}
 			y = {cityNamePlacement(city, usaMapProjection, cityCordMap)[1]}
 		>
