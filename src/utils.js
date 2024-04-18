@@ -10,7 +10,7 @@ const SECURITY_TIMES = {
 
 const TRAVEL_TO_AND_FROM_TIMES = {
 	'plane': 60,
-	'train': 60,
+	'train': 45,
 	'car': 0
 }
 
@@ -145,7 +145,16 @@ export let createDatapoints = (functionToPlot, maxDistance, xScale, yScale) => {
  * @returns the time it takes to travel distance x on a plane while accounding for non-riding travel times
  */
 export let planeTotalTime = (distance) =>  {
-	return planeTime(distance) + SECURITY_TIMES.plane + TRAVEL_TO_AND_FROM_TIMES.plane
+	return planeTimeToTotalTime(planeTime(distance));
+}
+
+/**
+ * 
+ * @param {*} time : time for just the flight
+ * @returns : the expected total time of the flight
+ */
+export let planeTimeToTotalTime = (time) => {
+	return time + SECURITY_TIMES.plane + TRAVEL_TO_AND_FROM_TIMES.plane;
 }
 
 /**
@@ -165,10 +174,39 @@ export let trainTotalTime = (distance) => {
 export let carTotalTime = (distance) => {
 	return carTime(distance) + SECURITY_TIMES.car + TRAVEL_TO_AND_FROM_TIMES.car
 }
+/**
+ * 
+ * @param {*} line1 : a function of a line that takes in a single x input
+ * @param {*} line2 : a function of a line that takes in a single x input
+ * @returns returns the x value at where the two lines intersect
+ */
+export let computeIntersection = (line1, line2) => {
+	const delta = 10
+	const intercept1 = line1(0)
+	const slope1 = (line1(delta) - intercept1) / delta
+
+	const intercept2 = line2(0)
+	const slope2 = (line2(delta) - intercept2) / delta
+	return (intercept1 - intercept2) / (slope2 - slope1)
+}
+
+/**
+ * 
+ * @param {*} lineFunction : linear function to compute the inverse of
+ * @param {*} y : y value for the desired x value
+ * @returns the solution for x of the equation y = mx + b
+ */
+export let computeInverse = (lineFunction, y) => {
+	const delta = 10
+	const intercept = lineFunction(0)
+	const slope = (lineFunction(delta) - intercept) / delta
+	return 1/slope * (y) - intercept
+}
 
 export let cutoffs = {
-	triangleUpper: 451.75,
-	triangleLower: 75.25,
+	triangleUpper: computeIntersection(trainTotalTime, planeTotalTime), // intersection of train with plane
+	triangleLower: computeIntersection(carTotalTime, trainTotalTime), // intersection of train with car
+	carPlaneIntersection: computeIntersection(carTotalTime, planeTotalTime),
 	topRoutesNumber: 100,
 	topGravNumber: 30
 }
@@ -216,5 +254,8 @@ export let minToHours = (time, numFlights) => {
 
 // function for coloring bars in histogram based on time triangle
 export let inTriangle = (flightTime) => {
-	return true;
+	const lowerTime = planeTotalTime(cutoffs.triangleLower)
+	const upperTime = planeTotalTime(cutoffs.triangleUpper)
+	console.log(`lowerX: ${cutoffs.triangleLower}, lowerTime: ${lowerTime}, upperX: ${cutoffs.triangleUpper}, upperTime: ${upperTime}, flightTime: ${flightTime}, bool value: ${(flightTime <= lowerTime) && (flightTime >= upperTime)}`)
+	return (flightTime >= lowerTime) && (flightTime <= upperTime)
 }

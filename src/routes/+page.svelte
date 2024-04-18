@@ -165,11 +165,10 @@
 				dims={[975,610]}/>
 			<RouteDisplay highlightedRoute={hRoutes["highlightedRouteTriangle"]}/>
 
-			<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#cfe6ce'}/> 
-			<!-- <newHistogram highlightedRoute={highlightedRouteRail}/> -->
-
 			<!-- <Comparison Bar Chart/> -->
 		</div>
+		<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#cfe6ce'}/> 
+			
 
 		<p>The United States currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the International Union of Railways definition of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
 		

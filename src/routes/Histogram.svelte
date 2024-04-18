@@ -1,7 +1,7 @@
 <script>
 	import * as d3 from 'd3';
 	import Axis from './Axis.svelte';
-        import {inTriangle} from '../utils.js';
+    import {inTriangle, planeTimeToTotalTime} from '../utils.js';
 
 	export let dataset;
         export let xLabel;
@@ -9,14 +9,15 @@
         export let triangleColor;
 	// export let selectedIndices;
 	//export let color;
-
+	
+	const timeUnitConversion = 60
 
 
         let cityPairToTime = dataset
                              .map(([pair, info]) => 
                                 [pair, 
-                                {AVG_TOTAL_TIME: info.RAMP_TO_RAMP/info.DEPARTURES_PERFORMED / 60, 
-                                AVG_AIR_TIME: info.AIR_TIME / info.DEPARTURES_PERFORMED / 60, 
+                                {AVG_TOTAL_TIME: planeTimeToTotalTime(info.RAMP_TO_RAMP/info.DEPARTURES_PERFORMED) / timeUnitConversion, 
+                                AVG_AIR_TIME: info.AIR_TIME / info.DEPARTURES_PERFORMED / timeUnitConversion, 
                                 NUM_DEPARTURES: info.DEPARTURES_PERFORMED}]);
 
         
@@ -85,13 +86,13 @@
 	<svg {height} {width}>
 		<!-- bars -->
 		<g>
-			{#each bins as bink}
+			{#each bins as bin}
 				<rect
-					x={x(bink.x0) + 1}
-					y={y(d3.sum(bink, (d) => d[1].NUM_DEPARTURES))}
-					height={y(0) - y(d3.sum(bink, (d) => d[1].NUM_DEPARTURES))}
-					width={x(bink.x1) - x(bink.x0) - 1}
-					fill={inTriangle(bink.x0) ? triangleColor : color}
+					x={x(bin.x0) + 1}
+					y={y(d3.sum(bin, (d) => d[1].NUM_DEPARTURES))}
+					height={y(0) - y(d3.sum(bin, (d) => d[1].NUM_DEPARTURES))}
+					width={x(bin.x1) - x(bin.x0) - 1}
+					fill={inTriangle(bin.x0 * timeUnitConversion) ? triangleColor : color}
 
 				/>
 
