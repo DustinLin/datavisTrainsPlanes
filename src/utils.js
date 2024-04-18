@@ -68,6 +68,13 @@ export const cityNamePlacement = (city, projection, cityCordMap) => {
 		]
 	}
 
+	if (city === "Huntsville_AL") {
+		return [
+		projection(cityCordMap[city].COORD)[0] - 50 ,
+		projection(cityCordMap[city].COORD)[1] - 7
+		]
+	}
+
 	if (CITY_COLLISIONS.includes(city)){
 		return [
 		projection(cityCordMap[city].COORD)[0] + 5,
