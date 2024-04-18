@@ -18,7 +18,7 @@
 	import MapStatic from './MapStatic.svelte';
 	import RailMapIntersect from './RailMapIntersect.svelte';
 
-	import { cutoffs, cityPairsToCities  } from '../utils';
+	import { cutoffs, cityPairsToCities, roundTo } from '../utils';
 	import Histogram from './Histogram.svelte';
 
 
@@ -125,9 +125,16 @@
 
 
 		<h2>Is there a faster way?</h2>
-		<p>introduction into the ideas of the time triangle</p>
 		<div class="infoMap" id="timeTriangle">
-			<p>Paragraph explaining time triangle</p>
+			<p>
+				The answer is that it depends on how far you are traveling.
+				The fastest way to get across the world is flying, the fastest way to get to the other side of town is likely to drive (but could be an electric bike or subway depending on where you live). 
+				In between those distance there is sweet spot where the fastest mode of travel is High Speed Rail (HSR).
+				<br>
+				To find this sweet spot we find a line of best fit for each of the modes of transportation (Car, HSR, Planes). 
+				We very creatively call the area intersection formed by these lines the time triangle which is plotted to the right.
+				From this we find that when traveling between {roundTo(cutoffs.triangleLower, 0.1)} miles and {roundTo(cutoffs.triangleUpper, 0.1)} miles HSR is the fastest mode of transportation.
+			</p>
 			<TimeTriangle/>
 		</div>
 
