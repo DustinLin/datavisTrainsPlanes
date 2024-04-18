@@ -21,6 +21,7 @@
 
 	const margin = { top: 25, right: 20, bottom: 50, left: 60 };
 
+
 	// filter the dataset by index
 	$: filteredDataset = selectedIndices.map((i) => dataset[i]);
 
@@ -73,8 +74,6 @@
 	.barchart {
 		/* take up extra horizontal space in the parent */
 		flex: 1;
-		/* be as tall as the parent div */
-		height: 100%;
 	}
 
 	/* animate changes to the lengths of the bars */

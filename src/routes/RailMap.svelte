@@ -62,6 +62,19 @@
 	// [width, height]
 	export let dims;
 
+	// TODO try to make display reactive
+	let borderBoxSize;
+	// borderBoxSize: has 2 entires: inline-size - width of div, block-size - height of div
+	// borderBoxSize could be undefined
+	$: width = borderBoxSize
+		? d3.max([borderBoxSize[0].inlineSize, dims[0]])
+		: dims[0];
+
+	$: height = borderBoxSize
+		? d3.max([borderBoxSize[0].blockSize, dims[1]])
+		: dims[1];
+
+
 
 	// hard code some cities to place?
 	/*
@@ -81,19 +94,13 @@
 		}
 	});
 
-	// TODO try to make display reactive
-	let borderBoxSize;
-	// borderBoxSize: has 2 entires: inline-size - width of div, block-size - height of div
-	// borderBoxSize could be undefined
-	let width = dims[0]
-	let height = dims[1]
+
 	//$: width = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 975
 	//$: height = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 610
 
 	// projections
-	const usaMapProjection = d3.geoAlbersUsa().fitSize([width, height], map);
+	$: usaMapProjection = d3.geoAlbersUsa().fitSize([width, height], map);
 
-	const mapPath = d3.geoPath().projection(usaMapProjection);
 
 	const RAIL_EXISTS_COLOR = VIS_PROPERTIES.HSR_ROUTE_COL
 
@@ -102,9 +109,10 @@
 	const MAP_COLOR = VIS_PROPERTIES.MAP_COLOR
 	const LINE_OPACITY = VIS_PROPERTIES.LINE_OPACITY
 
+	$: mapPath = d3.geoPath().projection(usaMapProjection);
 </script>
 
-<div class="maps">
+<div class="maps" bind:borderBoxSize={borderBoxSize}>
 	<svg width={width} height={height}>
 		<!-- drawing paths for each state, using projections -->
 		{#each map.features as state}

@@ -10,7 +10,7 @@
 	// export let selectedIndices;
 	//export let color;
 	
-	const timeUnitConversion = 60
+	const timeUnitConversion = 1
 
 
         let cityPairToTime = dataset

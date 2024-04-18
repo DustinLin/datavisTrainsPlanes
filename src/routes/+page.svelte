@@ -71,6 +71,9 @@
 
 	// doing some route processing to plot certain routes on different <Map>
 	let allRouteCities = filteredCityPairToInfo
+
+	let minMapDims = [500, 500];
+
 	let triangleRouteCities= filteredCityPairToInfo.filter(route => 
 		route[1].DISTANCE >= cutoffs.triangleLower && route[1].DISTANCE <= cutoffs.triangleUpper
 	)
@@ -113,14 +116,14 @@
 				cities={allRouteCities} 
 				cityCordMap={cityCordMap} 
 				showCityName={false} 
-				dims={[975, 610]} 
+				dims={minMapDims}
 				onhover={onhover} 
 				highlightedRoute={hRoutes["highlightedRouteAll"]}
 				mapId={"highlightedRouteAll"}/>
 			<RouteDisplay highlightedRoute={hRoutes["highlightedRouteAll"]}/>
 		</div>
 
-		<!-- compoenent -->
+		<!-- component -->
 		<h2>What are the popular airline routes in the US?</h2>
 		<div class="infoMap" id="popularAirlines">
 			<Map 
@@ -129,18 +132,22 @@
 				cityCordMap={cityCordMap} 
 				onhover={onhover} 
 				showCityName={true} 
-				dims={[975,610]} 
+				dims={minMapDims}
 				highlightedRoute={hRoutes["highlightedRoutePopular"]}
 				mapId={"highlightedRoutePopular"}/>
-			<RouteDisplay highlightedRoute={hRoutes["highlightedRoutePopular"]}/>
-			<!-- <BarChart/> for top routes -->
-			<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100}/> 
+
+			<div class="stackBox">
+				<RouteDisplay highlightedRoute={hRoutes["highlightedRoutePopular"]}/>
+				<!-- <BarChart/> for top routes -->
+				<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100}/> 
+			</div>
+
 		</div>
 
 		<h2>How much time is spent taking these routes?</h2>
 		<div class="infoMap" id="airlineTimes">
-			<p>idea to put a barchart that outlines different histogram that haneen made here as well as a bar chart the breaks down the flying time, maybe could give a few flight examples<p/>
-			<!-- <BarChart/> -->
+			<!-- <p>idea to put a barchart that outlines different histogram that haneen made here as well as a bar chart the breaks down the flying time, maybe could give a few flight examples<p/> -->
+			<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100}/> 
 			<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#88aed0'}/> 
 		</div>
 
@@ -153,36 +160,33 @@
 		</div>
 
 		<h2>Airline routes that would be faster on HSR</h2>
-		<div class="infoMap" id="airlineSpeedUp">
-			<Map 
-				map={usaGeoContig} 
-				cities={triangleRouteCities} 
-				cityCordMap={cityCordMap} 
-				onhover={onhover} 
-				mapId={"highlightedRouteTriangle"}
-				highlightedRoute={hRoutes["highlightedRouteTriangle"]}
-				showCityName={false} 
-				dims={[975,610]}/>
+		<div class="infoMap" id="fasterRoutes">
+			<div class="infoMap" id="airlineSpeedUp">
+				<Map 
+					map={usaGeoContig} 
+					cities={triangleRouteCities} 
+					cityCordMap={cityCordMap} 
+					onhover={onhover} 
+					mapId={"highlightedRouteTriangle"}
+					highlightedRoute={hRoutes["highlightedRouteTriangle"]}
+					showCityName={false} 
+					dims={minMapDims}/>
+
+
 			<RouteDisplay highlightedRoute={hRoutes["highlightedRouteTriangle"]}/>
-
-			<!-- <Comparison Bar Chart/> -->
+			</div>
 		</div>
-		<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#cfe6ce'}/> 
-			
-
-		<p>The United States currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the International Union of Railways definition of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
-		
-
-
 		<div class="infoMap" id="modifiedHistograms">
-			<!-- <HighlightedHistogram highlightedRoute={highlightedRouteRail}/> -->
-			<!-- <newHistogram highlightedRoute={highlightedRouteRail}/> -->
+			<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#cfe6ce'}/> 
+			<!-- <Comparison Bar Chart/> -->
 		</div>
 
 		<div class="infoMap" id="comparisonBarChart">
 			<!-- <ComparisonBarChart highlightedRoute={highlightedRouteRail}/> -->
 		</div>
-		
+			
+
+		<p>The United States currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the International Union of Railways definition of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
 
 		<h2>Which of the X routes should we build</h2>
 		<div class="infoMap" id="iterativeGravityExplanation"><p>
@@ -192,17 +196,17 @@
 		<h2>Results</h2>
 		<h2>Proposed HSR</h2>
 		<div class="infoMap" id="proposedHSRMap">
-			<MapStatic map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} dims={[975,610]}/>
+			<MapStatic map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} dims={minMapDims}/>
 			<!-- <FinalMapDisplay highlightedRoute={highlightedRouteRail}/> -->
 		</div>
 		
 		<h2>Intersection with current rail</h2>
-
 		<p>The United states currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the International Union of Railways definition of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
 		<p>Consider making the above information partly into a table? Comparing speeds?</p>
+		<p>The US does contain a lot of rail infrastructure already which would allows for cheap cost to build... fix the wording but something along this idea</p>
 		<div class="infoMap" id="railIntersection">
-			<RailMapIntersect map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} cityAmtrakRouteMap={cityAmtrakRouteMap} dims={[800,500]}/>
-			<RailMap map={usaGeoContig} railMap={amtrakMapSimp} cityCordMap={cityCordMap} citiesPlotSet={citiesPlotSet} dims={[800,500]}/>
+			<RailMapIntersect map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} cityAmtrakRouteMap={cityAmtrakRouteMap} dims={minMapDims}/>
+			<RailMap map={usaGeoContig} railMap={amtrakMapSimp} cityCordMap={cityCordMap} citiesPlotSet={citiesPlotSet} dims={minMapDims}/>
 			<!-- <RouteDisplay highlightedRoute={highlightedRouteRail}/> -->
 			<!-- <Comparison Bar Chart/> -->
 		</div>
@@ -211,8 +215,6 @@
 		<p>Want to learn more? go to these resources @cityNerd</p>
 		<p>What to play around with the data? click <a href="https://github.com/DustinLin/datavisTrainsPlanes">here</a>.</p>
 		<p>Want to get involved? takes these steps: Share our and other resources with others</p>
-		
-		<TopChart/>
 
 	</div>
 </div>
@@ -253,15 +255,33 @@
 	}
 
 	.infoMap {
-		/* want a horizonal flex? */
+		/* Creating a horizontal flex */
 		display: flex;
 		gap: 2em;
+		/* make the div take up the entire screen */
+		height: 85vh;
+		width: 100vw;
+		min-height: 500px;
+		margin: auto;
+	}
 
+	.maps {
+		height: 100vh;
+		width: 100vw;
+	}
+
+	.stackBox {
+		/* create a vertical stacking */
+		gap: 2em;
+		height: 100vh;
 	}
 
 	.barChart {
 		gap: 2em;
+		/* be 75% as tall as the parent div */
+		height: 75%;
 	}
+
 
 	.histogram {
 		gap: 2em;

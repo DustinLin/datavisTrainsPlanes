@@ -27,20 +27,21 @@
         console.log("sorted feature", sortedFeature);
 	// dimensions
 
+
 	let borderBoxSize;
 
-        /*
+
 	$: width = borderBoxSize
-		? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize)
+		? Math.max(borderBoxSize[0].inlineSize, 400)
 		: 400;
 
 	$: height = borderBoxSize
-		? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize)
+		? Math.max(borderBoxSize[0].blockSize, 400)
 		: 400;
-        */
 
-        const width = 1000;
-        const height = 750;
+	console.log(`test BarChart`);
+	$: console.log(`bar chart height ${height}, and width ${width}`)
+
 
 	//const margin = { top: 25, right: 20, bottom: 50, left: 60 };
         //const margin = {top: 45, bottom: 45, left: 150, right: 80};
@@ -63,31 +64,31 @@
 	const maxVal = sortedFeature[0][1];
         console.log("max val", maxVal);
 
-        const margin = {top: 45, bottom: 45, left: 270, right: 80};
+    const margin = {top: 45, bottom: 45, left: 270, right: 80};
 
         
 
-	const x = d3
+	$: x = d3
 		.scaleLinear()
 		.domain([0, maxVal])
 		//.nice()
 		.range([margin.left, width - margin.right]);
 
-	const y = d3
+	$: y = d3
 		.scaleBand()
 		.domain(sortedFeature.slice(0,10).map(([pair, info]) => pair))
 		.range([margin.top, height - margin.bottom])
 		.padding(0.1);
 
-        console.log("x range: ", x.range());
-        console.log("y range: ", y.range());
-        console.log("x domain: ", x.domain());
-        console.log("y domain: ", y.domain());
+    $: console.log("x range: ", x.range());
+    $: console.log("y range: ", y.range());
+    $: console.log("x domain: ", x.domain());
+    $: console.log("y domain: ", y.domain());
 
         
 </script>
 
-<div class="barchart" bind:borderBoxSize>
+<div class="barChart" bind:borderBoxSize>
 	<svg {height} {width}>
 		<!-- bars -->
 		<g>
@@ -119,11 +120,9 @@
 </div>
 
 <style>
-	.barchart {
+	.barChart {
 		/* take up extra horizontal space in the parent */
 		flex: 1;
-		/* be as tall as the parent div */
-		height: 100%;
 	}
 
 	/* animate changes to the lengths of the bars */
