@@ -148,7 +148,7 @@
 		<div class="infoMap" id="airlineTimes">
 			<!-- <p>idea to put a barchart that outlines different histogram that haneen made here as well as a bar chart the breaks down the flying time, maybe could give a few flight examples<p/> -->
 			<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100}/> 
-			<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#88aed0'}/> 
+			<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#88aed0'} minDimSize={minMapDims}/> 
 		</div>
 
 
@@ -177,7 +177,7 @@
 			</div>
 		</div>
 		<div class="infoMap" id="modifiedHistograms">
-			<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#cfe6ce'}/> 
+			<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#cfe6ce'} minDimSize={minMapDims}/> 
 			<!-- <Comparison Bar Chart/> -->
 		</div>
 
