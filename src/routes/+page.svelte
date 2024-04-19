@@ -12,14 +12,16 @@
 	import Map from './Map.svelte'
   	import RouteDisplay from './RouteDisplay.svelte';
 	import RailMap from './RailMap.svelte';
-    import TimeTriangle from './TimeTriangle.svelte';
+    	import TimeTriangle from './TimeTriangle.svelte';
   	import TopChart from './TopChart.svelte';
   	import RailMapSubset from './RailMapSubset.svelte';
 	import MapStatic from './MapStatic.svelte';
 	import RailMapIntersect from './RailMapIntersect.svelte';
 
-	import { cutoffs, cityPairsToCities  } from '../utils';
+	import { cutoffs, cityPairsToCities, computeInverse, trainTotalTime  } from '../utils';
 	import Histogram from './Histogram.svelte';
+
+	import {inTriangle, planeTimeToTotalTime, planeTotalTime, planeTime} from '../utils.js';
 
 
 	// data comes from the load function in +page.js
@@ -66,7 +68,7 @@
 	// doing some route processing to plot certain routes on different <Map>
 	let manyRouteCities = filteredCityPairToInfo
 
-	let triangleRouteCities= filteredCityPairToInfo.filter(route => 
+	let triangleRouteCities = filteredCityPairToInfo.filter(route => 
 		route[1].DISTANCE >= cutoffs.triangleLower && route[1].DISTANCE <= cutoffs.triangleUpper
 	)
 
@@ -91,6 +93,34 @@
 	
 
 	//  console.log(categories);
+
+
+	// data processing for route times histogram 
+	const timeUnitConversion = 60;
+	let cityPairToTime = filteredCityPairToInfo
+                             .map(([pair, info]) => 
+                                [pair, 
+                                {AVG_TOTAL_TIME: planeTimeToTotalTime(info.RAMP_TO_RAMP/info.DEPARTURES_PERFORMED) / timeUnitConversion, 
+				AVG_TOTAL_FLIGHT_TIME: (info.RAMP_TO_RAMP/info.DEPARTURES_PERFORMED) / timeUnitConversion,
+                                AVG_AIR_TIME: info.AIR_TIME / info.DEPARTURES_PERFORMED / timeUnitConversion, 
+				DISTANCE: info.DISTANCE,
+                                NUM_DEPARTURES: info.DEPARTURES_PERFORMED}]);
+
+	console.log("hellooooo");
+	console.log(cityPairToTime);
+	let trianglePairsOldTime = cityPairToTime
+				.filter(([pair, info]) => 
+				inTriangle(info.AVG_TOTAL_TIME * timeUnitConversion)); // assuming this takes in total time, in minutes
+
+	let trianglePairsNewTime = trianglePairsOldTime
+				.map(([pair, info]) => 
+				[pair, 
+                                {AVG_TOTAL_TIME: trainTotalTime(info.DISTANCE) / timeUnitConversion, 
+				DISTANCE: info.DISTANCE,
+                                NUM_DEPARTURES: info.NUM_DEPARTURES}]);
+
+	console.log("new time length");
+	console.log(trianglePairsNewTime.length);
 
 </script>
 
@@ -120,7 +150,7 @@
 		<div class="infoMap" id="airlineTimes">
 			<p>idea to put a barchart that outlines different histogram that haneen made here as well as a bar chart the breaks down the flying time, maybe could give a few flight examples<p/>
 			<!-- <BarChart/> -->
-			<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#88aed0'}/> 
+			<Histogram dataset={cityPairToTime} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#88aed0'}/> 
 		</div>
 
 
@@ -138,12 +168,15 @@
 
 			<!-- <Comparison Bar Chart/> -->
 		</div>
-		<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#cfe6ce'}/> 
+		<Histogram dataset={cityPairToTime} xLabel={"Total Travel Time when Flying (Hours)"} color={'#88aed0'} triangleColor={'#cfe6ce'}/> 
+
+		<p>Here's what the time distribution of these triangle routes looks like with HSR: </p>
+
+		<Histogram dataset={trianglePairsNewTime} xLabel={"Total Travel Time when Driving (Hours)"} color={'#cfe6ce'} triangleColor={'#cfe6ce'}/> 
 			
 
 		<p>The United States currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the International Union of Railways definition of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
 		
-
 
 		<div class="infoMap" id="modifiedHistograms">
 			<!-- <HighlightedHistogram highlightedRoute={highlightedRouteRail}/> -->

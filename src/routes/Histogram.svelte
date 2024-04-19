@@ -12,7 +12,7 @@
 	
 	const timeUnitConversion = 60
 
-
+	/*
         let cityPairToTime = dataset
                              .map(([pair, info]) => 
                                 [pair, 
@@ -21,6 +21,10 @@
                                 NUM_DEPARTURES: info.DEPARTURES_PERFORMED}]);
 
         
+	*/
+	
+	let cityPairToTime = dataset;
+
         let bins = d3.bin()
                 .thresholds(20)
                 .value((d) => d[1].AVG_TOTAL_TIME)
@@ -100,8 +104,8 @@
 		</g>
 
 		<!-- axes -->
-		<Axis orientation="bottom" scale={x} {width} {height} {margin} label={xLabel} />
-		<Axis orientation="left" scale={y} {width} {height} {margin} />
+		<Axis orientation="bottom" scale={x} {width} {height} {margin} label="test" />
+		<Axis orientation="left" scale={y} {width} {height} {margin} label="ex"/>
 	</svg>
 </div>
 

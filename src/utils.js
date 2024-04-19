@@ -156,6 +156,9 @@ export let minToHours = (time, numFlights) => {
 export let inTriangle = (flightTime) => {
 	const lowerTime = planeTotalTime(cutoffs.triangleLower)
 	const upperTime = planeTotalTime(cutoffs.triangleUpper)
-	console.log(`lowerX: ${cutoffs.triangleLower}, lowerTime: ${lowerTime}, upperX: ${cutoffs.triangleUpper}, upperTime: ${upperTime}, flightTime: ${flightTime}, bool value: ${(flightTime <= lowerTime) && (flightTime >= upperTime)}`)
+	//console.log(`lowerX: ${cutoffs.triangleLower}, lowerTime: ${lowerTime}, upperX: ${cutoffs.triangleUpper}, upperTime: ${upperTime}, flightTime: ${flightTime}, bool value: ${(flightTime <= lowerTime) && (flightTime >= upperTime)}`)
+	console.log("lower and upper time")
+	console.log(lowerTime)
+	console.log(upperTime)
 	return (flightTime >= lowerTime) && (flightTime <= upperTime)
 }
