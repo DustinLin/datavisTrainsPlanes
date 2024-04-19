@@ -183,6 +183,7 @@
 				dominant-baseline = "hanging"
 				x = {usaMapProjection(cityCordMap[city].COORD)[0] + 4}
 				y = {usaMapProjection(cityCordMap[city].COORD)[1] + 4}
+				font-weight = "bold"
 			>
 				{city.split("_")[0]}
 			</text>
