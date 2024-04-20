@@ -113,7 +113,7 @@
 </script>
 
 <div class="maps" bind:borderBoxSize={borderBoxSize}>
-	<h2>Title for map: something about existing rail in the US</h2>
+	<h2>Existing Amtrak rail in the Untied States</h2>
 	<svg width={width} height={height}>
 		<!-- drawing paths for each state, using projections -->
 		{#each map.features as state}

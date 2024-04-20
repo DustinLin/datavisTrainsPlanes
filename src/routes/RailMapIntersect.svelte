@@ -43,13 +43,42 @@
 	// tuple of (cities/route, boolean) for if there exists rail between
 	let routesPlot = []
 
-	// process routes: add to cityPlotSet, and see if they have a rail (if they do then plot it)
-	cities.forEach((route) => {
-		// add the cities to be plotted
-		let origin = cityPairsToCities(route)[0]
-		let dest = cityPairsToCities(route)[1]
-		citiesPlotSet.add(origin)
-		citiesPlotSet.add(dest)
+	// hard coding some cities connected, these cities are technically connected by amtrak rail,
+	// but involve multiple transfers, so it kind of counts?
+	const amtrakConnectedness = {
+		"(Las Vegas_NV, Los Angeles_CA)": false,
+		"(Boston_MA, New York_NY)": true,
+		"(New York_NY, Washington_DC)": true,
+		"(Dallas_TX, Houston_TX)": true,
+		"(Austin_TX, Dallas_TX)": true,
+		"(Portland_OR, Seattle_WA)": true,
+		"(Charlotte_NC, Raleigh_NC)": true,
+		"(Los Angeles_CA, San Francisco_CA)": true,
+		"(Austin_TX, Houston_TX)": true,
+		"(Austin_TX, San Antonio_TX)": true,
+		"(Norfolk_VA, Washington_DC)": true,
+		"(Miami_FL, Orlando_FL)": true,
+		"(Fort Lauderdale_FL, Miami_FL)": true,
+		"(Atlanta_GA, Greenville_SC)": true,
+		"(Chicago_IL, Grand Rapids_MI)": true,
+		"(Dallas_TX, Oklahoma City_OK)": true,
+		"(Charleston_SC, Charlotte_NC)": false,
+		"(Atlanta_GA, Birmingham_AL)": true,
+		"(Las Vegas_NV, Phoenix_AZ)": false,
+		"(Las Vegas_NV, San Diego_CA)": false,
+		"(Chicago_IL, Detroit_MI)": true,
+		"(Charlotte_NC, Greenville_SC)": true,
+		"(Atlanta_GA, Nashville_TN)": false,
+		"(Charlotte_NC, Myrtle Beach_SC)": false,
+		"(Chicago_IL, Indianapolis_IN)": true,
+		"(Raleigh_NC, Washington_DC)": true,
+		"(Asheville_NC, Greenville_SC)": false,
+		"(Seattle_WA, Spokane_WA)": true,
+		"(Atlanta_GA, Huntsville_AL)": false,
+		"(Atlanta_GA, Knoxville_TN)": false, 
+}
+	/**
+	 Old code to calculate if cities have rail in between, ended up just hard coding it to save some performance
 
 		// find which rail stops at that city, and compare
 		let originStations = (cityAmtrakRouteMap[origin])
@@ -76,6 +105,18 @@
 			routesPlot.push([route, false])
 		}
 
+
+	 */
+	// process routes: add to cityPlotSet, and see if they have a rail (if they do then plot it)
+	cities.forEach((route) => {
+		// add the cities to be plotted
+		let origin = cityPairsToCities(route)[0]
+		let dest = cityPairsToCities(route)[1]
+		citiesPlotSet.add(origin)
+		citiesPlotSet.add(dest)
+
+		// see which color to plot the route
+		routesPlot.push([route, amtrakConnectedness[route]])
 	})
 
 	/**
@@ -125,7 +166,7 @@
 </script>
 
 <div class="maps" bind:borderBoxSize={borderBoxSize}>
-	<h2>Title for map: rail intersect with a direct line between them?</h2>
+	<h2>Proposed HSR routes which already have existing Amtrak rail connections</h2>
 
 	<div class="swatches">
 	<!-- creating a swatch for each color in the scale -->

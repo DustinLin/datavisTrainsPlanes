@@ -48,7 +48,6 @@ const CITY_COLLISIONS = [
 	"Austin_TX",
 	"Grand Rapids_MI",
 	"Nashville_TN",
-	"Knoxville_TN",
 	"Asheville_TN",
 	"Huntsville_TN"
 ]
@@ -79,6 +78,12 @@ export const cityNamePlacement = (city, projection, cityCordMap) => {
 		return [
 		projection(cityCordMap[city].COORD)[0] - 50 ,
 		projection(cityCordMap[city].COORD)[1]
+		]
+	}
+	if (city === "Knoxville_TN") {
+		return [
+		projection(cityCordMap[city].COORD)[0] - 10 ,
+		projection(cityCordMap[city].COORD)[1]  - 10
 		]
 	}
 
