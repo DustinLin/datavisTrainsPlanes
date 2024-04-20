@@ -125,6 +125,27 @@
 </script>
 
 <div class="maps" bind:borderBoxSize={borderBoxSize}>
+	<h2>Title for map: rail intersect with a direct line between them?</h2>
+
+	<div class="swatches">
+	<!-- creating a swatch for each color in the scale -->
+	<div class="swatch">
+		<!-- also set color inside the html-->
+		<div class="square" style:background-color={RAIL_DNE_COLOR} > </div>
+		<div>There does not exist Amtrak rail connection</div>
+	</div>
+	<div class="swatch">
+		<!-- also set color inside the html-->
+		<div class="square" style:background-color={RAIL_EXISTS_COLOR} > </div>
+		<div>Exists a direct Amtrak rail connection between 2 cities</div>
+	</div>
+
+
+	</div>
+
+
+
+
 	<svg width={width} height={height}>
 		<!-- drawing paths for each state, using projections -->
 		{#each map.features as state}
@@ -145,7 +166,7 @@
 			x2={routeToCords(route, 1, 0)}
 			y2={routeToCords(route, 1, 1)}
 			stroke={railExist ? RAIL_EXISTS_COLOR : RAIL_DNE_COLOR}
-			stroke-width={ROUTE_STROKE_WID}
+			stroke-width={2.5}
 			opacity={LINE_OPACITY}
 		/>
 
@@ -160,7 +181,7 @@
 			cx = {usaMapProjection(cityCordMap[city].COORD)[0]}
 			cy = {usaMapProjection(cityCordMap[city].COORD)[1]}
 			fill = {CITY_CIRCLE_COL}
-			r = {CITY_CIRCLE_R}
+			r = {CITY_CIRCLE_R - 2}
 		/>
 
 		{/each}
@@ -190,4 +211,21 @@
 		/* the weight? */
 		flex:2;
 	}
+	.swatches {
+		display: flex;
+		align-items: center;
+		gap: 1em; /* adding some space between the <div>s inside swatches */
+	}
+
+	.swatch {
+		display: flex;
+		align-items: center;
+		gap: 0.25em; /* adding some space between the <div>s inside swatch */
+	}
+
+	.square {
+		width: 15px;
+		height: 15px;
+	}
+
 </style>

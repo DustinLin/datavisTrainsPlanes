@@ -102,7 +102,7 @@
 	$: usaMapProjection = d3.geoAlbersUsa().fitSize([width, height], map);
 
 
-	const RAIL_EXISTS_COLOR = VIS_PROPERTIES.HSR_ROUTE_COL
+	const RAIL_EXISTS_COLOR = VIS_PROPERTIES.AMTRAK_RAIL_COL
 
 	const CITY_CIRCLE_R = VIS_PROPERTIES.CITY_CIRCLE_R
 	const CITY_CIRCLE_COL = VIS_PROPERTIES.CITY_CIRCLE_COL
@@ -113,6 +113,7 @@
 </script>
 
 <div class="maps" bind:borderBoxSize={borderBoxSize}>
+	<h2>Title for map: something about existing rail in the US</h2>
 	<svg width={width} height={height}>
 		<!-- drawing paths for each state, using projections -->
 		{#each map.features as state}
@@ -142,7 +143,7 @@
 			cx = {usaMapProjection(cityCordMap[city].COORD)[0]}
 			cy = {usaMapProjection(cityCordMap[city].COORD)[1]}
 			fill = {CITY_CIRCLE_COL}
-			r = {CITY_CIRCLE_R}
+			r = {CITY_CIRCLE_R - 2}
 		/>
 		{/each}
 

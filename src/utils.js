@@ -75,6 +75,13 @@ export const cityNamePlacement = (city, projection, cityCordMap) => {
 		]
 	}
 
+	if (city === "Nashville_TN") {
+		return [
+		projection(cityCordMap[city].COORD)[0] - 50 ,
+		projection(cityCordMap[city].COORD)[1]
+		]
+	}
+
 	if (CITY_COLLISIONS.includes(city)){
 		return [
 		projection(cityCordMap[city].COORD)[0] + 5,
@@ -109,6 +116,7 @@ export const VIS_PROPERTIES = {
 	HL_CIRC_R: 5,
 	HL_ROUTE_STROKE_WID: 1.5,
 	HL_ROUTE_STROKE_COL: "#5eaee4", // more saturated blue compared to reg route
+	AMTRAK_RAIL_COL: "#6a3d9a",
 
 	HSR_ROUTE_COL: "#cc6600",//"#ff7800",
 	LINE_OPACITY: 0.6,

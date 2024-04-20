@@ -118,7 +118,7 @@
 			x2={routeToCords(route, 1, 0)}
 			y2={routeToCords(route, 1, 1)}
 			stroke={ROUTE_STROKE_COL}
-			stroke-width={1.5}
+			stroke-width={2.5}
 			opacity={LINE_OPACITY}
 		/>
 
@@ -134,7 +134,7 @@
 			cx = {usaMapProjection(cityCordMap[city].COORD)[0]}
 			cy = {usaMapProjection(cityCordMap[city].COORD)[1]}
 			fill = {CITY_CIRCLE_COL}
-			r = {CITY_CIRCLE_R}
+			r = {CITY_CIRCLE_R - 2}
 		/>
 		{/each}
 
