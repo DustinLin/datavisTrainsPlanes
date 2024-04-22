@@ -23,6 +23,7 @@ cleanup TODOs
 
 ## Our data
 ### raw data
+- flight data: from bureau of transportation ([BTS](https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=GEE)). Raw data contains fields such that number of departures scheduled, number of departures performed, distance, passengers, ramp time, air time, carrier ID, etc **For the year 2023**. Aggregated per route, per month (eg: in jan. there were X number of passengers flying from BOS to JFK via Delta).
 - `AmtrakRoutes.geojson`: from [BTS](https://data-usdot.opendata.arcgis.com/maps/baa5a6c4d4ae4034850e99aaca38cfbb)
 - `Amtrak_Routes-simplified.geojson`: from [this](https://github.com/binx/amtrak-explorer/tree/main) github source that did some pre-processing of the original rail data from Amtrak
 - `USA_Major_Cities.geojson`: IDK WHERE THIS IS FROM, contains city, state, population, and coordinate data of cities across the US
