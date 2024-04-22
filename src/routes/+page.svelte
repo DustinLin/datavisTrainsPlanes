@@ -163,9 +163,33 @@
 		
 
 		<h2>Which of the X routes should we build</h2>
-		<div class="infoMap" id="iterativeGravityExplanation"><p>
-			Explanation of the iterative gravity model
-		</p></div>
+		<div class="infoMap" id="iterativeGravityExplanation">
+			<div class="paragraphWrapper">
+				<p>
+				We propose 30 HSR rail lines with an Iterative Gravity Model.
+				This model is a modification we made to the Gravity Model presented in City Nerd's youtube video <a href="https://www.youtube.com/watch?v=wE5G1kTndI4">"56 High Speed Rail Links We Should've Built Already."</a>
+				Highly recommend checking out his video as it was the inspiration for our time triangle and iterative gravity model.
+				The gravity model as he presented is modeled after the equation for gravity. ADD MORE
+				<br>
+				We feel it is necessary to expand on this basic gravity model in two ways:
+				</p>
+				<ol>
+					<li>
+						For the attractive force instead of using population as a proxy for where people want to travel to instead use a figure that isn't a proxy - total annual passengers from US flight data.
+					</li>
+					<li>
+						Is to make the model aware of already proposed rail. <br>
+						To explain what we mean for the model to be aware consider a hypothetical when deciding where I should put a new HSR connection when some lines are already proposed.
+						Suppose New York City to Boston was already proposed. 
+						Now the model is considering connecting Washington DC to Boston.
+						Our first issue with the basic gravity model is when it computes the score for connecting Washington DC to Boston is considers building a line the entire way when only building to New York City is required.
+						The second thing we feel is an issue with the basic model is it doesn't take into consideration the fact that not only did I connect Washington DC to Boston I also connected Boston to New York City.
+						<br><br>
+						The Iterative Gravity model fixes both of these issues by first considering the direct connection and all possibilities of connecting two cities using existing rails. Secondly the score is now the sum of all scores for all the newly connected cities divided by the length of newly built rail line built.
+					</li>
+				</ol>
+			</div>
+		</div>
 
 		<h2>Results</h2>
 		<h2>Proposed HSR</h2>
@@ -187,8 +211,8 @@
 
 		<h2>What Now?</h2>
 		<p>Want to learn more? go to these resources @cityNerd</p>
-		<p>What to play around with the data? click <a href="https://github.com/DustinLin/datavisTrainsPlanes">here</a>.</p>
-		<p>Want to get involved? takes these steps: Share our and other resources with others</p>
+		<p>Want to play around with the data or learn more in depth about our computational model? click <a href="https://github.com/DustinLin/datavisTrainsPlanes">here</a>.</p>
+		<p>Want to show others? takes these steps: Share our and other resources with others</p>
 		
 		<TopChart/>
 
