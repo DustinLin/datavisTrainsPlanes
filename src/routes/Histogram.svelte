@@ -4,11 +4,15 @@
     import {inTriangle, planeTimeToTotalTime} from '../utils.js';
 
 	export let dataset;
-        export let xLabel;
-        export let color;
-        export let triangleColor;
+	export let xLabel;
+	export let color;
+	export let triangleColor;
 	// export let selectedIndices;
 	//export let color;
+
+	export let minDimSize;
+
+	const minDimSize1 = [500, 500]
 	
 	const timeUnitConversion = 1
 
@@ -34,18 +38,14 @@
 
 	let borderBoxSize;
 
-        /*
 	$: width = borderBoxSize
-		? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize)
-		: 400;
+		? Math.max(borderBoxSize[0].inlineSize, minDimSize[0])
+		: minDimSize[0];
 
 	$: height = borderBoxSize
-		? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize)
-		: 400;
-        */
+		? Math.max(borderBoxSize[0].blockSize, minDimSize[1])
+		: minDimSize[1];
 
-        const width = 960;
-        const height = 500;
 
 	//const margin = { top: 25, right: 20, bottom: 50, left: 60 };
         //const margin = {top: 45, bottom: 45, left: 150, right: 80};
@@ -63,14 +63,14 @@
         // scales 
 
         // Declare the x (horizontal position) scale.
-  const x = d3.scaleLinear()
-      .domain([bins[0].x0, bins[bins.length - 1].x1])
-      .range([margin.left, width - margin.right]);
+	$: x = d3.scaleLinear()
+		.domain([bins[0].x0, bins[bins.length - 1].x1])
+		.range([margin.left, width - margin.right]);
 
-  // Declare the y (vertical position) scale.
-  const y = d3.scaleLinear()
-      .domain([0, d3.max(bins, (d) => d3.sum(d, (l) => l[1].NUM_DEPARTURES))])
-      .range([height - margin.bottom, margin.top]);
+	// Declare the y (vertical position) scale.
+	$: y = d3.scaleLinear()
+		.domain([0, d3.max(bins, (d) => d3.sum(d, (l) => l[1].NUM_DEPARTURES))])
+		.range([height - margin.bottom, margin.top]);
 
 	  /*
         console.log("x range: ", x.range());
