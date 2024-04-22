@@ -52,7 +52,9 @@
 	let hRoutes = {
 		highlightedRouteAll: null,
 		highlightedRoutePopular: null,
-		highlightedRouteTriangle: null
+		highlightedRouteTriangle: null,
+		// for hovering on the scroll visual
+		highlightedRouteBuilt: null, // this property will simply be a city pair string
 	}
 
 	function onhover(route, vis){
@@ -196,7 +198,11 @@
 		<h2>Results</h2>
 		<h2>Proposed HSR</h2>
 		<div class="infoMap" id="proposedHSRMap">
-			<MapStatic map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} dims={minMapDims}/>
+			<MapStatic map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} 
+				dims={minMapDims}
+				highlightedRoute={hRoutes["highlightedRouteBuilt"]}
+				/>
+			<TopChart railLines={gravityTopResRoutes[0]} onhover={onhover} mapId={"highlightedRouteBuilt"} />
 			<!-- <FinalMapDisplay highlightedRoute={highlightedRouteRail}/> -->
 		</div>
 		
@@ -205,7 +211,14 @@
 		<p>Consider making the above information partly into a table? Comparing speeds?</p>
 		<p>The US does contain a lot of rail infrastructure already which would allows for cheap cost to build... fix the wording but something along this idea</p>
 		<div class="infoMap" id="railIntersection">
-			<RailMapIntersect map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} cityAmtrakRouteMap={cityAmtrakRouteMap} dims={minMapDims}/>
+			<RailMapIntersect 
+				map={usaGeoContig}
+				cities={GravTopRes} 
+				cityCordMap={cityCordMap} 
+				cityAmtrakRouteMap={cityAmtrakRouteMap} 
+				dims={minMapDims}
+
+				/>
 			<RailMap map={usaGeoContig} railMap={amtrakMapSimp} cityCordMap={cityCordMap} citiesPlotSet={citiesPlotSet} dims={minMapDims}/>
 			<!-- <RouteDisplay highlightedRoute={highlightedRouteRail}/> -->
 			<!-- <Comparison Bar Chart/> -->

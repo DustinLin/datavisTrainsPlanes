@@ -16,6 +16,8 @@
 
 	export let cityCordMap;  // map from city to coordinates
 
+	export let highlightedRoute; // the current highlighted route from the scroll wheel 
+
 	// [width, height]
 	export let dims;
 
@@ -36,6 +38,8 @@
 	$: usaMapProjection = d3.geoAlbersUsa().fitSize([width, height], map);
 
 	$: mapPath = d3.geoPath().projection(usaMapProjection);
+
+	const col = "#FF4D4D"
 
 
 	/**
@@ -91,6 +95,10 @@
 	const ROUTE_STROKE_WID = VIS_PROPERTIES.ROUTE_STROKE_WID
 	const MAP_COL = VIS_PROPERTIES.MAP_COLOR
 	const LINE_OPACITY = VIS_PROPERTIES.LINE_OPACITY
+
+	let routeOrder = 1
+	const routeInc = () => routeOrder++
+
 </script>
 
 
@@ -111,7 +119,6 @@
 		<!-- todo, refactor to a separate file/component?-->
 		<!--  drawing a line, need to extract coordinates and draw city end points -->
 
-		<!-- conditionally render color based on hover? -->
 		<line
 			x1={routeToCords(route, 0, 0)}
 			y1={routeToCords(route, 0, 1)}
@@ -121,6 +128,21 @@
 			stroke-width={2.5}
 			opacity={LINE_OPACITY}
 		/>
+
+		<!--
+
+		<text
+			font-size = 12
+			font-family = "sans-serif"
+			dominant-baseline = "text-top"
+			font-weight = "bold"
+			x = {(routeToCords(route, 0,0) + routeToCords(route, 1,0)) /2}
+			y = {(routeToCords(route, 0,1) + routeToCords(route, 1,1)) /2}
+		>
+			{routeInc()}
+		</text>
+
+		-->
 
 		{/each}
 
@@ -133,7 +155,7 @@
 		<circle
 			cx = {usaMapProjection(cityCordMap[city].COORD)[0]}
 			cy = {usaMapProjection(cityCordMap[city].COORD)[1]}
-			fill = {CITY_CIRCLE_COL}
+			fill = {ROUTE_STROKE_COL}
 			r = {CITY_CIRCLE_R - 2}
 		/>
 		{/each}
@@ -153,6 +175,30 @@
 		</text>
 		{/each}
 
+		{#if highlightedRoute}
+			<line
+				x1={routeToCords(highlightedRoute, 0, 0)}
+				y1={routeToCords(highlightedRoute, 0, 1)}
+				x2={routeToCords(highlightedRoute, 1, 0)}
+				y2={routeToCords(highlightedRoute, 1, 1)}
+				stroke={col}
+				stroke-width={3.5}
+				opacity={LINE_OPACITY}
+			/>
+			<circle
+				cx = {usaMapProjection(cityCordMap[cityPairsToCities(highlightedRoute)[0]].COORD)[0]}
+				cy = {usaMapProjection(cityCordMap[cityPairsToCities(highlightedRoute)[0]].COORD)[1]}
+				fill = {col}
+				r = {CITY_CIRCLE_R + 1.75}
+			/>
+			<circle
+				cx = {usaMapProjection(cityCordMap[cityPairsToCities(highlightedRoute)[1]].COORD)[0]}
+				cy = {usaMapProjection(cityCordMap[cityPairsToCities(highlightedRoute)[1]].COORD)[1]}
+				fill = {col}
+				r = {CITY_CIRCLE_R + 1.75}
+			/>
+
+		{/if}
 
 
 	</svg>
