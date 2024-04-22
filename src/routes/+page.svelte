@@ -22,6 +22,7 @@
 	import Histogram from './Histogram.svelte';
 
 	import {inTriangle, planeTimeToTotalTime, planeTotalTime, planeTime} from '../utils.js';
+	import {TRAVEL_TO_AND_FROM_TIMES, SECURITY_TIMES} from '../utils.js';
 
 
 	// data comes from the load function in +page.js
@@ -106,12 +107,14 @@
 				DISTANCE: info.DISTANCE,
                                 NUM_DEPARTURES: info.DEPARTURES_PERFORMED}]);
 
-	console.log("hellooooo");
-	console.log(cityPairToTime);
+	//console.log("hellooooo");
+	//console.log(cityPairToTime);
+	// intermediate processing to get cities that are in triangle.
 	let trianglePairsOldTime = cityPairToTime
 				.filter(([pair, info]) => 
 				inTriangle(info.AVG_TOTAL_TIME * timeUnitConversion)); // assuming this takes in total time, in minutes
 
+	// gets new projected time with HSR for cities that are in triangle
 	let trianglePairsNewTime = trianglePairsOldTime
 				.map(([pair, info]) => 
 				[pair, 
@@ -119,8 +122,25 @@
 				DISTANCE: info.DISTANCE,
                                 NUM_DEPARTURES: info.NUM_DEPARTURES}]);
 
+
 	console.log("new time length");
 	console.log(trianglePairsNewTime.length);
+
+	// data for each step bar chart
+	let averageTotalTime = d3.mean(cityPairToTime.map(([pair, info]) => info.AVG_TOTAL_FLIGHT_TIME));
+	let averageAirTime = d3.mean(cityPairToTime.map(([pair, info]) => info.AVG_AIR_TIME));
+	let averageExtraTime = averageTotalTime - averageAirTime;
+
+	console.log("avg total time: ", averageTotalTime);
+	console.log("avg air time: ", averageAirTime);
+	console.log("avg extra time: ", averageExtraTime);
+
+
+	let flyTimeBreakdown = [['Travel to/from Airport', TRAVEL_TO_AND_FROM_TIMES.plane], 
+				['Time in TSA Security', SECURITY_TIMES.plane], 
+				['Average Extra Time', averageExtraTime * timeUnitConversion], 
+				['Average Air Time', averageAirTime * timeUnitConversion]];
+	console.log("example Data", flyTimeBreakdown);
 
 </script>
 
@@ -143,7 +163,7 @@
 			<Map map={usaGeoContig} cities={topFlightRoutesPass} cityCordMap={cityCordMap} onhover={onhover} showCityName={true} dims={[975,610]}/>
 			<RouteDisplay highlightedRoute={highlightedRoute}/>
 			<!-- <BarChart/> for top routes -->
-			<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100}/> 
+			<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100} orientation={"horizontal"}/> 
 		</div>
 
 		<h2>How much time is spent taking these routes?</h2>
@@ -152,6 +172,9 @@
 			<!-- <BarChart/> -->
 			<Histogram dataset={cityPairToTime} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#88aed0'}/> 
 		</div>
+
+		<p>here's a bar chart of all the time it takes for each step to fly somewhere. see how much time is wasted in security</p>
+		<BarChart dataset={flyTimeBreakdown} feature={""} xLabel={"Time (minutes)"} color={'#88aed0'} roundValue={100} orientation={"vertical"}/> 
 
 
 		<h2>Is there a faster way?</h2>

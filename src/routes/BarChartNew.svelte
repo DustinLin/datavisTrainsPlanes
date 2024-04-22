@@ -1,3 +1,4 @@
+
 <script>
 	import * as d3 from 'd3';
 	import Axis from './Axis.svelte';
@@ -7,10 +8,16 @@
         export let xLabel;
         export let color;
         export let roundValue;
+	export let orientation;
 	// export let selectedIndices;
 	//export let color;
 
-        let sortedFeature = dataset
+	let sortedFeature = dataset;
+
+        
+        
+        if (feature == "PASSENGERS") {
+		sortedFeature = dataset
                 .sort(([cities1, data1], [cities2, data2]) => {
                 const score1 = data1[feature]
                 const score2 = data2[feature]
@@ -19,12 +26,28 @@
 
         
                 //sortedFeature = 0;
-        
-        if (feature == "PASSENGERS") {
+
                 sortedFeature = sortedFeature.map(([pair, info]) => [pair, info/1000000])
+
+		sortedFeature = sortedFeature.map(([pair, info]) => [convertString(pair), info]) 
+		        
         }
+ 
+	
+	function convertString(input) {
+		const pairs = input.slice(1, -1).split(', ');
+
+		const formattedPairs = pairs.map(pair => {
+			const [city, state] = pair.split('_');
+			return `${city}, ${state}`;
+		});
+
+		return formattedPairs.join('\n to \n');
+	}
+	
 
         console.log("sorted feature", sortedFeature);
+	//console.log("sorted feature", formattedFeature);
 	// dimensions
 
 	let borderBoxSize;
@@ -65,7 +88,9 @@
 
         const margin = {top: 45, bottom: 45, left: 270, right: 80};
 
-        
+
+
+        //if (orientation == "horizontal"){}
 
 	const x = d3
 		.scaleLinear()

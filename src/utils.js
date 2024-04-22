@@ -2,13 +2,13 @@
  * contain useful functions for data parsing?
  */
 
-const SECURITY_TIMES = {
+export let SECURITY_TIMES = {
 	'plane': 120,
 	'train': 15,
 	'car': 0 
 }
 
-const TRAVEL_TO_AND_FROM_TIMES = {
+export let TRAVEL_TO_AND_FROM_TIMES = {
 	'plane': 60,
 	'train': 45,
 	'car': 0
@@ -16,7 +16,7 @@ const TRAVEL_TO_AND_FROM_TIMES = {
 
 
 export let planeTime = (distance) => {
-	return 44.5957 + 0.117441*distance
+	return 44.5957 + 0.117441 * distance
 }
 
 export let carTime = (distance) => {
@@ -157,8 +157,8 @@ export let inTriangle = (flightTime) => {
 	const lowerTime = planeTotalTime(cutoffs.triangleLower)
 	const upperTime = planeTotalTime(cutoffs.triangleUpper)
 	//console.log(`lowerX: ${cutoffs.triangleLower}, lowerTime: ${lowerTime}, upperX: ${cutoffs.triangleUpper}, upperTime: ${upperTime}, flightTime: ${flightTime}, bool value: ${(flightTime <= lowerTime) && (flightTime >= upperTime)}`)
-	console.log("lower and upper time")
-	console.log(lowerTime)
-	console.log(upperTime)
+	//console.log("lower and upper time")
+	//console.log(lowerTime)
+	//console.log(upperTime)
 	return (flightTime >= lowerTime) && (flightTime <= upperTime)
 }
