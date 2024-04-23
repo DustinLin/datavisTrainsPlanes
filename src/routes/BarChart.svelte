@@ -59,6 +59,8 @@
 		? Math.max(borderBoxSize[0].blockSize, minDimSize[1])
 		: minDimSize[1];
 
+	$: console.log('sizes', borderBoxSize)
+
 
 	// get the counts for the filtered dataset
         /*
@@ -71,10 +73,10 @@
 
 	// scales
 
-	const maxVal = sortedFeature[0][1];
-        console.log("max val", maxVal);
+	const maxVal = d3.max(sortedFeature, (d) => d[1]);
+	console.log("max val", maxVal);
 
-        const margin = {top: 45, bottom: 45, left: 270, right: 80};
+	const margin = {top: 45, bottom: 45, left: 270, right: 80};
 
 
 
@@ -88,7 +90,7 @@
 
 	$: y = d3
 		.scaleBand()
-		.domain(sortedFeature.slice(0,10).map(([pair, info]) => pair))
+		.domain(sortedFeature.map(([pair, info]) => pair))
 		.range([margin.top, height - margin.bottom])
 		.padding(0.1);
 

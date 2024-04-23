@@ -79,7 +79,7 @@
 
 	let minMapDims = [500, 500];
 
-	let minBarDims = [500, 500];
+	let minBarDims = [500, 400];
 
 
 	let triangleRouteCities = filteredCityPairToInfo.filter(route => 
@@ -211,7 +211,7 @@
 		<!-- compoenent -->
 		<h2>What are the popular airline routes in the US?</h2>
 		<div class="infoMap" id="popularAirlines">
-			<Map 
+			<Map
 				map={usaGeoContig} 
 				cities={topFlightRoutesPass} 
 				cityCordMap={cityCordMap} 
@@ -219,7 +219,8 @@
 				showCityName={true} 
 				dims={minMapDims}
 				highlightedRoute={hRoutes["highlightedRoutePopular"]}
-				mapId={"highlightedRoutePopular"}/>
+				mapId={"highlightedRoutePopular"}
+			/>
 
 			<div class="stackBox">
 				<RouteDisplay highlightedRoute={hRoutes["highlightedRoutePopular"]}/>
@@ -386,15 +387,11 @@
 		/* set the font */
 		font-family: system-ui, sans-serif;
 		font-size: 16px;
-		/* make the div take up the entire screen */
-		height: 100vh;
-		width: 100vw;
 		/* add 32px of padding around the div */
 		padding: 2em;
 		/* put the controls on top of the plots with 32px of space in between */
-		display: flex;
-		flex-direction: column;
-		gap: 2em;
+		/* display: flex;
+		flex-direction: column; */
 	}
 
 	/* place the feature controls and color legend next to each other */
@@ -418,17 +415,17 @@
 	.infoMap {
 		/* Creating a horizontal flex */
 		display: flex;
-		gap: 2em;
 		/* make the div take up the entire screen */
 		height: 85vh;
-		width: 100vw;
-		min-height: 500px;
+		width: calc(100vw - 4em);
+		gap: 2em;
 		margin: auto;
 	}
 
+
 	.maps {
 		height: 100vh;
-		width: 100vw;
+		width: 100%;
 	}
 
 	.stackBox {
