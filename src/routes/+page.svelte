@@ -20,6 +20,7 @@
 	import { cutoffs, cityPairsToCities, roundTo, planeTime, planeTotalTime, computeInverse, trainTotalTime   } from '../utils';
 	import {inTriangle, planeTimeToTotalTime, planeToTrain, roundUp} from '../utils.js';
 	import {TRAVEL_TO_AND_FROM_TIMES, SECURITY_TIMES, convertString} from '../utils.js';
+	
 
 	import Histogram from './Histogram.svelte';
 
@@ -179,8 +180,8 @@
 </script>
 
 <div class="container">
-	<div class="header">
-		<h3>High Speed Rail (HSR) in the US</h3>
+	<div class="pageHeader">
+		<h2>High Speed Rail (HSR) in the US</h2>
 	</div>
 
 
@@ -206,7 +207,7 @@
 		<p>
 			One of the most common, and seemingly most convenient, ways to travel relatively long distances within the United States is by flying. In 2023, there were {filteredCityPairToInfo.length} unique flight routes within the continental US. 
 			There are typically several flight options to travel between any two cities in the US that make flying an easy, flexible option. 
-			In comparison, driving several hours is often not a viable option, especially for short trips where time spent driving would nearly equal time spent at the actual destination. 
+			In comparison, driving several hours is often not a viable option, especially for short trips, where time spent driving would nearly equal time spent at the actual destination. 
 			Currently, options for rail travel are limited in many parts of the country and, due to the lack of high speed rail (HSR) in the US, taking a train does not save significant time compared to driving.
 		</p>
 		</div>
@@ -228,7 +229,7 @@
 			<div class="stackBox">
 				<RouteDisplay highlightedRoute={hRoutes["highlightedRoutePopular"]}/>
 				<!-- <BarChart/> for top routes -->
-				<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100} orientation={"horizontal"} unitConversion={populationConversion} firstX={10} stringFormatter={convertString} minDimSize={minBarDims} id="stkBarChartPass"/> 
+				<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} yLabel={"Route"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100} orientation={"horizontal"} unitConversion={populationConversion} firstX={10} stringFormatter={convertString} minDimSize={minBarDims} id="stkBarChartPass"/> 
 			</div>
 
 		</div>
@@ -236,9 +237,9 @@
 		<h2>How much time is spent taking these routes?</h2>
 		<div class="infoMap" id="airlineTimes">
 			<!-- <p>idea to put a barchart that outlines different histogram that haneen made here as well as a bar chart the breaks down the flying time, maybe could give a few flight examples<p/> -->
-			<BarChart dataset={flyTimeBreakdown} feature={timeFeature} xLabel={"Total time taken (in minutes)"} color={'#88aed0'} roundValue={100} minDimSize={minBarDims}/> 
+			<BarChart dataset={flyTimeBreakdown} feature={timeFeature} yLabel={"Travel Time Breakdown"} xLabel={"Time (in minutes)"} color={'#88aed0'} roundValue={100} minDimSize={minBarDims}/> 
 
-			<Histogram dataset={cityPairToTime} yLabel={"Total number of flights in a year"} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#88aed0'} thresholds={histogramThresholds} maxBinSize={maxBinSize} minDimSize={minMapDims}/> 
+			<Histogram dataset={cityPairToTime} yLabel={"Number of Flights in 2023"} xLabel={"Total Time (in hours)"} color={'#88aed0'} triangleColor={'#88aed0'} thresholds={histogramThresholds} maxBinSize={maxBinSize} minDimSize={minMapDims}/> 
 		</div>
 
 		<!-- paragraph after bar chart of travel time breakdown that explains all the extra time spent when flying-->
@@ -251,10 +252,10 @@
 			Thus, even if the security line is short, travelers may still end up spending over an hour at the airport waiting to board. 
 			Additionally, commuting to and from the airport may total to an hour or more for people that live outside of major cities. 
 			Finally, although the actual air travel is fast, passengers also end up spending significant time on the airplane before takeoff and after landing for various reasons.
+			<br> <br>The bar chart on the left shows the average time breakdown for each step involved in flying. The histogram on the right displays the distribution of total travel times for all 2023 flights within the continental US.
 		</p>
 		</div>
 
-		<p>here's a bar chart of all the time it takes for each step to fly somewhere. see how much time is wasted in security</p>
 
 		<h2>Is there a faster way?</h2>
 
@@ -265,7 +266,7 @@
 			For example, the fastest way to get across the world is flying, while the fastest way to get to the other side of town is likely to drive. 
 			Traveling a distance between these two extremes lends itself to rail travel, specifically high speed rail (HSR). 
 			The fastest train in the US, Amtrak's Acela line, has an average speed of 70 MPH (113 km/hr). 
-			This does not meet the required average speed of 124 MPH (200 km/hr) to be classified as high speed by the International Union of Railways. 
+			This does not meet the required average speed of 124 MPH (200 km/hr) to be classified as "high speed." 
 			Thus, the United States currently has no functional HSR, despite the prevalence and success of HSR in many other nations including Japan and several European countries such as the UK, France, Italy, and Germany. 
 		</p>
 		</div>
@@ -279,10 +280,10 @@
 		<div class="paragraphWrapper">
 		<p>
 			To assess the potential benefits of implementing HSR in the US, we first determine the range of distances within which the fastest mode of travel would be HSR. 
-			To calculate this sweet spot, we find a line of best fit for each of the three modes of transportation (car, HSR, planes) considered here. 
+			To calculate this sweet spot, we find a line of best fit for each of the three modes of transportation (car, HSR, and plane) considered here. 
 			We call the area formed by the intersection of these lines the “Time Triangle,” which is plotted to the right. 
 			The Time Triangle indicates that for distances between {roundTo(cutoffs.triangleLower, 0.1)} miles and {roundTo(cutoffs.triangleUpper, 0.1)} miles HSR is the fastest mode of transportation when factoring in all the main steps included with each method of travel. 
-			These distances correspond to flight times of {roundTo(planeTime(cutoffs.triangleLower), 0.1)} minutes and {roundTo(planeTime(cutoffs.triangleUpper), 0.1)} minutes, respectively. We show some of the airline routes that would be traveled quicker using HSR below. 
+			These distances correspond to plane travel times of {roundTo(planeTotalTime(cutoffs.triangleLower), 0.1) / timeUnitConversion} hours and {roundTo(planeTotalTime(cutoffs.triangleUpper), 0.1) / timeUnitConversion} hours (including all steps of flight travel), respectively. We show the airline routes that would be traveled faster on HSR on the map below. 
 		</p>
 		</div>
 
@@ -313,19 +314,19 @@
 
 		<div class="infoMap" id="modifiedHistograms">
 			<!-- <Comparison Bar Chart/> -->
-			<Histogram dataset={cityPairToTime} xLabel={"Total Travel Time when Flying (Hours)"} color={'#88aed0'} triangleColor={'#cfe6ce'} timeUnitConversion={timeUnitConversion} thresholds={histogramThresholds} maxBinSize={maxBinSize} minDimSize={minMapDims}/> 
+			<Histogram dataset={cityPairToTime} xLabel={"Total Travel Time when Flying (hours)"} yLabel={"Number of Trips"} color={'#88aed0'} triangleColor={'#cfe6ce'} timeUnitConversion={timeUnitConversion} thresholds={histogramThresholds} maxBinSize={maxBinSize} minDimSize={minMapDims}/> 
 
-			<Histogram dataset={cityPairToTime} xLabel={"Total Travel time taking train when faster (Hours)"} color={'#cfe6ce'} triangleColor={'#cfe6ce'} providedAccessorFunction={planeToTrain} timeUnitConversion={timeUnitConversion} thresholds={histogramThresholds} maxBinSize={maxBinSize} minDimSize={minMapDims}/> 
+			<Histogram dataset={cityPairToTime} xLabel={"Total Travel Time After HSR is Built)"} yLabel={"Number of Trips"} color={'#cfe6ce'} triangleColor={'#cfe6ce'} providedAccessorFunction={planeToTrain} timeUnitConversion={timeUnitConversion} thresholds={histogramThresholds} maxBinSize={maxBinSize} minDimSize={minMapDims}/> 
 
 		</div>
 
 		<div class="infoMap" id="comparisonBarChart">
 			<!-- <ComparisonBarChart highlightedRoute={highlightedRouteRail}/> -->
-			<BarChart dataset={flyTimeBreakdown} feature={timeFeature} xLabel={"Time (minutes)"} color={'#88aed0'} roundValue={100} orientation={"vertical"} timeUnitConversion={timeUnitConversion} minDimSize={minBarDims}/> 
+			<BarChart dataset={flyTimeBreakdown} feature={timeFeature} xLabel={"Time (minutes)"} yLabel={"Travel Time Breakdown"} color={'#88aed0'} roundValue={100} orientation={"vertical"} timeUnitConversion={timeUnitConversion} minDimSize={minBarDims}/> 
 		</div>
 			
 
-		<h2>Which of the X routes should we build</h2>
+		<h2>Which of these HSR routes should we build first?</h2>
 		<div class="infoMap" id="iterativeGravityExplanation">
 			<div class="paragraphWrapper">
 				<p>
@@ -352,7 +353,6 @@
 			</div>
 		</div>
 
-		<h2>Results</h2>
 		<h2>Proposed HSR</h2>
 		<div class="infoMap" id="proposedHSRMap">
 			<MapStatic map={usaGeoContig} cities={GravTopRes} cityCordMap={cityCordMap} 
@@ -429,6 +429,12 @@
 
 	/* place the feature controls and color legend next to each other */
 	.header {
+		display: flex;
+		gap: 2em;
+		align-items: center;
+	}
+
+	.pageHeader {
 		display: flex;
 		gap: 2em;
 		align-items: center;

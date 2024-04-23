@@ -326,7 +326,7 @@ export let roundDown = (number, place) => {
 export let convertString = (input) => {
 	const pairs = cityPairsToCities(input)
 	const formattedPairs = formateCityTuple(pairs)
-	return formattedPairs.join('\n to \n');
+	return formattedPairs.join('\n - \n');
 }
 
 export let planeToTrain = (rowData, timeUnitConversion) => {
