@@ -282,8 +282,8 @@
 			To assess the potential benefits of implementing HSR in the US, we first determine the range of distances within which the fastest mode of travel would be HSR. 
 			To calculate this sweet spot, we find a line of best fit for each of the three modes of transportation (car, HSR, and plane) considered here. 
 			We call the area formed by the intersection of these lines the “Time Triangle,” which is plotted to the right. 
-			The Time Triangle indicates that for distances between {roundTo(cutoffs.triangleLower, 0.1)} miles and {roundTo(cutoffs.triangleUpper, 0.1)} miles HSR is the fastest mode of transportation when factoring in all the main steps included with each method of travel. 
-			These distances correspond to plane travel times of {roundTo(planeTotalTime(cutoffs.triangleLower), 0.1) / timeUnitConversion} hours and {roundTo(planeTotalTime(cutoffs.triangleUpper), 0.1) / timeUnitConversion} hours (including all steps of flight travel), respectively. We show the airline routes that would be traveled faster on HSR on the map below. 
+			The Time Triangle indicates that for distances between {roundTo(cutoffs.triangleLower, 0.1)} miles and {roundTo(cutoffs.triangleUpper, 0.1)} miles, HSR is the fastest mode of transportation when factoring in all the main steps included with each method of travel. 
+			These distances correspond to total travel times of {roundTo(planeTotalTime(cutoffs.triangleLower), 0.1)} minutes ({roundTo(planeTotalTime(cutoffs.triangleLower), 0.1) / timeUnitConversion} hours) and {roundTo(planeTotalTime(cutoffs.triangleUpper), 0.1)} minutes ({roundTo(planeTotalTime(cutoffs.triangleUpper), 0.1) / timeUnitConversion} hours) including all steps of flight travel, respectively. We show the airline routes that would be traveled faster on HSR on the map below. 
 		</p>
 		</div>
 
@@ -308,7 +308,8 @@
 		</div>
 		
 		<div class="paragraphWrapper">
-		<p>Here's what the time distribution of these triangle routes looks like with HSR: </p>
+		<p>The left histogram shows the distribution of total flight times for all flights in 2023, with the flights that fall within our Time Triangle highlighted in green.
+			The right histogram shows the theoretical distribution of total travel times when HSR is taken for these Time Triangle flights instead.</p>
 		</div>
 
 
@@ -325,6 +326,9 @@
 			<BarChart dataset={flyTimeBreakdown} feature={timeFeature} xLabel={"Time (minutes)"} yLabel={"Travel Time Breakdown"} color={'#88aed0'} roundValue={100} orientation={"vertical"} timeUnitConversion={timeUnitConversion} minDimSize={minBarDims}/> 
 		</div>
 			
+		<div class="paragraphWrapper">
+			<p>The above bar chart compares the travel time breakdown for flights and HSR for the Time Triangle distances.</p>
+			</div>
 
 		<h2>Which of these HSR routes should we build first?</h2>
 		<div class="infoMap" id="iterativeGravityExplanation">
