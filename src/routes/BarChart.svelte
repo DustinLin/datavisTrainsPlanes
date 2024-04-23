@@ -96,7 +96,7 @@
         
 </script>
 
-<div class="barchart" bind:borderBoxSize>
+<div class="BarChart" bind:borderBoxSize>
 	<svg {height} {width}>
 		<!-- bars -->
 		<g>
@@ -128,11 +128,9 @@
 </div>
 
 <style>
-	.barchart {
+	.BarChart {
 		/* take up extra horizontal space in the parent */
 		flex: 1;
-		/* be as tall as the parent div */
-		height: 100%;
 	}
 
 	/* animate changes to the lengths of the bars */

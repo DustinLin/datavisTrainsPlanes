@@ -224,7 +224,7 @@
 			<div class="stackBox">
 				<RouteDisplay highlightedRoute={hRoutes["highlightedRoutePopular"]}/>
 				<!-- <BarChart/> for top routes -->
-				<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100} orientation={"horizontal"} unitConversion={populationConversion} firstX={10} stringFormatter={convertString} minDimSize={minBarDims}/> 
+				<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100} orientation={"horizontal"} unitConversion={populationConversion} firstX={10} stringFormatter={convertString} minDimSize={minBarDims} id="stkBarChartPass"/> 
 			</div>
 
 		</div>
@@ -437,14 +437,10 @@
 		height: 100vh;
 	}
 
-	.barChart {
-		gap: 2em;
-		/* be 75% as tall as the parent div */
-		height: 75%;
-	}
-
-
 	.histogram {
 		gap: 2em;
+	}
+	.stkBarChartPass{
+		height: 75%
 	}
 </style>
