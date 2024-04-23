@@ -166,22 +166,20 @@
 </script>
 
 <div class="maps" bind:borderBoxSize={borderBoxSize}>
-	<h2>Proposed HSR routes which already have existing Amtrak rail connections</h2>
+	<h3>Proposed HSR routes which already have existing Amtrak rail connections</h3>
 
 	<div class="swatches">
 	<!-- creating a swatch for each color in the scale -->
 	<div class="swatch">
 		<!-- also set color inside the html-->
 		<div class="square" style:background-color={RAIL_DNE_COLOR} > </div>
-		<div>There does not exist Amtrak rail connection</div>
+		<div class="swatch-text">There does not exist Amtrak rail connection</div>
 	</div>
 	<div class="swatch">
 		<!-- also set color inside the html-->
 		<div class="square" style:background-color={RAIL_EXISTS_COLOR} > </div>
-		<div>Exists a direct Amtrak rail connection between 2 cities</div>
+		<div class="swatch-text">Exists a direct Amtrak rail connection between 2 cities</div>
 	</div>
-
-
 	</div>
 
 
@@ -254,20 +252,24 @@
 		background: #ffffff;
 		border-radius: 2em;
 	}
-	h2 {
-		padding-left: 1em;
+	h3 {
+		padding-left: 0.5em;
 	}
 	.swatches {
 		display: flex;
 		align-items: center;
-		gap: 1em; /* adding some space between the <div>s inside swatches */
-		padding-left: 1em;
+		gap: 0.5em; /* adding some space between the <div>s inside swatches */
+		padding-left: 0.5em;
 	}
 
 	.swatch {
 		display: flex;
 		align-items: center;
 		gap: 0.25em; /* adding some space between the <div>s inside swatch */
+	}
+
+	.swatch-text {
+		font-size:13px
 	}
 
 	.square {

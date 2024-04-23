@@ -78,7 +78,7 @@
 
 	let minMapDims = [500, 500];
 
-	let minBarDims = [500, 500];
+	let minBarDims = [500, 400];
 
 
 	let triangleRouteCities = filteredCityPairToInfo.filter(route => 
@@ -214,7 +214,7 @@
 		<!-- component -->
 		<h2>What are the popular airline routes in the US?</h2>
 		<div class="infoMap" id="popularAirlines">
-			<Map 
+			<Map
 				map={usaGeoContig} 
 				cities={topFlightRoutesPass} 
 				cityCordMap={cityCordMap} 
@@ -222,7 +222,8 @@
 				showCityName={true} 
 				dims={minMapDims}
 				highlightedRoute={hRoutes["highlightedRoutePopular"]}
-				mapId={"highlightedRoutePopular"}/>
+				mapId={"highlightedRoutePopular"}
+			/>
 
 			<div class="stackBox">
 				<RouteDisplay highlightedRoute={hRoutes["highlightedRoutePopular"]}/>
@@ -269,6 +270,7 @@
 		</p>
 		</div>
 
+			<TimeTriangle/>
 		<div class="infoMap" id="timeTriangle">
 
 		<!-- paragraph explaining time triangle that goes next to it-->
@@ -418,15 +420,11 @@
 		/* set the font */
 		font-family: system-ui, sans-serif;
 		font-size: 16px;
-		/* make the div take up the entire screen */
-		height: 100vh;
-		width: 100vw;
 		/* add 32px of padding around the div */
 		padding: 2em;
 		/* put the controls on top of the plots with 32px of space in between */
-		display: flex;
-		flex-direction: column;
-		gap: 2em;
+		/* display: flex;
+		flex-direction: column; */
 	}
 
 	/* place the feature controls and color legend next to each other */
@@ -450,17 +448,18 @@
 	.infoMap {
 		/* Creating a horizontal flex */
 		display: flex;
-		gap: 2em;
 		/* make the div take up the entire screen */
 		height: 85vh;
 		width: 100vw;
 		min-height: 500px;
-		padding: 1em;
+		padding: 0.5em;
+		gap: 0.5em;
 	}
+
 
 	.maps {
 		height: 100vh;
-		width: 100vw;
+		width: 100%;
 	}
 
 	.stackBox {

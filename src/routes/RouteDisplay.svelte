@@ -57,7 +57,6 @@
 <style>
 	/* todo styling is scuffed but it looks ok with hard coded values */
 	.routeDisplay {
-		height: 25%;
 		min-width: 450px;
 		background-color: #ffffff;
 		/* rounded corners and padding to make more roomy */

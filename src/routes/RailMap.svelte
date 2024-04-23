@@ -113,7 +113,17 @@
 </script>
 
 <div class="maps" bind:borderBoxSize={borderBoxSize}>
-	<h2>Existing Amtrak rail in the Untied States</h2>
+	<h3>Existing Amtrak rail in the Untied States</h3>
+
+	<div class="swatches">
+	<!-- creating a swatch for each color in the scale -->
+	<div class="swatch">
+		<!-- also set color inside the html-->
+		<div class="square" style:background-color={RAIL_EXISTS_COLOR} > </div>
+		<div class="swatch-text">Amtrak Rail Lines</div>
+	</div>
+	</div>
+
 	<svg width={width} height={height}>
 		<!-- drawing paths for each state, using projections -->
 		{#each map.features as state}
@@ -172,7 +182,28 @@
 		background: #ffffff;
 		border-radius: 2em;
 	}
-	h2 {
+	h3 {
 		padding-left: 1em;
+	}
+
+	.swatches {
+		display: flex;
+		align-items: center;
+		gap: 0.5em; /* adding some space between the <div>s inside swatches */
+		padding-left: 0.5em;
+	}
+	.swatch {
+		display: flex;
+		align-items: center;
+		gap: 0.25em; /* adding some space between the <div>s inside swatch */
+	}
+
+	.swatch-text {
+		font-size:13px
+	}
+
+	.square {
+		width: 15px;
+		height: 15px;
 	}
 </style>
