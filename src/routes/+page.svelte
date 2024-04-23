@@ -45,7 +45,6 @@
 
 	// for keeping track of which route was highlighted
 	// idea is to pass highlightedRoute to some other component
-	// TODO: for multiple maps will need to create a diff variable.. or else they all point to the same thing
 	// data type is the the route object
 
 	// total of 3 hover maps: one for all the routes, one for top popular routes, one for routes in triangle
@@ -133,7 +132,7 @@
 			Currently, options for rail travel are limited in many parts of the country and, due to the lack of high speed rail (HSR) in the US, taking a train does not save significant time compared to driving.
 		</p>
 
-		<!-- compoenent -->
+		<!-- component -->
 		<h2>What are the popular airline routes in the US?</h2>
 		<div class="infoMap" id="popularAirlines">
 			<Map 
@@ -164,7 +163,7 @@
 		<!-- paragraph after bar chart of travel time breakdown that explains all the extra time spent when flying-->
 		<p>
 			Besides the time spent in the air on a plane, there are several additional steps involved in air travel that, in total, can add hours to a trip. 
-			One major inconvenience associated with flying is TSA — the restrictions and the time it takes to go through TSA security at the airport. 
+			One major inconvenience associated with flying is the TSA — the restrictions and the time it takes to go through TSA security at the airport. 
 			Security lines can be very long, especially when the airport is very busy. 
 			Since no one can anticipate how long the wait in the security line will be, TSA recommends that people arrive at the airport two hours before their flight. 
 			Thus, even if the security line is short, travelers may still end up spending over an hour at the airport waiting to board. 
@@ -186,16 +185,16 @@
 
 		<div class="infoMap" id="timeTriangle">
 
+		<!-- paragraph explaining time triangle that goes next to it-->
 
-			<!-- paragraph explaining time triangle that goes next to it-->
-			<TimeTriangle/>
-			<p>
-				To assess the potential benefits of implementing HSR in the US, we first determine the range of distances within which the fastest mode of travel would be HSR. 
-				To calculate this sweet spot, we find a line of best fit for each of the three modes of transportation (car, HSR, planes) considered here. 
-				We call the area formed by the intersection of these lines the “Time Triangle,” which is plotted to the right. 
-				The Time Triangle indicates that for distances between {roundTo(cutoffs.triangleLower, 0.1)} miles and {roundTo(cutoffs.triangleUpper, 0.1)} miles HSR is the fastest mode of transportation when factoring in all the main steps included with each method of travel. 
-				These distances correspond to flight times of {roundTo(planeTime(cutoffs.triangleLower), 0.1)} minutes and {roundTo(planeTime(cutoffs.triangleUpper), 0.1)} minutes, respectively. We show some of the airline routes that would be traveled quicker using HSR below. 
-			</p>
+		<TimeTriangle/>
+		<p>
+			To assess the potential benefits of implementing HSR in the US, we first determine the range of distances within which the fastest mode of travel would be HSR. 
+			To calculate this sweet spot, we find a line of best fit for each of the three modes of transportation (car, HSR, planes) considered here. 
+			We call the area formed by the intersection of these lines the “Time Triangle,” which is plotted to the right. 
+			The Time Triangle indicates that for distances between {roundTo(cutoffs.triangleLower, 0.1)} miles and {roundTo(cutoffs.triangleUpper, 0.1)} miles HSR is the fastest mode of transportation when factoring in all the main steps included with each method of travel. 
+			These distances correspond to flight times of {roundTo(planeTime(cutoffs.triangleLower), 0.1)} minutes and {roundTo(planeTime(cutoffs.triangleUpper), 0.1)} minutes, respectively. We show some of the airline routes that would be traveled quicker using HSR below. 
+		</p>
 		</div>
 
 		<h2>Airline routes that would be faster on HSR</h2>
@@ -227,16 +226,15 @@
 		</div>
 			
 
-		<p>The United States currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the International Union of Railways definition of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
-
 		<h2>Which of the X routes should we build</h2>
 		<div class="infoMap" id="iterativeGravityExplanation">
 			<div class="paragraphWrapper">
 				<p>
-				To determine which of the potential rail lines would be the most impact, and thus should be focused on first, we built a mathematical model called an Iterative Gravity Model.
-				We propose 30 HSR lines that identified with by our model which was a modification we made to the Gravity Model presented in a YouTube video by CityNerd titled <a href="https://www.youtube.com/watch?v=wE5G1kTndI4">"56 High Speed Rail Links We Should've Built Already."</a>
+				To determine which of the potential rail lines would have the most impact, and thus should be focused on first, we built a mathematical model called an Iterative Gravity Model.
+				Based on our model we propose 30 HSR lines. We would like to note that our model was influenced by the Gravity Model presented in a YouTube video by CityNerd titled <a href="https://www.youtube.com/watch?v=wE5G1kTndI4">"56 High Speed Rail Links We Should've Built Already."</a>
 				Highly recommend checking out his video as it was the inspiration for our time triangle and iterative gravity model.
-				The gravity model as he presented is modeled after the equation for gravity.
+				The gravity model as he presented is modeled after the <a href="https://en.wikipedia.org/wiki/Newton's_law_of_universal_gravitation">
+				equation for gravity</a>.
 				<br>
 				We improve upon this basic gravity model in two ways:
 				</p>
@@ -244,7 +242,7 @@
 					<li>
 						For the part of the equation representing “attractive force,” instead of using population as a proxy for where people want to travel, we use an actual figure that represents this: total annual passengers from US flight data.					</li>
 					<li>
-						The model is aware of already proposed rail when determining where rail should be placed next. <br>
+						Our model is aware of already proposed rail when determining where rail should be placed next. <br>
 						Consider the following hypothetical: 
 						Suppose rail between New York City and Boston was already proposed, and now the model is considering connecting Washington DC to Boston.
 						The basic gravity model, when computing the score for connecting Washington DC to Boston, considers building a line the entire way from Washington DC to Boston when only building to New York City is required since New York City and Boston have already been connected by HSR.
