@@ -9,41 +9,45 @@
 	export let color;
 	export let roundValue;
 	export let orientation;
+	export let includeTotal;
+	export let unitConversion = 1;
+	export let firstX = -1;
+	export let stringFormatter;
 	// export let selectedIndices;
 	//export let color;
 
 	let sortedFeature = dataset;
-
-        
-        
-        if (feature == "PASSENGERS") {
-		sortedFeature = dataset
+	
+	sortedFeature = dataset
                 .sort(([cities1, data1], [cities2, data2]) => {
+				if (feature === "time") {
+					console.log('testing', data1, feature);
+				}
+				
                 const score1 = data1[feature]
                 const score2 = data2[feature]
                 return d3.descending(score1, score2)
-                }).map(([pair, info]) => [pair, info[feature]]).slice(0,10)
+                }).map(([pair, info]) => [pair, info[feature]])
+
+	if (firstX !== -1) {
+		sortedFeature = sortedFeature.slice(0, firstX)
+	}
 
         
-                //sortedFeature = 0;
+	//sortedFeature = 0;
 
-                sortedFeature = sortedFeature.map(([pair, info]) => [pair, info/1000000])
+	sortedFeature = sortedFeature.map(([pair, info]) => [pair, info/unitConversion])
 
-		sortedFeature = sortedFeature.map(([pair, info]) => [convertString(pair), info]) 
-		        
-        }
+	stringFormatter = stringFormatter ? stringFormatter : (d) => d
+	sortedFeature = sortedFeature.map(([pair, info]) => [stringFormatter(pair), info]) 
+        
+        
+
+
+		
+
+		
  
-	
-	function convertString(input) {
-		const pairs = input.slice(1, -1).split(', ');
-
-		const formattedPairs = pairs.map(pair => {
-			const [city, state] = pair.split('_');
-			return `${city}, ${state}`;
-		});
-
-		return formattedPairs.join('\n to \n');
-	}
 	
 
         console.log("sorted feature", sortedFeature);
@@ -149,6 +153,7 @@
 		flex: 1;
 		/* be as tall as the parent div */
 		height: 100%;
+
 	}
 
 	/* animate changes to the lengths of the bars */

@@ -119,6 +119,13 @@ export let cityPairsToCities = (cityPair) => {
   return cityPair.slice(1, -1).split(", ");
 };
 
+export let formateCityTuple = (cityPair) => {
+	return cityPair.map(pair => {
+		const [city, state] = pair.split('_');
+		return `${city}, ${state}`;
+	});
+}
+
 /**
  * eg: "Los Angeles_CA", returns "Los Angeles"
  * useful for working with `cityCordMap.json` data, which encodes city+state names to avoid duplicated
@@ -178,6 +185,12 @@ export let roundUp = (number, place) => {
  */
 export let roundDown = (number, place) => {
 	return Math.floor(number / place) * place
+}
+
+export let convertString = (input) => {
+	const pairs = cityPairsToCities(input)
+	const formattedPairs = formateCityTuple(pairs)
+	return formattedPairs.join('\n to \n');
 }
 
 export let planeToTrain = (rowData, timeUnitConversion) => {

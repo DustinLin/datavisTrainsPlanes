@@ -21,7 +21,7 @@
 	import Histogram from './Histogram.svelte';
 
 	import {inTriangle, planeTimeToTotalTime, planeToTrain, roundUp} from '../utils.js';
-	import {TRAVEL_TO_AND_FROM_TIMES, SECURITY_TIMES} from '../utils.js';
+	import {TRAVEL_TO_AND_FROM_TIMES, SECURITY_TIMES, convertString} from '../utils.js';
 
 
 	// data comes from the load function in +page.js
@@ -75,6 +75,8 @@
 		route[1].DISTANCE >= cutoffs.triangleLower && route[1].DISTANCE <= cutoffs.triangleUpper
 	)
 
+	const populationConversion = 1000 * 1000
+
 	console.log(`there is a diff between many routes and triangle routes: ${manyRouteCities.length}, ${triangleRouteCities.length}`)
 
 	// sorting data by top that carry passengers, taking top N
@@ -103,11 +105,13 @@
 	let cityPairToTime = filteredCityPairToInfo
                              .map(([pair, info]) => 
                                 [pair, 
-                                {AVG_TOTAL_TIME: planeTimeToTotalTime(info.RAMP_TO_RAMP/info.DEPARTURES_PERFORMED) / timeUnitConversion, 
-				AVG_TOTAL_FLIGHT_TIME: (info.RAMP_TO_RAMP/info.DEPARTURES_PERFORMED) / timeUnitConversion,
-                                AVG_AIR_TIME: info.AIR_TIME / info.DEPARTURES_PERFORMED / timeUnitConversion, 
-				DISTANCE: info.DISTANCE,
-                                NUM_DEPARTURES: info.DEPARTURES_PERFORMED}]);
+                                {
+									AVG_TOTAL_TIME: planeTimeToTotalTime(info.RAMP_TO_RAMP/info.DEPARTURES_PERFORMED) / timeUnitConversion, 
+									AVG_TOTAL_FLIGHT_TIME: (info.RAMP_TO_RAMP/info.DEPARTURES_PERFORMED) / timeUnitConversion,
+									AVG_AIR_TIME: info.AIR_TIME / info.DEPARTURES_PERFORMED / timeUnitConversion, 
+									DISTANCE: info.DISTANCE,
+									NUM_DEPARTURES: info.DEPARTURES_PERFORMED
+							}]);
 
 	let histogramThresholds = [];
 	const groupSize = 30 / timeUnitConversion;
@@ -146,16 +150,22 @@
 	let averageAirTime = d3.mean(cityPairToTime.map(([pair, info]) => info.AVG_AIR_TIME));
 	let averageExtraTime = averageTotalTime - averageAirTime;
 
+	let newAverageTotalTime = d3.mean(cityPairToTime, ([pair, info]) => planeToTrain(info));
+
 	console.log("avg total time: ", averageTotalTime);
 	console.log("avg air time: ", averageAirTime);
 	console.log("avg extra time: ", averageExtraTime);
 
-
-	let flyTimeBreakdown = [['Travel to/from Airport', TRAVEL_TO_AND_FROM_TIMES.plane], 
-				['Time in TSA Security', SECURITY_TIMES.plane], 
-				['Average Extra Time', averageExtraTime * timeUnitConversion], 
-				['Average Air Time', averageAirTime * timeUnitConversion]];
+	const timeFeature = 'time'
+	let flyTimeBreakdown = [['Travel to/from airport', {time: TRAVEL_TO_AND_FROM_TIMES['plane']}], 
+				['Time in Airport', {time: SECURITY_TIMES.plane }], 
+				['Average Airplane Time on Ground', {time: averageExtraTime * timeUnitConversion}], 
+				['Average Airplane Time in Air', {time: averageAirTime * timeUnitConversion}]];
 	console.log("example Data", flyTimeBreakdown);
+
+	const totalTime = d3.sum(flyTimeBreakdown, (d) => d[1][timeFeature])
+
+	flyTimeBreakdown.push(['Total Time', {time: totalTime}])
 
 </script>
 
@@ -178,7 +188,7 @@
 			<Map map={usaGeoContig} cities={topFlightRoutesPass} cityCordMap={cityCordMap} onhover={onhover} showCityName={true} dims={[975,610]}/>
 			<RouteDisplay highlightedRoute={highlightedRoute}/>
 			<!-- <BarChart/> for top routes -->
-			<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100} orientation={"horizontal"}/> 
+			<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100} orientation={"horizontal"} unitConversion={populationConversion} firstX={10} stringFormatter={convertString}/> 
 		</div>
 
 		<h2>How much time is spent taking these routes?</h2>
@@ -189,7 +199,7 @@
 		</div>
 
 		<p>here's a bar chart of all the time it takes for each step to fly somewhere. see how much time is wasted in security</p>
-		<BarChart dataset={flyTimeBreakdown} feature={""} xLabel={"Time (minutes)"} color={'#88aed0'} roundValue={100} orientation={"vertical"} timeUnitConversion={timeUnitConversion} /> 
+		<BarChart dataset={flyTimeBreakdown} feature={timeFeature} xLabel={"Time (minutes)"} color={'#88aed0'} roundValue={100} orientation={"vertical"} timeUnitConversion={timeUnitConversion}/> 
 
 
 		<h2>Is there a faster way?</h2>
@@ -210,8 +220,7 @@
 
 		<p>Here's what the time distribution of these triangle routes looks like with HSR: </p>
 
-		<Histogram dataset={cityPairToTime} xLabel={"Total Travel Time when Driving (Hours)"} color={'#cfe6ce'} triangleColor={'#cfe6ce'} providedAccessorFunction={planeToTrain} timeUnitConversion={timeUnitConversion} thresholds={histogramThresholds} maxBinSize={maxBinSize}/> 
-			
+		<Histogram dataset={cityPairToTime} xLabel={"Total Travel time taking train when faster (Hours)"} color={'#cfe6ce'} triangleColor={'#cfe6ce'} providedAccessorFunction={planeToTrain} timeUnitConversion={timeUnitConversion} thresholds={histogramThresholds} maxBinSize={maxBinSize}/> 
 
 		<p>The United States currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the International Union of Railways definition of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
 		

@@ -14,7 +14,7 @@
 	// export let selectedIndices;
 	//export let color;
 	function defaultAccessor(rowData, timeUnitConversion) {
-		return rowData.AVG_TOTAL_TIME
+		return rowData.AVG_TOTAL_TIME;
 	}
 
 	
