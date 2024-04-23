@@ -25,7 +25,7 @@
 				{#each ticks as tick}
 					<g transform="translate(0,{scale(tick) + offset})">
 						<line x2={-6} stroke="black" />
-						<text text-anchor="end" dominant-baseline="middle" fill="black" x={-10}>{tick}</text>
+						<text text-anchor="end" dominant-baseline="middle" fill="black" x={-10} font-size={15}>{tick}</text>
 					</g>
 				{/each}
 
@@ -45,7 +45,7 @@
 				{/each}
 
 				{#if label}
-					<text text-anchor="end" dominant-baseline="hanging" fill="black" x={width - 20} y={25}>
+					<text text-anchor="end" dominant-baseline="hanging" fill="black" x={width - 55} y={25}>
 						{label}
 					</text>
 				{/if}
