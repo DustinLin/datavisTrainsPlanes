@@ -103,7 +103,7 @@
 	// 	.padding(0.1);
 </script>
 
-<div class="barchart" bind:borderBoxSize={borderBoxSize}>
+<div class="timeTriangle" bind:borderBoxSize={borderBoxSize}>
 	<svg height={height} width={width}>
 		<!-- bars -->
 		<g>
@@ -145,15 +145,14 @@
 </div>
 
 <style>
-	.barchart {
-		/* take up extra horizontal space in the parent */
-		flex: 1;
+	.timeTriangle {
 		/* be as tall as the parent div */
 		height: 100%;
 		background-color: #ffffff;
 		/* rounded corners and padding to make more roomy */
 		border-radius: 2em;
 
+		width: 100%;
 	}
 
 	/* animate changes to the lengths of the bars

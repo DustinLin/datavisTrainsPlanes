@@ -122,6 +122,7 @@ export const VIS_PROPERTIES = {
 	HL_ROUTE_STROKE_WID: 1.5,
 	HL_ROUTE_STROKE_COL: "#5eaee4", // more saturated blue compared to reg route
 	AMTRAK_RAIL_COL: "#6a3d9a",
+	TRAIN_COLOR: "#cfe6ce",
 
 	HSR_ROUTE_COL: "#cc6600",//"#ff7800",
 	LINE_OPACITY: 0.6,
