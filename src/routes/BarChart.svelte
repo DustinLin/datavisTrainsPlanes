@@ -14,13 +14,15 @@
 	export let firstX = -1;
 	export let stringFormatter;
 	export let minDimSize;
+	export let sort;
 
 	// export let selectedIndices;
 	//export let color;
 
 	let sortedFeature = dataset;
 	
-	sortedFeature = dataset
+	if (sort) {
+		sortedFeature = dataset
                 .sort(([cities1, data1], [cities2, data2]) => {
 				if (feature === "time") {
 					console.log('testing', data1, feature);
@@ -29,7 +31,10 @@
                 const score1 = data1[feature]
                 const score2 = data2[feature]
                 return d3.descending(score1, score2)
-                }).map(([pair, info]) => [pair, info[feature]])
+                })
+	}
+
+	
 
 	if (firstX !== -1) {
 		sortedFeature = sortedFeature.slice(0, firstX)
@@ -37,15 +42,21 @@
 
         
 	//sortedFeature = 0;
+	const unitCovertFunction = (info) => {
+		const newInfo = {...info}
+		newInfo[feature] = newInfo[feature]/unitConversion
+		newInfo['color'] = newInfo['color'] ? newInfo['color'] :  color
+		return newInfo
+	}
 
-	sortedFeature = sortedFeature.map(([pair, info]) => [pair, info/unitConversion])
+	sortedFeature = sortedFeature.map(([pair, info]) => [pair, unitCovertFunction(info)])
 
 	stringFormatter = stringFormatter ? stringFormatter : (d) => d
 	sortedFeature = sortedFeature.map(([pair, info]) => [stringFormatter(pair), info]) 
         
 	
 
-        console.log("sorted feature", sortedFeature);
+    console.log("sorted feature", sortedFeature);
 	//console.log("sorted feature", formattedFeature);
 	// dimensions
 
@@ -73,7 +84,7 @@
 
 	// scales
 
-	const maxVal = d3.max(sortedFeature, (d) => d[1]);
+	const maxVal = d3.max(sortedFeature, (d) => d[1][feature]);
 	console.log("max val", maxVal);
 
 	const margin = {top: 45, bottom: 45, left: 270, right: 80};
@@ -102,23 +113,23 @@
 	<svg {height} {width}>
 		<!-- bars -->
 		<g>
-			{#each sortedFeature as [cityPair, feature] (cityPair)}
+			{#each sortedFeature as [cityPair, info] (cityPair)}
 				<rect
 					x={x(0)}
 					y={y(cityPair)}
 					height={y.bandwidth()}
-					width={x(feature) - x(0)}
-					fill={color}
+					width={x(info[feature]) - x(0)}
+					fill={info['color']}
 				/>
                                 <text
                                         class="bar-label"
                                         font-family="sans-serif"
                                         font-size="12px"
-                                        x={x(feature) + 5}
+                                        x={x(info[feature]) + 5}
                                         y={y(cityPair) + y.bandwidth() / 2 + 5}
                                         text-anchor="start"
                                         >
-                                        {Math.round(feature * roundValue) / roundValue}
+                                        {Math.round(info[feature] * roundValue) / roundValue}
                                 </text>
 			{/each}
 		</g>

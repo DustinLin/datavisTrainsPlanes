@@ -17,14 +17,14 @@
 	import MapStatic from './MapStatic.svelte';
 	import RailMapIntersect from './RailMapIntersect.svelte';
 
-	import { cutoffs, cityPairsToCities, roundTo, planeTime, planeTotalTime, computeInverse, trainTotalTime   } from '../utils';
+	import { cutoffs, cityPairsToCities, roundTo, planeTime, trainTime, planeTotalTime, computeInverse, trainTotalTime, VIS_PROPERTIES   } from '../utils';
 	import {inTriangle, planeTimeToTotalTime, planeToTrain, roundUp} from '../utils.js';
 	import {TRAVEL_TO_AND_FROM_TIMES, SECURITY_TIMES, convertString} from '../utils.js';
 
 	import Histogram from './Histogram.svelte';
 
 
-
+	const trainColor = ""
 	// data comes from the load function in +page.js
 	export let data;
 
@@ -147,7 +147,7 @@
 	let trianglePairsNewTime = trianglePairsOldTime
 				.map(([pair, info]) => 
 				[pair, 
-                                {AVG_TOTAL_TIME: trainTotalTime(info.DISTANCE) / timeUnitConversion, 
+                                {AVG_TOTAL_TIME: trainTime(info.DISTANCE) / timeUnitConversion, 
 				DISTANCE: info.DISTANCE,
                                 NUM_DEPARTURES: info.NUM_DEPARTURES}]);
 
@@ -160,7 +160,7 @@
 	let averageAirTime = d3.mean(cityPairToTime.map(([pair, info]) => info.AVG_AIR_TIME));
 	let averageExtraTime = averageTotalTime - averageAirTime;
 
-	let newAverageTotalTime = d3.mean(cityPairToTime, ([pair, info]) => planeToTrain(info));
+	// let withTrainAverageTime = d3.mean(cityPairToTime, ([pair, info]) => planeToTrain(info));
 
 	console.log("avg total time: ", averageTotalTime);
 	console.log("avg air time: ", averageAirTime);
@@ -175,7 +175,56 @@
 
 	const totalTime = d3.sum(flyTimeBreakdown, (d) => d[1][timeFeature])
 
-	flyTimeBreakdown.push(['Total Time', {time: totalTime}])
+	flyTimeBreakdown.push(['Plane Total Time', {time: totalTime}])
+
+	let averagePlaneTimeInTriangle = d3.mean(trianglePairsOldTime.map(([pair, info]) => info.AVG_TOTAL_FLIGHT_TIME));
+	let averageTrainTimeInTriangle = d3.mean(trianglePairsNewTime.map(([pair, info]) => info.AVG_TOTAL_TIME));
+	let averageAirTimeInTriangle = d3.mean(trianglePairsOldTime.map(([pair, info]) => info.AVG_AIR_TIME));
+	let averageExtraTimeInTriangle = averagePlaneTimeInTriangle - averageAirTimeInTriangle;
+
+	// console.log('testing 123', trianglePairsOldTime)
+	console.log('times', averagePlaneTimeInTriangle, averageTrainTimeInTriangle)
+	// if (averageTrainTimeInTriangle > averagePlaneTimeInTriangle) {
+	// 	console.log('times', averagePlaneTimeInTriangle, averageTrainTimeInTriangle)
+	// 	throw Error("planes went faster")
+	// }
+	
+
+	let planeInfo = [
+		['Travel to/from airport', {time: TRAVEL_TO_AND_FROM_TIMES['plane']}],
+		['Time in Airport', {time: SECURITY_TIMES.plane }],
+		['Average Airplane Time on Ground', {time: averageExtraTimeInTriangle * timeUnitConversion}], 
+		['Average Airplane Time in Air', {time: averageAirTimeInTriangle * timeUnitConversion}]
+	]
+	
+	const planeTotal = d3.sum(planeInfo, (d) => d[1][timeFeature])
+	console.log('the total for planes', planeTotal)
+
+	planeInfo.push(['Plane Total Time', {time: planeTotal}])
+
+	let trainInfo = [
+		['Travel to/from train station', {time: TRAVEL_TO_AND_FROM_TIMES['train'], color: VIS_PROPERTIES.TRAIN_COLOR}],
+		['Time in station', {time: SECURITY_TIMES.train, color: VIS_PROPERTIES.TRAIN_COLOR }],
+		['Average Train Startup Time', {time: trainTime(0), color: VIS_PROPERTIES.TRAIN_COLOR}],
+		['Average Train Travel Time', {time: averageTrainTimeInTriangle * timeUnitConversion - trainTime(0), color: VIS_PROPERTIES.TRAIN_COLOR}]
+	]
+	
+	console.log(trainInfo)
+	const trainTotal = d3.sum(trainInfo, (d) => d[1][timeFeature])
+	console.log('the total for trains', trainTotal)
+
+
+	trainInfo.push(['Train Total Time', {time: trainTotal, color: VIS_PROPERTIES.TRAIN_COLOR}])
+	
+	const bigKahuna = []
+	const nothingBurger = planeInfo.map(function(e, i) {
+		bigKahuna.push(e);
+		bigKahuna.push(trainInfo[i]);
+		return [e, trainInfo[i]];
+	});
+
+
+		
 
 </script>
 
@@ -225,7 +274,7 @@
 			<div class="stackBox">
 				<RouteDisplay highlightedRoute={hRoutes["highlightedRoutePopular"]}/>
 				<!-- <BarChart/> for top routes -->
-				<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100} orientation={"horizontal"} unitConversion={populationConversion} firstX={10} stringFormatter={convertString} minDimSize={minBarDims} id="stkBarChartPass"/> 
+				<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100} orientation={"horizontal"} unitConversion={populationConversion} firstX={10} stringFormatter={convertString} minDimSize={minBarDims} id="stkBarChartPass" sort={false}/> 
 			</div>
 
 		</div>
@@ -309,8 +358,7 @@
 		</div>
 
 		<div class="infoMap" id="comparisonBarChart">
-			<!-- <ComparisonBarChart highlightedRoute={highlightedRouteRail}/> -->
-			<BarChart dataset={flyTimeBreakdown} feature={timeFeature} xLabel={"Time (minutes)"} color={'#88aed0'} roundValue={100} orientation={"vertical"} timeUnitConversion={timeUnitConversion} minDimSize={minBarDims}/> 
+			<BarChart dataset={bigKahuna} feature={timeFeature} xLabel={"Time (minutes)"} color={'#88aed0'} roundValue={100} orientation={"vertical"} timeUnitConversion={timeUnitConversion} minDimSize={minBarDims}/> 
 		</div>
 			
 
