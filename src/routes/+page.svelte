@@ -6,8 +6,7 @@
 
 	import './style.css';
 	import * as d3 from 'd3';
-	//import BarChart from './BarChart.svelte';
-	import BarChart from './BarChartNew.svelte';
+	import BarChart from './BarChart.svelte';
 
 	import Map from './Map.svelte'
   	import RouteDisplay from './RouteDisplay.svelte';
@@ -18,8 +17,12 @@
 	import MapStatic from './MapStatic.svelte';
 	import RailMapIntersect from './RailMapIntersect.svelte';
 
-	import { cutoffs, cityPairsToCities, roundTo, planeTime } from '../utils';
+	import { cutoffs, cityPairsToCities, roundTo, planeTime, planeTotalTime, computeInverse, trainTotalTime   } from '../utils';
+	import {inTriangle, planeTimeToTotalTime, planeToTrain, roundUp} from '../utils.js';
+	import {TRAVEL_TO_AND_FROM_TIMES, SECURITY_TIMES, convertString} from '../utils.js';
+
 	import Histogram from './Histogram.svelte';
+
 
 
 	// data comes from the load function in +page.js
@@ -75,11 +78,15 @@
 
 	let minMapDims = [500, 500];
 
-	let triangleRouteCities= filteredCityPairToInfo.filter(route => 
+	let minBarDims = [500, 500];
+
+
+	let triangleRouteCities = filteredCityPairToInfo.filter(route => 
 		route[1].DISTANCE >= cutoffs.triangleLower && route[1].DISTANCE <= cutoffs.triangleUpper
 	)
 
 	console.log(`there is a diff between all routes and triangle routes: ${allRouteCities.length}, ${triangleRouteCities.length}`)
+	const populationConversion = 1000 * 1000
 
 	// sorting data by top that carry passengers, taking top N
 	let topFlightRoutesPass = filteredCityPairToInfo 
@@ -100,6 +107,74 @@
 	
 
 	//  console.log(categories);
+
+
+	// data processing for route times histogram 
+	const timeUnitConversion = 60;
+	let cityPairToTime = filteredCityPairToInfo
+                             .map(([pair, info]) => 
+                                [pair, 
+                                {
+									AVG_TOTAL_TIME: planeTimeToTotalTime(info.RAMP_TO_RAMP/info.DEPARTURES_PERFORMED) / timeUnitConversion, 
+									AVG_TOTAL_FLIGHT_TIME: (info.RAMP_TO_RAMP/info.DEPARTURES_PERFORMED) / timeUnitConversion,
+									AVG_AIR_TIME: info.AIR_TIME / info.DEPARTURES_PERFORMED / timeUnitConversion, 
+									DISTANCE: info.DISTANCE,
+									NUM_DEPARTURES: info.DEPARTURES_PERFORMED
+							}]);
+
+	let histogramThresholds = [];
+	const groupSize = 30 / timeUnitConversion;
+	console.log('group size', groupSize)
+	const maxTime = roundUp(d3.max(cityPairToTime, d => d[1].AVG_TOTAL_TIME), groupSize)
+	for (let i = 0; i <= maxTime; i += groupSize) {
+		histogramThresholds.push(i);
+	}
+
+	// const maxBinSize = d3.max(bins, (d) => d3.sum(d, (l) => l[1].NUM_DEPARTURES))
+	const maxBinSize = 1.7 * 1000 * 1000 // TODO: fix this so it isn't hard coded
+
+	console.log('group size', groupSize)
+
+	//console.log("hellooooo");
+	//console.log(cityPairToTime);
+	// intermediate processing to get cities that are in triangle.
+	let trianglePairsOldTime = cityPairToTime
+				.filter(([pair, info]) => 
+				inTriangle(info.AVG_TOTAL_TIME * timeUnitConversion)); // assuming this takes in total time, in minutes
+
+	// gets new projected time with HSR for cities that are in triangle
+	let trianglePairsNewTime = trianglePairsOldTime
+				.map(([pair, info]) => 
+				[pair, 
+                                {AVG_TOTAL_TIME: trainTotalTime(info.DISTANCE) / timeUnitConversion, 
+				DISTANCE: info.DISTANCE,
+                                NUM_DEPARTURES: info.NUM_DEPARTURES}]);
+
+
+	console.log("new time length");
+	console.log(trianglePairsNewTime.length);
+
+	// data for each step bar chart
+	let averageTotalTime = d3.mean(cityPairToTime.map(([pair, info]) => info.AVG_TOTAL_FLIGHT_TIME));
+	let averageAirTime = d3.mean(cityPairToTime.map(([pair, info]) => info.AVG_AIR_TIME));
+	let averageExtraTime = averageTotalTime - averageAirTime;
+
+	let newAverageTotalTime = d3.mean(cityPairToTime, ([pair, info]) => planeToTrain(info));
+
+	console.log("avg total time: ", averageTotalTime);
+	console.log("avg air time: ", averageAirTime);
+	console.log("avg extra time: ", averageExtraTime);
+
+	const timeFeature = 'time'
+	let flyTimeBreakdown = [['Travel to/from airport', {time: TRAVEL_TO_AND_FROM_TIMES['plane']}], 
+				['Time in Airport', {time: SECURITY_TIMES.plane }], 
+				['Average Airplane Time on Ground', {time: averageExtraTime * timeUnitConversion}], 
+				['Average Airplane Time in Air', {time: averageAirTime * timeUnitConversion}]];
+	console.log("example Data", flyTimeBreakdown);
+
+	const totalTime = d3.sum(flyTimeBreakdown, (d) => d[1][timeFeature])
+
+	flyTimeBreakdown.push(['Total Time', {time: totalTime}])
 
 </script>
 
@@ -148,7 +223,7 @@
 			<div class="stackBox">
 				<RouteDisplay highlightedRoute={hRoutes["highlightedRoutePopular"]}/>
 				<!-- <BarChart/> for top routes -->
-				<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100}/> 
+				<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100} orientation={"horizontal"} unitConversion={populationConversion} firstX={10} stringFormatter={convertString} minDimSize={minBarDims} id="stkBarChartPass"/> 
 			</div>
 
 		</div>
@@ -156,8 +231,9 @@
 		<h2>How much time is spent taking these routes?</h2>
 		<div class="infoMap" id="airlineTimes">
 			<!-- <p>idea to put a barchart that outlines different histogram that haneen made here as well as a bar chart the breaks down the flying time, maybe could give a few flight examples<p/> -->
-			<BarChart dataset={filteredCityPairToInfo} feature={"PASSENGERS"} xLabel={"Passengers (in millions)"} color={'#88aed0'} roundValue={100}/> 
-			<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#88aed0'} minDimSize={minMapDims}/> 
+			<BarChart dataset={flyTimeBreakdown} feature={timeFeature} xLabel={"Total time taken (in minutes)"} color={'#88aed0'} roundValue={100} minDimSize={minBarDims}/> 
+
+			<Histogram dataset={cityPairToTime} yLabel={"Total number of flights in a year"} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#88aed0'} thresholds={histogramThresholds} maxBinSize={maxBinSize} minDimSize={minMapDims}/> 
 		</div>
 
 		<!-- paragraph after bar chart of travel time breakdown that explains all the extra time spent when flying-->
@@ -170,6 +246,8 @@
 			Additionally, commuting to and from the airport may total to an hour or more for people that live outside of major cities. 
 			Finally, although the actual air travel is fast, passengers also end up spending significant time on the airplane before takeoff and after landing for various reasons.
 		</p>
+
+		<p>here's a bar chart of all the time it takes for each step to fly somewhere. see how much time is wasted in security</p>
 
 		<h2>Is there a faster way?</h2>
 
@@ -214,15 +292,22 @@
 			<RouteDisplay highlightedRoute={hRoutes["highlightedRouteTriangle"]}/>
 			</div>
 		</div>
-		<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#cfe6ce'} minDimSize={minMapDims}/> 
-			
+		<p>The United States currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the International Union of Railways definition of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
+		
+		<p>Here's what the time distribution of these triangle routes looks like with HSR: </p>
+
+
 		<div class="infoMap" id="modifiedHistograms">
-			<Histogram dataset={filteredCityPairToInfo} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#cfe6ce'} minDimSize={minMapDims}/> 
 			<!-- <Comparison Bar Chart/> -->
+			<Histogram dataset={cityPairToTime} xLabel={"Total Travel Time when Flying (Hours)"} color={'#88aed0'} triangleColor={'#cfe6ce'} timeUnitConversion={timeUnitConversion} thresholds={histogramThresholds} maxBinSize={maxBinSize} minDimSize={minMapDims}/> 
+
+			<Histogram dataset={cityPairToTime} xLabel={"Total Travel time taking train when faster (Hours)"} color={'#cfe6ce'} triangleColor={'#cfe6ce'} providedAccessorFunction={planeToTrain} timeUnitConversion={timeUnitConversion} thresholds={histogramThresholds} maxBinSize={maxBinSize} minDimSize={minMapDims}/> 
+
 		</div>
 
 		<div class="infoMap" id="comparisonBarChart">
 			<!-- <ComparisonBarChart highlightedRoute={highlightedRouteRail}/> -->
+			<BarChart dataset={flyTimeBreakdown} feature={timeFeature} xLabel={"Time (minutes)"} color={'#88aed0'} roundValue={100} orientation={"vertical"} timeUnitConversion={timeUnitConversion} minDimSize={minBarDims}/> 
 		</div>
 			
 
@@ -352,14 +437,10 @@
 		height: 100vh;
 	}
 
-	.barChart {
-		gap: 2em;
-		/* be 75% as tall as the parent div */
-		height: 75%;
-	}
-
-
 	.histogram {
 		gap: 2em;
+	}
+	.stkBarChartPass{
+		height: 75%
 	}
 </style>
