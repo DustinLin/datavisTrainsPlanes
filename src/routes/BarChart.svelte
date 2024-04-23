@@ -6,6 +6,7 @@
 	export let dataset;
 	export let feature;
 	export let xLabel;
+	export let yLabel;
 	export let color;
 	export let roundValue;
 	export let orientation;
@@ -123,7 +124,7 @@
 
 		<!-- axes -->
 		<Axis orientation="bottom" scale={x} {width} {height} {margin} label={xLabel} />
-		<Axis orientation="left" scale={y} {width} {height} {margin} />
+		<Axis orientation="left" scale={y} {width} {height} {margin} label={yLabel}/>
 	</svg>
 </div>
 
