@@ -38,7 +38,7 @@ cleanup TODOs
 - `usaContGeojson.json`: US geojson map of the contiguous US, derived from `usaGeojson.json`, removing Alaska, Hawaii, etc.
 
 
-### Sample datas
+### Sample data entries
 - `cityCordMap.json` - used for mapping cities to a map:
 ```
   "Boston_MA": {
