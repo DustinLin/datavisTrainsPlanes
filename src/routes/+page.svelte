@@ -18,7 +18,7 @@
 	import MapStatic from './MapStatic.svelte';
 	import RailMapIntersect from './RailMapIntersect.svelte';
 
-	import { cutoffs, cityPairsToCities, roundTo, planeTime } from '../utils';
+	import { cutoffs, cityPairsToCities, roundTo, planeTime, planeTotalTime } from '../utils';
 	import Histogram from './Histogram.svelte';
 
 
@@ -194,7 +194,7 @@
 				To calculate this sweet spot, we find a line of best fit for each of the three modes of transportation (car, HSR, planes) considered here. 
 				We call the area formed by the intersection of these lines the “Time Triangle,” which is plotted to the right. 
 				The Time Triangle indicates that for distances between {roundTo(cutoffs.triangleLower, 0.1)} miles and {roundTo(cutoffs.triangleUpper, 0.1)} miles HSR is the fastest mode of transportation when factoring in all the main steps included with each method of travel. 
-				These distances correspond to flight times of {roundTo(planeTime(cutoffs.triangleLower), 0.1)} minutes and {roundTo(planeTime(cutoffs.triangleUpper), 0.1)} minutes, respectively. We show some of the airline routes that would be traveled quicker using HSR below. 
+				These distances correspond to flight times of {roundTo(planeTotalTime(cutoffs.triangleLower), 0.1)} minutes and {roundTo(planeTotalTime(cutoffs.triangleUpper), 0.1)} minutes, respectively. We show the airline routes that would be traveled quicker using HSR below. 
 			</p>
 		</div>
 
