@@ -6,13 +6,12 @@
 
 	import './style.css';
 	import * as d3 from 'd3';
-	//import BarChart from './BarChart.svelte';
-	import BarChart from './BarChartNew.svelte';
+	import BarChart from './BarChart.svelte';
 
 	import Map from './Map.svelte'
   	import RouteDisplay from './RouteDisplay.svelte';
 	import RailMap from './RailMap.svelte';
-    	import TimeTriangle from './TimeTriangle.svelte';
+    import TimeTriangle from './TimeTriangle.svelte';
   	import TopChart from './TopChart.svelte';
   	import RailMapSubset from './RailMapSubset.svelte';
 	import MapStatic from './MapStatic.svelte';
@@ -21,7 +20,7 @@
 	import { cutoffs, cityPairsToCities, computeInverse, trainTotalTime  } from '../utils';
 	import Histogram from './Histogram.svelte';
 
-	import {inTriangle, planeTimeToTotalTime, planeTotalTime, planeTime} from '../utils.js';
+	import {inTriangle, planeTimeToTotalTime, planeToTrain, roundUp} from '../utils.js';
 	import {TRAVEL_TO_AND_FROM_TIMES, SECURITY_TIMES} from '../utils.js';
 
 
@@ -51,6 +50,9 @@
 	// TODO: for multiple maps will need to create a diff variable.. or else they all point to the same thing
 	// data type is the the route object
 	let highlightedRoute = null;
+
+
+	
 
 	function onhover(route){
 		// set params for route
@@ -106,6 +108,19 @@
                                 AVG_AIR_TIME: info.AIR_TIME / info.DEPARTURES_PERFORMED / timeUnitConversion, 
 				DISTANCE: info.DISTANCE,
                                 NUM_DEPARTURES: info.DEPARTURES_PERFORMED}]);
+
+	let histogramThresholds = [];
+	const groupSize = 30 / timeUnitConversion;
+	console.log('group size', groupSize)
+	const maxTime = roundUp(d3.max(cityPairToTime, d => d[1].AVG_TOTAL_TIME), groupSize)
+	for (let i = 0; i <= maxTime; i += groupSize) {
+		histogramThresholds.push(i);
+	}
+
+	// const maxBinSize = d3.max(bins, (d) => d3.sum(d, (l) => l[1].NUM_DEPARTURES))
+	const maxBinSize = 1.7 * 1000 * 1000 // TODO: fix this so it isn't hard coded
+
+	console.log('group size', groupSize)
 
 	//console.log("hellooooo");
 	//console.log(cityPairToTime);
@@ -170,11 +185,11 @@
 		<div class="infoMap" id="airlineTimes">
 			<p>idea to put a barchart that outlines different histogram that haneen made here as well as a bar chart the breaks down the flying time, maybe could give a few flight examples<p/>
 			<!-- <BarChart/> -->
-			<Histogram dataset={cityPairToTime} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#88aed0'}/> 
+			<Histogram dataset={cityPairToTime} xLabel={"Passengers (in millions)"} color={'#88aed0'} triangleColor={'#88aed0'} thresholds={histogramThresholds} maxBinSize={maxBinSize}/> 
 		</div>
 
 		<p>here's a bar chart of all the time it takes for each step to fly somewhere. see how much time is wasted in security</p>
-		<BarChart dataset={flyTimeBreakdown} feature={""} xLabel={"Time (minutes)"} color={'#88aed0'} roundValue={100} orientation={"vertical"}/> 
+		<BarChart dataset={flyTimeBreakdown} feature={""} xLabel={"Time (minutes)"} color={'#88aed0'} roundValue={100} orientation={"vertical"} timeUnitConversion={timeUnitConversion} /> 
 
 
 		<h2>Is there a faster way?</h2>
@@ -191,11 +206,11 @@
 
 			<!-- <Comparison Bar Chart/> -->
 		</div>
-		<Histogram dataset={cityPairToTime} xLabel={"Total Travel Time when Flying (Hours)"} color={'#88aed0'} triangleColor={'#cfe6ce'}/> 
+		<Histogram dataset={cityPairToTime} xLabel={"Total Travel Time when Flying (Hours)"} color={'#88aed0'} triangleColor={'#cfe6ce'} timeUnitConversion={timeUnitConversion} thresholds={histogramThresholds} maxBinSize={maxBinSize}/> 
 
 		<p>Here's what the time distribution of these triangle routes looks like with HSR: </p>
 
-		<Histogram dataset={trianglePairsNewTime} xLabel={"Total Travel Time when Driving (Hours)"} color={'#cfe6ce'} triangleColor={'#cfe6ce'}/> 
+		<Histogram dataset={cityPairToTime} xLabel={"Total Travel Time when Driving (Hours)"} color={'#cfe6ce'} triangleColor={'#cfe6ce'} providedAccessorFunction={planeToTrain} timeUnitConversion={timeUnitConversion} thresholds={histogramThresholds} maxBinSize={maxBinSize}/> 
 			
 
 		<p>The United States currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the International Union of Railways definition of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>

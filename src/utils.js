@@ -97,10 +97,10 @@ export let computeIntersection = (line1, line2) => {
  * @returns the solution for x of the equation y = mx + b
  */
 export let computeInverse = (lineFunction, y) => {
-	const delta = 10
-	const intercept = lineFunction(0)
-	const slope = (lineFunction(delta) - intercept) / delta
-	return 1/slope * (y) - intercept
+	const delta = 10;
+	const intercept = lineFunction(0);
+	const slope = (lineFunction(delta) - intercept) / delta;
+	return 1/slope * ((y) - intercept);
 }
 
 export let cutoffs = {
@@ -161,4 +161,34 @@ export let inTriangle = (flightTime) => {
 	//console.log(lowerTime)
 	//console.log(upperTime)
 	return (flightTime >= lowerTime) && (flightTime <= upperTime)
+}
+
+
+/**
+ * @param {*} number the number that should be rounded
+ * @param {*} place number of place to round the result two. e.g. (place = 1; nearest whole number) (place = 0.1; nearest 0.1)
+ */
+export let roundUp = (number, place) => {
+	return Math.ceil(number / place) * place
+}
+
+/**
+ * @param {*} number the number that should be rounded
+ * @param {*} place number of place to round the result two. e.g. (place = 1; nearest whole number) (place = 0.1; nearest 0.1)
+ */
+export let roundDown = (number, place) => {
+	return Math.floor(number / place) * place
+}
+
+export let planeToTrain = (rowData, timeUnitConversion) => {
+	const flightTime = rowData.AVG_TOTAL_TIME * timeUnitConversion;
+	if (inTriangle(flightTime)) {
+		const distance = computeInverse(planeTotalTime, flightTime)
+		return trainTotalTime(distance) / timeUnitConversion
+	}
+	else {
+		return flightTime / timeUnitConversion
+	}
+	
+	
 }

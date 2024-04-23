@@ -1,16 +1,26 @@
 <script>
 	import * as d3 from 'd3';
 	import Axis from './Axis.svelte';
-    import {inTriangle, planeTimeToTotalTime} from '../utils.js';
+    import {inTriangle, planeTimeToTotalTime, roundDown} from '../utils.js';
 
 	export let dataset;
-        export let xLabel;
-        export let color;
-        export let triangleColor;
+	export let xLabel;
+	export let color;
+	export let triangleColor;
+	export let providedAccessorFunction;
+	export let timeUnitConversion;
+	export let thresholds;
+	export let maxBinSize;
 	// export let selectedIndices;
 	//export let color;
+	function defaultAccessor(rowData, timeUnitConversion) {
+		return rowData.AVG_TOTAL_TIME
+	}
+
 	
-	const timeUnitConversion = 60
+	
+
+	const accessorFunction = providedAccessorFunction ? providedAccessorFunction: defaultAccessor
 
 	/*
         let cityPairToTime = dataset
@@ -25,13 +35,14 @@
 	
 	let cityPairToTime = dataset;
 
-        let bins = d3.bin()
-                .thresholds(20)
-                .value((d) => d[1].AVG_TOTAL_TIME)
-                (cityPairToTime);
-
+	let bins = d3.bin()
+			.thresholds(thresholds)
+			.value((d) => accessorFunction(d[1], timeUnitConversion))
+			(cityPairToTime);
         // bins = d3.map(bins, (d) => 
         //         [d.length, d3.sum(d, (l) => l[1].NUM_DEPARTURES), d.x0, d.x1])
+
+	bins.forEach((element) => console.log('test of the stupid variety', element.x0, element.x1));
 
         // console.log("bins", bins);
 	// dimensions
@@ -61,20 +72,23 @@
 	// get the counts for the filtered dataset
 
 
-        const margin = {top: 20, bottom: 30, left: 80, right: 20};
+    const margin = {top: 20, bottom: 30, left: 80, right: 20};
 
         
-        // scales 
+    
+	// scales 
+	// Declare the x (horizontal position) scale.
+	const x = d3.scaleLinear()
+	.domain([thresholds[0], thresholds[thresholds.length - 1]])
+	.range([margin.left, width - margin.right]);
 
-        // Declare the x (horizontal position) scale.
-  const x = d3.scaleLinear()
-      .domain([bins[0].x0, bins[bins.length - 1].x1])
-      .range([margin.left, width - margin.right]);
-
-  // Declare the y (vertical position) scale.
-  const y = d3.scaleLinear()
-      .domain([0, d3.max(bins, (d) => d3.sum(d, (l) => l[1].NUM_DEPARTURES))])
+  	// Declare the y (vertical position) scale.
+  	const y = d3.scaleLinear()
+      .domain([0, maxBinSize])
       .range([height - margin.bottom, margin.top]);
+
+	const thresholdWidth = thresholds[1] - thresholds[0]
+	const boxWidth = x(thresholds[1]) - x(thresholds[0]) - 1
 
 	  /*
         console.log("x range: ", x.range());
@@ -92,10 +106,10 @@
 		<g>
 			{#each bins as bin}
 				<rect
-					x={x(bin.x0) + 1}
+					x={x(roundDown(bin.x0, thresholdWidth)) + 1}
 					y={y(d3.sum(bin, (d) => d[1].NUM_DEPARTURES))}
 					height={y(0) - y(d3.sum(bin, (d) => d[1].NUM_DEPARTURES))}
-					width={x(bin.x1) - x(bin.x0) - 1}
+					width={boxWidth}
 					fill={inTriangle(bin.x0 * timeUnitConversion) ? triangleColor : color}
 
 				/>
