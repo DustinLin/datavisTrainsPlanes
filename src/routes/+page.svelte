@@ -263,11 +263,11 @@
 			Thus, the United States currently has no functional HSR, despite the prevalence and success of HSR in many other nations including Japan and several European countries such as the UK, France, Italy, and Germany. 
 		</p>
 
+			<TimeTriangle/>
 		<div class="infoMap" id="timeTriangle">
 
 
 			<!-- paragraph explaining time triangle that goes next to it-->
-			<TimeTriangle/>
 			<p>
 				To assess the potential benefits of implementing HSR in the US, we first determine the range of distances within which the fastest mode of travel would be HSR. 
 				To calculate this sweet spot, we find a line of best fit for each of the three modes of transportation (car, HSR, planes) considered here. 

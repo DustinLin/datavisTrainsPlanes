@@ -151,6 +151,29 @@ export let createDatapoints = (functionToPlot, maxDistance, xScale, yScale) => {
 	return data;
 }
 
+// plotting a vertical line
+export let vertLine = (vert, maxDistance, xScale, yScale) => {
+	const data = [];
+	const step = maxDistance / 500
+	for (let x = 0; x <= planeTotalTime(vert) + step; x += step) {
+	  const y = vert
+	  data.push([xScale(y), yScale(x)])
+	}
+	return data;
+}
+
+// plotting the horizontal lines in the time triangle, given a y, plot f(x) = y, stopping at intersect point
+export let triangleDashedLine = (vert, maxDistance, xScale, yScale) => {
+	const data = [];
+	const step = maxDistance / 500
+	for (let x = 0; x <= vert; x += step) {
+	  const y = planeTotalTime(vert)
+	  data.push([xScale(x), yScale(y)])
+	}
+	return data;
+}
+
+
 
 /**
  * 

@@ -1,11 +1,16 @@
 <script>
 	import * as d3 from 'd3';
 	import Axis from './Axis.svelte';
-	import {planeTotalTime, trainTotalTime, carTotalTime, createDatapoints} from '../utils'
+	import {planeTotalTime, trainTotalTime, carTotalTime, createDatapoints, cutoffs, vertLine, triangleDashedLine} from '../utils'
 
 	
 
-	const marginTriangle = { top: 10, right: 50, bottom: 50, left: 50 };
+	const triangleLower = cutoffs.triangleLower // ~ 75.2
+	const triangleUpper = cutoffs.triangleUpper // ~575.5
+
+
+
+	const marginTriangle = { top: 50, right: 50, bottom: 50, left: 50 };
 
 	let borderBoxSize;
 	const ratio = 1.25
@@ -25,11 +30,11 @@
 	const functions = [planeTotalTime, trainTotalTime, carTotalTime];
 
 	$: smallXScale = d3.scaleLinear()
-		.domain([0, 500])
+		.domain([0, 600])
 		.range([marginTriangle.left, width - marginTriangle.right]);
 
 	$: smallYScale = d3.scaleLinear()
-		.domain([0, 500])
+		.domain([0, 350])
 		.range([height - marginTriangle.bottom, marginTriangle.top]);
 
 	const transportTypeColorScale = d3.scaleOrdinal()
@@ -109,11 +114,33 @@
 					stroke-width={STROKE_WIDTH}
 				/>
 			{/each}
+				<path
+					d={d3.line()(vertLine(triangleLower, MAX_DISTANCE, smallXScale, smallYScale))}
+					stroke="black"
+					stroke-width={STROKE_WIDTH}
+				/>
+				<path
+					d={d3.line()(vertLine( triangleUpper, MAX_DISTANCE, smallXScale, smallYScale))}
+					stroke="black"
+					stroke-width={STROKE_WIDTH}
+				/>
+				<path
+					d={d3.line()(triangleDashedLine(triangleLower, MAX_DISTANCE, smallXScale, smallYScale))}
+					stroke="black"
+					stroke-width={STROKE_WIDTH}
+					stroke-dasharray={("3,3")}
+				/>
+				<path
+					d={d3.line()(triangleDashedLine(triangleUpper, MAX_DISTANCE, smallXScale, smallYScale))}
+					stroke="black"
+					stroke-width={STROKE_WIDTH}
+					stroke-dasharray={("3,3")}
+				/>
 		</g>
 
 		<!-- axes -->
-		<Axis orientation="bottom" scale={smallXScale} width={width} height={height} margin={marginTriangle} label={'Count'} />
-		<Axis orientation="left" scale={smallYScale} width={width} height={height} margin={marginTriangle} />
+		<Axis orientation="bottom" scale={smallXScale} width={width} height={height} margin={marginTriangle} label={"time in minutes"} />
+		<Axis orientation="left" scale={smallYScale} width={width} height={height} margin={marginTriangle} label={"distance in miles"} />
 	</svg>
 </div>
 
