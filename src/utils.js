@@ -272,3 +272,11 @@ export let inTriangle = (flightTime) => {
 	// console.log(`lowerX: ${cutoffs.triangleLower}, lowerTime: ${lowerTime}, upperX: ${cutoffs.triangleUpper}, upperTime: ${upperTime}, flightTime: ${flightTime}, bool value: ${(flightTime <= lowerTime) && (flightTime >= upperTime)}`)
 	return (flightTime >= lowerTime) && (flightTime <= upperTime)
 }
+
+/**
+ * @param {*} number the number that should be rounded
+ * @param {*} place number of place to round the result two. e.g. (place = 1; nearest whole number) (place = 0.1; nearest 0.1)
+ */
+export let roundTo = (number, place) => {
+	return Math.round(number / place) * place
+}

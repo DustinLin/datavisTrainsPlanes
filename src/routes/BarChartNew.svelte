@@ -1,12 +1,13 @@
 <script>
 	import * as d3 from 'd3';
 	import Axis from './Axis.svelte';
+	import { roundTo } from '../utils'
 
 	export let dataset;
 	export let feature;
-        export let xLabel;
-        export let color;
-        export let roundValue;
+	export let xLabel;
+	export let color;
+	export let roundValue;
 	// export let selectedIndices;
 	//export let color;
 
@@ -108,7 +109,7 @@
                                         y={y(cityPair) + y.bandwidth() / 2 + 5}
                                         text-anchor="start"
                                         >
-                                        {Math.round(feature * roundValue) / roundValue}
+                                        {roundTo(feature, roundValue)}
                                 </text>
 			{/each}
 		</g>
