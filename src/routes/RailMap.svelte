@@ -169,5 +169,10 @@
 		border-style: solid;
 		/* the weight? */
 		flex:2;
+		background: #ffffff;
+		border-radius: 2em;
+	}
+	h2 {
+		padding-left: 1em;
 	}
 </style>

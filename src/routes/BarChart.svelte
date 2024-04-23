@@ -130,6 +130,9 @@
 <style>
 	.BarChart {
 		/* take up extra horizontal space in the parent */
+		background-color: #ffffff;
+		/* rounded corners and padding to make more roomy */
+		border-radius: 2em;
 		flex: 1;
 	}
 

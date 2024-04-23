@@ -196,16 +196,20 @@
 				onhover={onhover} 
 				highlightedRoute={hRoutes["highlightedRouteAll"]}
 				mapId={"highlightedRouteAll"}/>
+
+
 			<RouteDisplay highlightedRoute={hRoutes["highlightedRouteAll"]}/>
 		</div>
 
 		<!-- intro paragraph ab how ppl usually fly places-->
+		<div class="paragraphWrapper">
 		<p>
 			One of the most common, and seemingly most convenient, ways to travel relatively long distances within the United States is by flying. In 2023, there were {filteredCityPairToInfo.length} unique flight routes within the continental US. 
 			There are typically several flight options to travel between any two cities in the US that make flying an easy, flexible option. 
 			In comparison, driving several hours is often not a viable option, especially for short trips where time spent driving would nearly equal time spent at the actual destination. 
 			Currently, options for rail travel are limited in many parts of the country and, due to the lack of high speed rail (HSR) in the US, taking a train does not save significant time compared to driving.
 		</p>
+		</div>
 
 		<!-- component -->
 		<h2>What are the popular airline routes in the US?</h2>
@@ -237,6 +241,7 @@
 		</div>
 
 		<!-- paragraph after bar chart of travel time breakdown that explains all the extra time spent when flying-->
+		<div class="paragraphWrapper">
 		<p>
 			Besides the time spent in the air on a plane, there are several additional steps involved in air travel that, in total, can add hours to a trip. 
 			One major inconvenience associated with flying is the TSA — the restrictions and the time it takes to go through TSA security at the airport. 
@@ -246,12 +251,14 @@
 			Additionally, commuting to and from the airport may total to an hour or more for people that live outside of major cities. 
 			Finally, although the actual air travel is fast, passengers also end up spending significant time on the airplane before takeoff and after landing for various reasons.
 		</p>
+		</div>
 
 		<p>here's a bar chart of all the time it takes for each step to fly somewhere. see how much time is wasted in security</p>
 
 		<h2>Is there a faster way?</h2>
 
 		<!-- paragraph before time triangle that introduces HSR-->
+		<div class="paragraphWrapper">
 		<p>
 			When factoring in time spent waiting at the airport or on the plane, along with time it takes to get to and from the airport, there are indeed faster alternatives to flying for certain distances of travel. 
 			For example, the fastest way to get across the world is flying, while the fastest way to get to the other side of town is likely to drive. 
@@ -260,12 +267,14 @@
 			This does not meet the required average speed of 124 MPH (200 km/hr) to be classified as high speed by the International Union of Railways. 
 			Thus, the United States currently has no functional HSR, despite the prevalence and success of HSR in many other nations including Japan and several European countries such as the UK, France, Italy, and Germany. 
 		</p>
+		</div>
 
 		<div class="infoMap" id="timeTriangle">
 
 		<!-- paragraph explaining time triangle that goes next to it-->
 
 		<TimeTriangle/>
+		<div class="paragraphWrapper">
 		<p>
 			To assess the potential benefits of implementing HSR in the US, we first determine the range of distances within which the fastest mode of travel would be HSR. 
 			To calculate this sweet spot, we find a line of best fit for each of the three modes of transportation (car, HSR, planes) considered here. 
@@ -273,6 +282,8 @@
 			The Time Triangle indicates that for distances between {roundTo(cutoffs.triangleLower, 0.1)} miles and {roundTo(cutoffs.triangleUpper, 0.1)} miles HSR is the fastest mode of transportation when factoring in all the main steps included with each method of travel. 
 			These distances correspond to flight times of {roundTo(planeTime(cutoffs.triangleLower), 0.1)} minutes and {roundTo(planeTime(cutoffs.triangleUpper), 0.1)} minutes, respectively. We show some of the airline routes that would be traveled quicker using HSR below. 
 		</p>
+		</div>
+
 		</div>
 
 		<h2>Airline routes that would be faster on HSR</h2>
@@ -292,9 +303,10 @@
 			<RouteDisplay highlightedRoute={hRoutes["highlightedRouteTriangle"]}/>
 			</div>
 		</div>
-		<p>The United States currently has no functional high speed rail. The fastest train in the US, Amtrak's Acela line, top speed of 160 MPH (257 km/hr) meets the International Union of Railways definition of travel at least 155 MPH (250 km/hr). However, the Acela average speed of 70 MPH (113 km/hr) does not meet the required average speed of 124 MPH (200 km/hr)</p>
 		
+		<div class="paragraphWrapper">
 		<p>Here's what the time distribution of these triangle routes looks like with HSR: </p>
+		</div>
 
 
 		<div class="infoMap" id="modifiedHistograms">
@@ -352,11 +364,13 @@
 		<h2>Intersection with current rail</h2>
 
 		<!-- paragraph talking ab current rail-->
+		<div class="paragraphWrapper">
 		<p>
 			As explained above, while Amtrak is the fastest rail in the US, it does not meet the qualification for HSR. 
 			Nonetheless, we can use the locations of these rail lines to guide future plans for building HSR using the existing infrastructure. 
 			The below maps show our proposed HSR routes (left) and the existing Amtrak rail lines (right), with all the cities identified with our Iterative Gravity Model labeled.
 		</p>
+		</div>
 
 		<div class="infoMap" id="railIntersection">
 			<RailMapIntersect 
@@ -373,15 +387,33 @@
 		</div>
 
 		<h2>What Now?</h2>
+
+		<div class="paragraphWrapper">
+
 		<p>Want to learn more? go to these resources @cityNerd</p>
 		<p>Want to play around with the data or learn more in depth about our computational model? click <a href="https://github.com/DustinLin/datavisTrainsPlanes">here</a>.</p>
 		<p>Want to show others? takes these steps: Share our and other resources with others</p>
+
+		</div>
 		
 	</div>
 </div>
 
+
 <style>
 	/* Old styling */
+	.paragraphWrapper {
+		background-color: #ffffff;
+		/* rounded corners and padding to make more roomy */
+		border-radius: 2em;
+		padding: 1em;
+	}
+
+
+	h2 {
+		/* add more space between each section by padding upper? */
+		padding-top: 2em;
+	}
 	.container {
 		/* set the font */
 		font-family: system-ui, sans-serif;
@@ -423,7 +455,7 @@
 		height: 85vh;
 		width: 100vw;
 		min-height: 500px;
-		margin: auto;
+		padding: 1em;
 	}
 
 	.maps {
@@ -434,13 +466,19 @@
 	.stackBox {
 		/* create a vertical stacking */
 		gap: 2em;
-		height: 100vh;
+		height: 100%; /* take 100% height from parent */
+		display: flex;
+		flex-direction: column;
 	}
 
 	.histogram {
 		gap: 2em;
 	}
-	.stkBarChartPass{
+	.stkBarChartPass {
 		height: 75%
+	}
+
+	:global(body){
+		background: #f0fcf1;
 	}
 </style>

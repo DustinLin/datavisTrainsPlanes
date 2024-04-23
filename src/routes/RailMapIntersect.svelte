@@ -251,11 +251,17 @@
 		border-style: solid;
 		/* the weight? */
 		flex:2;
+		background: #ffffff;
+		border-radius: 2em;
+	}
+	h2 {
+		padding-left: 1em;
 	}
 	.swatches {
 		display: flex;
 		align-items: center;
 		gap: 1em; /* adding some space between the <div>s inside swatches */
+		padding-left: 1em;
 	}
 
 	.swatch {

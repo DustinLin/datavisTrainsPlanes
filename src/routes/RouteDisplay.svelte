@@ -59,6 +59,10 @@
 	.routeDisplay {
 		height: 25%;
 		min-width: 450px;
+		background-color: #ffffff;
+		/* rounded corners and padding to make more roomy */
+		border-radius: 2em;
+		padding: 1em;
 	}
 </style>
 

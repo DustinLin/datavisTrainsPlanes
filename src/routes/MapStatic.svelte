@@ -210,5 +210,8 @@
 		border-style: solid;
 		/* the weight? */
 		flex:2;
+		background: #ffffff;
+		border-radius: 2em;
+		padding: 1em;
 	}
 </style>

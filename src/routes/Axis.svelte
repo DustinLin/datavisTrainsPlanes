@@ -30,7 +30,7 @@
 				{/each}
 
 				{#if label}
-					<text text-anchor="start" dominant-baseline="hanging" fill="black" x={-margin.left} y={0}>
+					<text text-anchor="start" dominant-baseline="hanging" fill="black" x={-margin.left + 10} y={10}>
 						{label}
 					</text>
 				{/if}
@@ -45,7 +45,7 @@
 				{/each}
 
 				{#if label}
-					<text text-anchor="end" dominant-baseline="hanging" fill="black" x={width} y={30}>
+					<text text-anchor="end" dominant-baseline="hanging" fill="black" x={width - 20} y={25}>
 						{label}
 					</text>
 				{/if}

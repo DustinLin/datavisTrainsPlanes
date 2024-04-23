@@ -74,7 +74,7 @@
 	// get the counts for the filtered dataset
 
 
-    const margin = {top: 20, bottom: 30, left: 80, right: 20};
+    const margin = {top: 45, bottom: 45, left: 120, right: 80};
 
 
 	// scales 
@@ -130,6 +130,10 @@
 		flex: 1;
 		/* be as tall as the parent div */
 		height: 100%;
+		background-color: #ffffff;
+		/* rounded corners and padding to make more roomy */
+		border-radius: 2em;
+		padding: 1em;
 	}
 
 	/* animate changes to the lengths of the bars */
