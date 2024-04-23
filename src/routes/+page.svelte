@@ -267,14 +267,15 @@
 
 
 			<!-- paragraph explaining time triangle that goes next to it-->
-			<TimeTriangle/>
-			<p>
+			<p id="timeTriangleText">
 				To assess the potential benefits of implementing HSR in the US, we first determine the range of distances within which the fastest mode of travel would be HSR. 
 				To calculate this sweet spot, we find a line of best fit for each of the three modes of transportation (car, HSR, planes) considered here. 
 				We call the area formed by the intersection of these lines the “Time Triangle,” which is plotted to the right. 
 				The Time Triangle indicates that for distances between {roundTo(cutoffs.triangleLower, 0.1)} miles and {roundTo(cutoffs.triangleUpper, 0.1)} miles HSR is the fastest mode of transportation when factoring in all the main steps included with each method of travel. 
 				These distances correspond to flight times of {roundTo(planeTotalTime(cutoffs.triangleLower), 0.1)} minutes and {roundTo(planeTotalTime(cutoffs.triangleUpper), 0.1)} minutes, respectively. We show the airline routes that would be traveled quicker using HSR below. 
 			</p>
+			
+			<TimeTriangle/>
 		</div>
 
 		<h2>Airline routes that would be faster on HSR</h2>
@@ -437,7 +438,12 @@
 	.histogram {
 		gap: 2em;
 	}
-	.stkBarChartPass{
-		height: 75%
+
+	#stkBarChartPass{
+		height: calc(75% - 2em)
+	}
+
+	#timeTriangleText {
+		width: 50%
 	}
 </style>
