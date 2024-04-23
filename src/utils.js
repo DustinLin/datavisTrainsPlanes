@@ -2,13 +2,13 @@
  * contain useful functions for data parsing?
  */
 
-const SECURITY_TIMES = {
+export let SECURITY_TIMES = {
 	'plane': 120,
 	'train': 15,
 	'car': 0 
 }
 
-const TRAVEL_TO_AND_FROM_TIMES = {
+export let TRAVEL_TO_AND_FROM_TIMES = {
 	'plane': 60,
 	'train': 45,
 	'car': 0
@@ -129,7 +129,7 @@ export const VIS_PROPERTIES = {
 }
 
 export let planeTime = (distance) => {
-	return 44.5957 + 0.117441*distance
+	return 44.5957 + 0.117441 * distance
 }
 
 export let carTime = (distance) => {
@@ -210,10 +210,10 @@ export let computeIntersection = (line1, line2) => {
  * @returns the solution for x of the equation y = mx + b
  */
 export let computeInverse = (lineFunction, y) => {
-	const delta = 10
-	const intercept = lineFunction(0)
-	const slope = (lineFunction(delta) - intercept) / delta
-	return 1/slope * (y) - intercept
+	const delta = 10;
+	const intercept = lineFunction(0);
+	const slope = (lineFunction(delta) - intercept) / delta;
+	return 1/slope * ((y) - intercept);
 }
 
 export let cutoffs = {
@@ -231,6 +231,13 @@ export let cutoffs = {
 export let cityPairsToCities = (cityPair) => {
   return cityPair.slice(1, -1).split(", ");
 };
+
+export let formateCityTuple = (cityPair) => {
+	return cityPair.map(pair => {
+		const [city, state] = pair.split('_');
+		return `${city}, ${state}`;
+	});
+}
 
 /**
  * eg: "Los Angeles_CA", returns "Los Angeles"
@@ -279,4 +286,35 @@ export let inTriangle = (flightTime) => {
  */
 export let roundTo = (number, place) => {
 	return Math.round(number / place) * place
+}
+	
+export let roundUp = (number, place) => {
+	return Math.ceil(number / place) * place
+}
+
+/**
+ * @param {*} number the number that should be rounded
+ * @param {*} place number of place to round the result two. e.g. (place = 1; nearest whole number) (place = 0.1; nearest 0.1)
+ */
+export let roundDown = (number, place) => {
+	return Math.floor(number / place) * place
+}
+
+export let convertString = (input) => {
+	const pairs = cityPairsToCities(input)
+	const formattedPairs = formateCityTuple(pairs)
+	return formattedPairs.join('\n to \n');
+}
+
+export let planeToTrain = (rowData, timeUnitConversion) => {
+	const flightTime = rowData.AVG_TOTAL_TIME * timeUnitConversion;
+	if (inTriangle(flightTime)) {
+		const distance = computeInverse(planeTotalTime, flightTime)
+		return trainTotalTime(distance) / timeUnitConversion
+	}
+	else {
+		return flightTime / timeUnitConversion
+	}
+	
+	
 }
