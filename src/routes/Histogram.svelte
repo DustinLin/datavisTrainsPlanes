@@ -48,9 +48,8 @@
         // bins = d3.map(bins, (d) => 
         //         [d.length, d3.sum(d, (l) => l[1].NUM_DEPARTURES), d.x0, d.x1])
 
-	bins.forEach((element) => console.log('test of the stupid variety', element.x0, element.x1));
+	//bins.forEach((element) => console.log('test of the stupid variety', element.x0, element.x1));
 
-        // console.log("bins", bins);
 	// dimensions
 
 	let borderBoxSize;

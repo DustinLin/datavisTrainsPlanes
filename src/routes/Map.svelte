@@ -36,7 +36,7 @@
 	// $: width = dims[0];
 	// height = 800;
 
-	$: console.log(`width and height ${width}, ${height}`)
+	// $: console.log(`width and height ${width}, ${height}`)
 	
 
 	// trying to plot lines and add interaction?

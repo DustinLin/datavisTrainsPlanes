@@ -198,7 +198,7 @@
 				mapId={"highlightedRouteAll"}/>
 
 
-			<RouteDisplay highlightedRoute={hRoutes["highlightedRouteAll"]}/>
+			<RouteDisplay id="totalFlightRoutesDisplay" highlightedRoute={hRoutes["highlightedRouteAll"]}/>
 		</div>
 
 		<!-- intro paragraph ab how ppl usually fly places-->
@@ -473,8 +473,12 @@
 	.histogram {
 		gap: 2em;
 	}
-	.stkBarChartPass {
+	#stkBarChartPass {
 		height: 75%
+	}
+
+	#totalFlightRoutesDisplay {
+		height: 25%
 	}
 
 	:global(body){

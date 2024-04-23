@@ -22,9 +22,6 @@
 	
 	sortedFeature = dataset
                 .sort(([cities1, data1], [cities2, data2]) => {
-				if (feature === "time") {
-					console.log('testing', data1, feature);
-				}
 				
                 const score1 = data1[feature]
                 const score2 = data2[feature]
@@ -45,8 +42,6 @@
         
 	
 
-        console.log("sorted feature", sortedFeature);
-	//console.log("sorted feature", formattedFeature);
 	// dimensions
 
 	let borderBoxSize;
@@ -74,7 +69,7 @@
 	// scales
 
 	const maxVal = d3.max(sortedFeature, (d) => d[1]);
-	console.log("max val", maxVal);
+	//console.log("max val", maxVal);
 
 	const margin = {top: 45, bottom: 45, left: 270, right: 80};
 

@@ -62,6 +62,7 @@
 		/* rounded corners and padding to make more roomy */
 		border-radius: 2em;
 		padding: 1em;
+
 	}
 </style>
 
