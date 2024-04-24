@@ -183,7 +183,7 @@
 		border-radius: 2em;
 	}
 	h3 {
-		padding-left: 1em;
+		padding-left: 0.5em;
 	}
 
 	.swatches {

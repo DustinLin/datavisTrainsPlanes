@@ -34,8 +34,8 @@
 {#if highlightedRoute}
 <div class="routeDisplay" width={width}>
 	<ul>
-		<li>Origin City: {cityStToCity(cityPairsToCities(highlightedRoute[0])[0])}, {cityStToState(cityPairsToCities(highlightedRoute[0])[0])}</li>
-		<li>Destination City: {cityStToCity(cityPairsToCities(highlightedRoute[0])[1])}, {cityStToState(cityPairsToCities(highlightedRoute[0])[1])}</li>
+		<li>City: {cityStToCity(cityPairsToCities(highlightedRoute[0])[0])}, {cityStToState(cityPairsToCities(highlightedRoute[0])[0])}</li>
+		<li>Other City: {cityStToCity(cityPairsToCities(highlightedRoute[0])[1])}, {cityStToState(cityPairsToCities(highlightedRoute[0])[1])}</li>
 		<li>Distance: {Math.floor(highlightedRoute[1].DISTANCE)} miles </li>
 		<li>Passengers: {numberWithCommas(highlightedRoute[1].PASSENGERS)}</li>
 	</ul>
@@ -45,8 +45,8 @@
 {:else}
 <div class="routeDisplay" width={width}>
 	<ul>
-		<li>Origin City: {hintString}</li>
-		<li>Destination City: {hintString}</li>
+		<li>City: {hintString}</li>
+		<li>Other City: {hintString}</li>
 		<li>Distance: {hintString}</li>
 		<li>Passengers: {hintString}</li>
 	</ul>

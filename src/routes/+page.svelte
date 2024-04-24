@@ -236,6 +236,16 @@
 
 	<div class="main">
 		<h2>How do people travel long distances in the US?</h2>
+
+		<div class="paragraphWrapper">
+		<p>
+			One of the most common, and seemingly most convenient, ways to travel long distances within the United States is by flying. In 2023, there were {filteredCityPairToInfo.length} unique flight routes within the continental US. 
+			There are typically several flight options to travel between any two cities in the US that make flying an easy, flexible option. 
+			In comparison, driving several hours is often not a viable option, especially for weekend trips, where time spent driving would nearly equal time spent at the actual destination. 
+			Currently, options for rail travel are limited in many parts of the country and, due to the lack of high speed rail (HSR) in the US, taking a train does not save significant time compared to driving.
+		</p>
+		</div>
+
 		<div class="infoMap" id="allRoutes">
 			<Map
 				map={usaGeoContig} 
@@ -248,18 +258,13 @@
 				mapId={"highlightedRouteAll"}/>
 
 
+
+			<div class="stackBox">
 			<RouteDisplay id="totalFlightRoutesDisplay" highlightedRoute={hRoutes["highlightedRouteAll"]}/>
+			</div>
 		</div>
 
 		<!-- intro paragraph ab how ppl usually fly places-->
-		<div class="paragraphWrapper">
-		<p>
-			One of the most common, and seemingly most convenient, ways to travel relatively long distances within the United States is by flying. In 2023, there were {filteredCityPairToInfo.length} unique flight routes within the continental US. 
-			There are typically several flight options to travel between any two cities in the US that make flying an easy, flexible option. 
-			In comparison, driving several hours is often not a viable option, especially for short trips, where time spent driving would nearly equal time spent at the actual destination. 
-			Currently, options for rail travel are limited in many parts of the country and, due to the lack of high speed rail (HSR) in the US, taking a train does not save significant time compared to driving.
-		</p>
-		</div>
 
 		<!-- component -->
 		<h2>What are the popular airline routes in the US?</h2>
@@ -284,6 +289,10 @@
 		</div>
 
 		<h2>How much time is spent taking these routes?</h2>
+		<div class="paragraphWrapper">
+			The bar chart on the left shows the average time for each step involved in flying. The histogram on the right displays the distribution of total travel times for all 2023 flights within the continental US.
+		</div>
+
 		<div class="infoMap" id="airlineTimes">
 			<!-- <p>idea to put a barchart that outlines different histogram that haneen made here as well as a bar chart the breaks down the flying time, maybe could give a few flight examples<p/> -->
 			<BarChart dataset={flyTimeBreakdown} feature={timeFeature} yLabel={"Travel Time Breakdown"} xLabel={"Time (in minutes)"} color={'#88aed0'} roundValue={100} minDimSize={minBarDims}/> 
@@ -293,16 +302,15 @@
 
 		<!-- paragraph after bar chart of travel time breakdown that explains all the extra time spent when flying-->
 		<div class="paragraphWrapper">
-		<p>
-			Besides the time spent in the air on a plane, there are several additional steps involved in air travel that, in total, can add hours to a trip. 
-			One major inconvenience associated with flying is the TSA — the restrictions and the time it takes to go through TSA security at the airport. 
-			Security lines can be very long, especially when the airport is very busy. 
-			Since no one can anticipate how long the wait in the security line will be, TSA recommends that people arrive at the airport two hours before their flight. 
-			Thus, even if the security line is short, travelers may still end up spending over an hour at the airport waiting to board. 
-			Additionally, commuting to and from the airport may total to an hour or more for people that live outside of major cities. 
-			Finally, although the actual air travel is fast, passengers also end up spending significant time on the airplane before takeoff and after landing for various reasons.
-			<br> <br>The bar chart on the left shows the average time breakdown for each step involved in flying. The histogram on the right displays the distribution of total travel times for all 2023 flights within the continental US.
-		</p>
+			<p>
+				Besides the time spent in the air on a plane, there are several additional steps involved in air travel that, in total, can add hours to a trip. 
+				One major inconvenience associated with flying is the TSA — the restrictions and the time it takes to go through TSA security at the airport. 
+				Security lines can be very long, especially when the airport is very busy. 
+				Since no one can anticipate how long the wait in the security line will be, TSA recommends that people arrive at the airport two hours before their flight. 
+				Thus, even if the security line is short, travelers may still end up spending over an hour at the airport waiting to board. 
+				Additionally, commuting to and from the airport often totals to an hour or more. 
+				Finally, although the actual air travel is fast, passengers also end up spending significant time on the airplane before takeoff and after landing for taxiing, boarding, preparing the cabin for takeoff and delays.
+			</p>
 		</div>
 
 
@@ -320,22 +328,47 @@
 		</p>
 		</div>
 
-			<TimeTriangle/>
-		<div class="infoMap" id="timeTriangle">
 
 		<!-- paragraph explaining time triangle that goes next to it-->
 
-		<TimeTriangle/>
-		<div class="paragraphWrapper">
-		<p>
-			To assess the potential benefits of implementing HSR in the US, we first determine the range of distances within which the fastest mode of travel would be HSR. 
-			To calculate this sweet spot, we find a line of best fit for each of the three modes of transportation (car, HSR, and plane) considered here. 
-			We call the area formed by the intersection of these lines the “Time Triangle,” which is plotted to the right. 
-			The Time Triangle indicates that for distances between {roundTo(cutoffs.triangleLower, 0.1)} miles and {roundTo(cutoffs.triangleUpper, 0.1)} miles, HSR is the fastest mode of transportation when factoring in all the main steps included with each method of travel. 
-			These distances correspond to total travel times of {roundTo(planeTotalTime(cutoffs.triangleLower), 0.1)} minutes ({roundTo(planeTotalTime(cutoffs.triangleLower), 0.1) / timeUnitConversion} hours) and {roundTo(planeTotalTime(cutoffs.triangleUpper), 0.1)} minutes ({roundTo(planeTotalTime(cutoffs.triangleUpper), 0.1) / timeUnitConversion} hours) including all steps of flight travel, respectively. We show the airline routes that would be traveled faster on HSR on the map below. 
-		</p>
+		<div class="infoMap" id="timeTriangle">
+
+
+			<!-- paragraph explaining time triangle that goes next to it-->
+			<p class="paragraphWrapper" id="timeTriangleText">
+
+				To assess the potential benefits of implementing HSR in the US, we first determine the range of distances within which the fastest mode of travel would be HSR. 
+				To calculate this sweet spot, we find a line of best fit for each of the three considered modes of transportation (car, HSR, and plane) and plot them on the graph shown on the right. 
+				We call the area formed by the intersection of these lines the “Time Triangle,” which is plotted to the right. 
+				The Time Triangle indicates that for distances between {roundTo(cutoffs.triangleLower, 0.1)} miles and {roundTo(cutoffs.triangleUpper, 0.1)} miles (indicated by the solid grey lines), HSR is the fastest mode of transportation when factoring in all the main steps included with each method of travel. 
+				These distances correspond to total travel times of {roundTo(planeTotalTime(cutoffs.triangleLower), 0.1)} minutes ({roundTo(planeTotalTime(cutoffs.triangleLower), 0.1) / timeUnitConversion} hours) and {roundTo(planeTotalTime(cutoffs.triangleUpper), 0.1)} minutes ({roundTo(planeTotalTime(cutoffs.triangleUpper), 0.1) / timeUnitConversion} hours) including all steps of flight travel, respectively (these are indicated by the dashed grey lines in the graph). We show the airline routes that would be traveled faster on HSR on the map below. 
+			</p>
+
+			
+			<TimeTriangle/>
+
+			<div class="stackBox">
+			<div class="swatches">
+			<!-- creating a swatch for each color in the scale -->
+			<div class="swatch">
+				<!-- also set color inside the html-->
+				<div class="square" style:background-color={VIS_PROPERTIES.PLANE_COLOR} > </div>
+				<div class="swatch-text">Planes</div>
+			</div>
+			<div class="swatch">
+				<!-- also set color inside the html-->
+				<div class="square" style:background-color={VIS_PROPERTIES.TRAIN_COLOR} > </div>
+				<div class="swatch-text">HSR</div>
+			</div>
+			<div class="swatch">
+				<!-- also set color inside the html-->
+				<div class="square" style:background-color={VIS_PROPERTIES.CAR_COLOR} > </div>
+				<div class="swatch-text">Cars</div>
+			</div>
+
 		</div>
 
+		</div>
 		</div>
 
 		<h2>Airline routes that would be faster on HSR</h2>
@@ -352,13 +385,17 @@
 					dims={minMapDims}/>
 
 
+			<div class="stackBox">
 			<RouteDisplay highlightedRoute={hRoutes["highlightedRouteTriangle"]}/>
+			<BarChart dataset={triangleRouteCities} feature={"PASSENGERS"} xLabel={"Passengers (millions)"} color={'#88aed0'} roundValue={100} orientation={"horizontal"} unitConversion={populationConversion} firstX={10} stringFormatter={convertString} minDimSize={minBarDims} id="stkBarChartPass" sort={false}/> 
+			</div>
+
 			</div>
 		</div>
 		
 		<div class="paragraphWrapper">
-		<p>The left histogram shows the distribution of total flight times for all flights in 2023, with the flights that fall within our Time Triangle highlighted in green.
-			The right histogram shows the theoretical distribution of total travel times when HSR is taken for these Time Triangle flights instead.</p>
+		<p>The left histogram below shows the distribution of total flight times for all flights in 2023, with the flights that fall within our Time Triangle highlighted in green.
+			The right histogram below shows the theoretical distribution of total travel times when HSR is taken for these Time Triangle flights instead.</p>
 		</div>
 
 
@@ -366,44 +403,45 @@
 			<!-- <Comparison Bar Chart/> -->
 			<Histogram dataset={cityPairToTime} xLabel={"Total Travel Time when Flying (hours)"} yLabel={"Number of Trips"} color={'#88aed0'} triangleColor={'#cfe6ce'} timeUnitConversion={timeUnitConversion} thresholds={histogramThresholds} maxBinSize={maxBinSize} minDimSize={minMapDims}/> 
 
-			<Histogram dataset={cityPairToTime} xLabel={"Total Travel Time After HSR is Built)"} yLabel={"Number of Trips"} color={'#cfe6ce'} triangleColor={'#cfe6ce'} providedAccessorFunction={planeToTrain} timeUnitConversion={timeUnitConversion} thresholds={histogramThresholds} maxBinSize={maxBinSize} minDimSize={minMapDims}/> 
+			<Histogram dataset={cityPairToTime} xLabel={"Total Travel Time After HSR is Built)"} yLabel={"Number of Trips"} color={'#88aed0'} triangleColor={'#cfe6ce'} providedAccessorFunction={planeToTrain} timeUnitConversion={timeUnitConversion} thresholds={histogramThresholds} maxBinSize={maxBinSize} minDimSize={minMapDims}/> 
 
+		</div>
+
+		<div class="paragraphWrapper">
+			<p>The below bar chart compares the travel time breakdown for flights and HSR for the Time Triangle distances.</p>
 		</div>
 
 		<div class="infoMap" id="comparisonBarChart">
 			<BarChart dataset={bigKahuna} feature={timeFeature} xLabel={"Time (minutes)"} color={'#88aed0'} roundValue={100} orientation={"vertical"} timeUnitConversion={timeUnitConversion} minDimSize={minBarDims}/> 
 		</div>
 			
-		<div class="paragraphWrapper">
-			<p>The above bar chart compares the travel time breakdown for flights and HSR for the Time Triangle distances.</p>
-			</div>
 
 		<h2>Which of these HSR routes should we build first?</h2>
-		<div class="infoMap" id="iterativeGravityExplanation">
 			<div class="paragraphWrapper">
 				<p>
 				To determine which of the potential rail lines would have the most impact, and thus should be focused on first, we built a mathematical model called an Iterative Gravity Model.
-				Based on our model we propose 30 HSR lines. We would like to note that our model was influenced by the Gravity Model presented in a YouTube video by CityNerd titled <a href="https://www.youtube.com/watch?v=wE5G1kTndI4">"56 High Speed Rail Links We Should've Built Already."</a>
+				Based on our model we propose 30 HSR lines. We note that our model was influenced by the Gravity Model presented in a YouTube video by CityNerd titled <a href="https://www.youtube.com/watch?v=wE5G1kTndI4">"56 High Speed Rail Links We Should've Built Already."</a>
 				Highly recommend checking out his video as it was the inspiration for our time triangle and iterative gravity model.
 				The gravity model as he presented is modeled after the <a href="https://en.wikipedia.org/wiki/Newton's_law_of_universal_gravitation">
-				equation for gravity</a>.
+				equation for gravity</a>. CityNerd calculates the gravity score by multiplying the population of the 2 cities, and divides by the distance between them squared. This mimics the equation for gravity by relating the "mass" of the two objects with the population of cities.
 				<br>
 				We improve upon this basic gravity model in two ways:
 				</p>
 				<ol>
 					<li>
-						For the part of the equation representing “attractive force,” instead of using population as a proxy for where people want to travel, we use an actual figure that represents this: total annual passengers from US flight data.					</li>
+						For the part of the equation representing “attractive force,” instead of using population as a proxy for where people want to travel, we use an actual figure that represents this: total annual passengers from US flight data.
+					</li>
 					<li>
 						Our model is aware of already proposed rail when determining where rail should be placed next. <br>
 						Consider the following hypothetical: 
-						Suppose rail between New York City and Boston was already proposed, and now the model is considering connecting Washington DC to Boston.
-						The basic gravity model, when computing the score for connecting Washington DC to Boston, considers building a line the entire way from Washington DC to Boston when only building to New York City is required since New York City and Boston have already been connected by HSR.
+						Suppose rail between New York City and Boston was already proposed, and now the model is considering connecting Washington, D.C. to Boston.
+						The basic gravity model, when computing the score for connecting Washington, D.C. to Boston, considers building a line the entire way from Washington, D.C. to Boston. However, only building rail between
+						Washington, D.C. and New York City is required since New York City and Boston have already been connected by HSR. In addition, if we connect Washington, D.C. to Boston, we also are also connecting Washington, D.C. to New York City so we should get the score for both of these, which the basic gravity model does not account for.
 						<br><br>
-						The Iterative Gravity model fixes both of these issues by first considering the direct connection and all possibilities of connecting two cities using existing rails. Secondly, the score is now the sum of all scores for all the newly connected cities divided by the length of newly built rail line built.
+						The Iterative Gravity model fixes both of these awareness issues by first considering the direct connection and all possibilities of connecting two cities using existing rails. Secondly, the score is now the sum of all scores for all the newly connected cities divided by the length of newly built rail line built.
 					</li>
 				</ol>
 			</div>
-		</div>
 
 		<h2>Proposed HSR</h2>
 		<div class="infoMap" id="proposedHSRMap">
@@ -420,9 +458,9 @@
 		<!-- paragraph talking ab current rail-->
 		<div class="paragraphWrapper">
 		<p>
-			As explained above, while Amtrak is the fastest rail in the US, it does not meet the qualification for HSR. 
-			Nonetheless, we can use the locations of these rail lines to guide future plans for building HSR using the existing infrastructure. 
-			The below maps show our proposed HSR routes (left) and the existing Amtrak rail lines (right), with all the cities identified with our Iterative Gravity Model labeled.
+			As explained above the Amtrak it does not meet the qualification for HSR. 
+			Nonetheless, we can use the locations of these rail lines to make development of HSR cheaper by saving on clearing costs.
+			The below maps compare our proposed HSR routes and the existing Amtrak rail lines, all the cities identified with our Iterative Gravity Model are labeled.
 		</p>
 		</div>
 
@@ -536,7 +574,7 @@
 	}
 
 	#timeTriangleText {
-		width: 50%
+		width: 50%;
 	}
 
 	#totalFlightRoutesDisplay {
@@ -545,5 +583,25 @@
 
 	:global(body){
 		background: #f0fcf1;
+	}
+
+	.swatches {
+		gap: 0.5em; /* adding some space between the <div>s inside swatches */
+		padding-left: 0.5em;
+	}
+
+	.swatch {
+		display: flex;
+		align-items: center;
+		gap: 0.25em; /* adding some space between the <div>s inside swatch */
+	}
+
+	.swatch-text {
+		font-size:13px
+	}
+
+	.square {
+		width: 15px;
+		height: 15px;
 	}
 </style>

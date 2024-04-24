@@ -33,8 +33,8 @@ cleanup TODOs
 ### derived data
 - `cityCordMap.json`: Mapping from cities to their coordinates removing excess data, used for graphing/projecting on geomap, derived from `USA_Major_Cities.geojson`
 - `cityRouteMap.json`: Mapping from cities to what Amtrak lines they have, derived also from the [github where we got amtrak routes](https://github.com/binx/amtrak-explorer/tree/main)
-- `filteredCityPairToInfo.json`: flight route data @Jack write about this
-- `formatedIteratedGravityResults.json` - first index of the array contains the top routes to build HSR, rest are extra info on rail lines (eg: rail stops, distance between them) @Jack write about this 
+- `filteredCityPairToInfo.json`: flight route data write about this
+- `formatedIteratedGravityResults.json` - first index of the array contains the top routes to build HSR, rest are extra info on rail lines (eg: rail stops, distance between them) write about this 
 - `usaContGeojson.json`: US geojson map of the contiguous US, derived from `usaGeojson.json`, removing Alaska, Hawaii, etc.
 
 
@@ -67,7 +67,6 @@ cleanup TODOs
             "ORIGIN": "LAS",
             "ORIGIN_STATE": "NV",
             "DISTANCE": 227.41557128412538,
-            "GRAVITY": 83.07735023785848
         }
     ],
 ```
