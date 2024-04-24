@@ -387,7 +387,7 @@
 
 			<div class="stackBox">
 			<RouteDisplay highlightedRoute={hRoutes["highlightedRouteTriangle"]}/>
-			<BarChart dataset={triangleRouteCities} feature={"PASSENGERS"} xLabel={"Passengers (millions)"} color={'#88aed0'} roundValue={100} orientation={"horizontal"} unitConversion={populationConversion} firstX={10} stringFormatter={convertString} minDimSize={minBarDims} id="stkBarChartPass" sort={false}/> 
+			<BarChart dataset={triangleRouteCities} feature={"PASSENGERS"} xLabel={"Passengers (millions)"} color={'#88aed0'} roundValue={100} orientation={"horizontal"} unitConversion={populationConversion} firstX={10} stringFormatter={convertString} minDimSize={minBarDims} id="stkBarChartPass" sort={true}/> 
 			</div>
 
 			</div>
