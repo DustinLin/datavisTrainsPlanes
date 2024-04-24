@@ -138,8 +138,8 @@
 		</g>
 
 		<!-- axes -->
-		<Axis orientation="bottom" scale={smallXScale} width={width} height={height} margin={marginTriangle} label={"Time (minutes)"} />
-		<Axis orientation="left" scale={smallYScale} width={width} height={height} margin={marginTriangle} label={"Distance (miles)"} />
+		<Axis orientation="bottom" scale={smallXScale} width={width} height={height} margin={marginTriangle} label={"Distance (miles)"} />
+		<Axis orientation="left" scale={smallYScale} width={width} height={height} margin={marginTriangle} label={"Time (minutes)"} />
 	</svg>
 </div>
 
