@@ -13,13 +13,13 @@ cleanup TODOs
 - [ ] maybe get a style guide so it's not code explosion
 - [x] write some documentation and merge with `master`
 - [ ] fill out data description section down below?
-- [ ] can upload the pre-processing scripts on here used, but this is more so for completeness/documentation
+- [x] can upload the pre-processing scripts on here used, but this is more so for completeness/documentation
 
 ## File structure
 - `src/routes` contains our components
 - `src/utils.js` has some functions for parsing the data that we import that may be useful throughout the components
 - `static/` has all the datasets that we are using (and imported from code in `src/routes/+page.js` for all to use)
-- `static/ref` has some reference files that we used for preprocessing the data? Purely for reference?
+- `static/pythonPreprocessing`, `static/cityTrainsPreprocessing` has some reference files that we used for preprocessing the data, purely for reference
 
 ## Our data
 ### raw data
