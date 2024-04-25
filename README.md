@@ -12,7 +12,7 @@ cleanup TODOs
 - [x] clean up more code and delete unnecessary files
 - [ ] maybe get a style guide so it's not code explosion
 - [x] write some documentation and merge with `master`
-- [ ] fill out data description section down below?
+- [x] fill out data description section down below?
 - [x] can upload the pre-processing scripts on here used, but this is more so for completeness/documentation
 
 ## File structure
@@ -82,10 +82,6 @@ cleanup TODOs
 ]
 ```
 - The geo maps are not that interesting - just line objects for d3 to draw
-
-
-## potential data for amtrak speed?
-https://en.wikipedia.org/wiki/Long-distance_Amtrak_routes
 
 ### nice/fast color picker
 [linked](https://coolors.co/b5b5b5)
