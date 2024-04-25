@@ -6,7 +6,7 @@ npm run dev
 ```
 
 cleanup TODOs
-- [x] nuke original elements
+- [x] get rid of original elements
 - [x] getting importing working for JSON, loading structure set up in `+page.js`
 - [x] figure out how to plot the map
 - [x] clean up more code and delete unnecessary files
