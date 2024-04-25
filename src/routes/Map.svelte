@@ -33,17 +33,6 @@
 		? d3.max([borderBoxSize[0].blockSize, dims[1]])
 		: dims[0];
 
-	// $: width = dims[0];
-	// height = 800;
-
-	// $: console.log(`width and height ${width}, ${height}`)
-	
-
-	// trying to plot lines and add interaction?
-	// from observable its an array of arrays
-
-	
-	
 
 	/**
 	 * helper function to compute the PROJECTED coordinates for lines
@@ -98,15 +87,7 @@
 	
 	const citiesPlotSet  = new Set(citiesRoutePoints)
 
-	//console.log(`total unmapped cities: ${unMap}`)
-
 	// now have some cities that we want to plot
-
-	// TODO try to make display reactive
-	// borderBoxSize: has 2 entires: inline-size - width of div, block-size - height of div
-	// borderBoxSize could be undefined
-	//$: width = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 975
-	//$: height = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 610
 
 	// projections
 	$: usaMapProjection = d3.geoAlbersUsa().fitSize([width, height], map);

@@ -12,7 +12,6 @@
 
 	export let map; // the USA map
 	export let cityCordMap;  // mapping from US cities for coordinates
-	export let cityAmtrakRouteMap; // mapping US cities to what Amtrak routes they are on
 
 	// city pairs that we want to plot, are of the form "(Boston_MA, New York_NY)", there is no associated flight data
 	export let cities;

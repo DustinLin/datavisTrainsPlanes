@@ -13,22 +13,22 @@
 	import RailMap from './RailMap.svelte';
     import TimeTriangle from './TimeTriangle.svelte';
   	import TopChart from './TopChart.svelte';
-  	import RailMapSubset from './RailMapSubset.svelte';
 	import MapStatic from './MapStatic.svelte';
 	import RailMapIntersect from './RailMapIntersect.svelte';
-
-	import { cutoffs, cityPairsToCities, roundTo, planeTime, trainTime, planeTotalTime, computeInverse, trainTotalTime, VIS_PROPERTIES   } from '../utils';
-	import {inTriangle, planeTimeToTotalTime, planeToTrain, roundUp} from '../utils.js';
-	import {TRAVEL_TO_AND_FROM_TIMES, SECURITY_TIMES, convertString} from '../utils.js';
-	
-
 	import Histogram from './Histogram.svelte';
+
+	import { cutoffs, cityPairsToCities, roundTo, trainTime, planeTotalTime, VIS_PROPERTIES,
+			inTriangle, planeTimeToTotalTime, planeToTrain, roundUp,
+			TRAVEL_TO_AND_FROM_TIMES, SECURITY_TIMES, convertString
+	} from '../utils';
+	
 
 
 	const trainColor = ""
 	// data comes from the load function in +page.js
 	export let data;
 
+	// init data being passed in
 	const usaGeoContig = data.dataPayload.usaGeo;
 	const cityCordMap = data.dataPayload.cityCordMap;
 	const amtrakMap = data.dataPayload.amtrakMap;
@@ -37,12 +37,15 @@
 	const cityAmtrakRouteMap = data.dataPayload.cityAmtrakRouteMap;
 	const gravityTopResRoutes = data.dataPayload.gravityTopResRoutes
 
+	/* making sure data loads properly
 
 	console.log(`there are many states: ${usaGeoContig.features.length}`)
 	console.log(`There are many cities in the cord map: ${Object.keys(cityCordMap).length}`)
 	console.log(`there are many amtrak routes: ${amtrakMap.features.length}`)
 	console.log(`there are many city pairs: ${filteredCityPairToInfo.length}`)
 	console.log(`we are builing the top ${gravityTopResRoutes[0].length} grav rail routes`)
+
+	*/
 
 
 
@@ -70,6 +73,8 @@
 			hRoutes[vis] = route
 		}
 	}
+
+	// prob some duplicate computation here
 
 	// filtering top routes to show in vis
 	let GravTopRes = gravityTopResRoutes[0].slice(0, cutoffs.topGravNumber)
@@ -107,8 +112,6 @@
 	});
 	
 
-	//  console.log(categories);
-
 
 	// data processing for route times histogram 
 	const timeUnitConversion = 60;
@@ -125,7 +128,7 @@
 
 	let histogramThresholds = [];
 	const groupSize = 30 / timeUnitConversion;
-	console.log('group size', groupSize)
+	//console.log('group size', groupSize)
 	const maxTime = roundUp(d3.max(cityPairToTime, d => d[1].AVG_TOTAL_TIME), groupSize)
 	for (let i = 0; i <= maxTime; i += groupSize) {
 		histogramThresholds.push(i);
@@ -134,10 +137,8 @@
 	// const maxBinSize = d3.max(bins, (d) => d3.sum(d, (l) => l[1].NUM_DEPARTURES))
 	const maxBinSize = 1.7 * 1000 * 1000 // TODO: fix this so it isn't hard coded
 
-	console.log('group size', groupSize)
+	//console.log('group size', groupSize)
 
-	//console.log("hellooooo");
-	//console.log(cityPairToTime);
 	// intermediate processing to get cities that are in triangle.
 	let trianglePairsOldTime = cityPairToTime
 				.filter(([pair, info]) => 
@@ -152,26 +153,26 @@
                                 NUM_DEPARTURES: info.NUM_DEPARTURES}]);
 
 
-	console.log("new time length");
-	console.log(trianglePairsNewTime.length);
 
 	// data for each step bar chart
 	let averageTotalTime = d3.mean(cityPairToTime.map(([pair, info]) => info.AVG_TOTAL_FLIGHT_TIME));
 	let averageAirTime = d3.mean(cityPairToTime.map(([pair, info]) => info.AVG_AIR_TIME));
 	let averageExtraTime = averageTotalTime - averageAirTime;
 
-	// let withTrainAverageTime = d3.mean(cityPairToTime, ([pair, info]) => planeToTrain(info));
+	/*
+	console.log("new time length");
+	console.log(trianglePairsNewTime.length);
 
 	console.log("avg total time: ", averageTotalTime);
 	console.log("avg air time: ", averageAirTime);
 	console.log("avg extra time: ", averageExtraTime);
+	*/
 
 	const timeFeature = 'time'
 	let flyTimeBreakdown = [['Travel to/from airport', {time: TRAVEL_TO_AND_FROM_TIMES['plane']}], 
 				['Time in Airport', {time: SECURITY_TIMES.plane }], 
 				['Average Airplane Time on Ground', {time: averageExtraTime * timeUnitConversion}], 
 				['Average Airplane Time in Air', {time: averageAirTime * timeUnitConversion}]];
-	console.log("example Data", flyTimeBreakdown);
 
 	const totalTime = d3.sum(flyTimeBreakdown, (d) => d[1][timeFeature])
 
@@ -182,13 +183,6 @@
 	let averageAirTimeInTriangle = d3.mean(trianglePairsOldTime.map(([pair, info]) => info.AVG_AIR_TIME));
 	let averageExtraTimeInTriangle = averagePlaneTimeInTriangle - averageAirTimeInTriangle;
 
-	// console.log('testing 123', trianglePairsOldTime)
-	console.log('times', averagePlaneTimeInTriangle, averageTrainTimeInTriangle)
-	// if (averageTrainTimeInTriangle > averagePlaneTimeInTriangle) {
-	// 	console.log('times', averagePlaneTimeInTriangle, averageTrainTimeInTriangle)
-	// 	throw Error("planes went faster")
-	// }
-	
 
 	let planeInfo = [
 		['Travel to/from airport', {time: TRAVEL_TO_AND_FROM_TIMES['plane']}],
@@ -198,7 +192,6 @@
 	]
 	
 	const planeTotal = d3.sum(planeInfo, (d) => d[1][timeFeature])
-	console.log('the total for planes', planeTotal)
 
 	planeInfo.push(['Plane Total Time', {time: planeTotal}])
 
@@ -209,9 +202,7 @@
 		['Average Train Travel Time', {time: averageTrainTimeInTriangle * timeUnitConversion - trainTime(0), color: VIS_PROPERTIES.TRAIN_COLOR}]
 	]
 	
-	console.log(trainInfo)
 	const trainTotal = d3.sum(trainInfo, (d) => d[1][timeFeature])
-	console.log('the total for trains', trainTotal)
 
 
 	trainInfo.push(['Train Total Time', {time: trainTotal, color: VIS_PROPERTIES.TRAIN_COLOR}])
@@ -256,7 +247,6 @@
 				onhover={onhover} 
 				highlightedRoute={hRoutes["highlightedRouteAll"]}
 				mapId={"highlightedRouteAll"}/>
-
 
 
 			<div class="stackBox">
@@ -333,7 +323,6 @@
 
 		<div class="infoMap" id="timeTriangle">
 
-
 			<!-- paragraph explaining time triangle that goes next to it-->
 			<p class="paragraphWrapper" id="timeTriangleText">
 
@@ -343,7 +332,6 @@
 				The Time Triangle indicates that for distances between {roundTo(cutoffs.triangleLower, 0.1)} miles and {roundTo(cutoffs.triangleUpper, 0.1)} miles (indicated by the solid grey lines), HSR is the fastest mode of transportation when factoring in all the main steps included with each method of travel. 
 				These distances correspond to total travel times of {roundTo(planeTotalTime(cutoffs.triangleLower), 0.1)} minutes ({roundTo(planeTotalTime(cutoffs.triangleLower), 0.1) / timeUnitConversion} hours) and {roundTo(planeTotalTime(cutoffs.triangleUpper), 0.1)} minutes ({roundTo(planeTotalTime(cutoffs.triangleUpper), 0.1) / timeUnitConversion} hours) including all steps of flight travel, respectively (these are indicated by the dashed grey lines in the graph). We show the airline routes that would be traveled faster on HSR on the map below. 
 			</p>
-
 			
 			<TimeTriangle/>
 
@@ -501,7 +489,6 @@
 		padding: 1em;
 	}
 
-
 	h2 {
 		/* add more space between each section by padding upper? */
 		padding-top: 2em;
@@ -529,7 +516,6 @@
 		gap: 2em;
 		align-items: center;
 	}
-
 	.main {
 		/* changed to a vertical flex, with overflow scroll */
 		display:flex;
@@ -540,7 +526,6 @@
 
 		gap: 2em;
 	}
-
 	.infoMap {
 		/* Creating a horizontal flex */
 		display: flex;
@@ -551,13 +536,10 @@
 		padding: 0.5em;
 		gap: 0.5em;
 	}
-
-
 	.maps {
 		height: 100vh;
 		width: 100%;
 	}
-
 	.stackBox {
 		/* create a vertical stacking */
 		gap: 2em;

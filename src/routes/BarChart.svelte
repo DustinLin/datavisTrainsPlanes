@@ -9,8 +9,6 @@
 	export let yLabel;
 	export let color;
 	export let roundValue;
-	export let orientation;
-	export let includeTotal;
 	export let unitConversion = 1;
 	export let firstX = -1;
 	export let stringFormatter;
@@ -66,7 +64,7 @@
 		? Math.max(borderBoxSize[0].blockSize, minDimSize[1])
 		: minDimSize[1];
 
-	$: console.log('sizes', borderBoxSize)
+	// $: console.log('sizes', borderBoxSize)
 
 
 	// get the counts for the filtered dataset
@@ -84,9 +82,6 @@
 
 	const margin = {top: 45, bottom: 45, left: 270, right: 80};
 
-
-
-        //if (orientation == "horizontal"){}
 
 	$: x = d3
 		.scaleLinear()

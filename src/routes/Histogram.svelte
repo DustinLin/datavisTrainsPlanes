@@ -8,8 +8,6 @@
 	export let yLabel;
 	export let color;
 	export let triangleColor;
-	// export let selectedIndices;
-	//export let color;
 
 	export let minDimSize;
 
@@ -17,15 +15,11 @@
 	export let timeUnitConversion;
 	export let thresholds;
 	export let maxBinSize;
-	// export let selectedIndices;
-	//export let color;
+
 	function defaultAccessor(rowData, timeUnitConversion) {
 		return rowData.AVG_TOTAL_TIME;
 	}
-
 	
-	
-
 	const accessorFunction = providedAccessorFunction ? providedAccessorFunction: defaultAccessor
 
 	/*
@@ -48,7 +42,6 @@
         // bins = d3.map(bins, (d) => 
         //         [d.length, d3.sum(d, (l) => l[1].NUM_DEPARTURES), d.x0, d.x1])
 
-	//bins.forEach((element) => console.log('test of the stupid variety', element.x0, element.x1));
 
 	// dimensions
 
@@ -69,9 +62,7 @@
 	// filter the dataset by index
 	// $: filteredDataset = selectedIndices.map((i) => sortedGravity[i]);
 
-        
 	// get the counts for the filtered dataset
-
 
     const margin = {top: 45, bottom: 45, left: 120, right: 80};
 

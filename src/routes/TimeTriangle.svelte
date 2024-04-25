@@ -1,14 +1,12 @@
 <script>
 	import * as d3 from 'd3';
 	import Axis from './Axis.svelte';
-	import {planeTotalTime, trainTotalTime, carTotalTime, createDatapoints, cutoffs, vertLine, triangleDashedLine, VIS_PROPERTIES} from '../utils'
+	import {planeTotalTime, trainTotalTime, carTotalTime, createDatapoints, cutoffs, 
+			vertLine, triangleDashedLine, VIS_PROPERTIES} from '../utils'
 
-	
 
 	const triangleLower = cutoffs.triangleLower // ~ 75.2
 	const triangleUpper = cutoffs.triangleUpper // ~575.5
-
-
 
 	const marginTriangle = { top: 50, right: 50, bottom: 50, left: 50 };
 
@@ -42,64 +40,6 @@
 		//.range(d3.schemeCategory10)
 		.range([VIS_PROPERTIES.PLANE_COLOR, VIS_PROPERTIES.TRAIN_COLOR, VIS_PROPERTIES.CAR_COLOR])
 
-//   // add x axis to chart
-//  // const xAxes = triangleSvg.append('g')
-//     // move it to the bottom
-//     //.attr('transform', d => `translate(0,${gridRow.bandwidth()})`)
-//   //  .call(xAxis)
-//     // remove the baseline
-//   //  .call(g => g.select('.domain').remove())
-//     // change the tick color to gray
-//   //  .call(g => g.selectAll('line').attr('stroke', '#c0c0c0'));
-
-//     triangleSvg.append('g')
-//       // move x-axis to the bottom 
-//       .attr('transform', d => `translate(0,${heightTriangle})`)
-//       .call(xAxis)
-      
-//       .append('text')
-//         .attr('fill', 'black')
-//         .attr('font-family', 'sans-serif')
-//         .attr('x', 270)
-//         .attr('y', 40)
-//         .text("Distance (miles)");
-
-
-//     triangleSvg.append('g')
-//       .attr('transform', d => `translate(${marginTriangle.left}, 0)`)
-//       .call(yAxis)
-//       .append('text')
-//         .attr('fill', 'black')
-//         .attr('font-family', 'sans-serif')
-//         .attr("transform", "rotate(-90)")
-//         .attr('x', -heightTriangle/2)
-//         .attr('y', -30)
-//         .text("Time");
-
-
-	///////////// OLD CODE
-	// dimensions
-
-
-
-	// const margin = { top: 25, right: 20, bottom: 50, left: 60 };
-
-
-	// scales
-
-	// $: maxCount = d3.max(counts.values());
-
-	// $: x = d3
-	// 	.scaleLinear()
-	// 	.domain([0, maxCount])
-	// 	.nice()
-	// 	.range([margin.left, width - margin.right]);
-
-	// $: y = d3
-	// 	.scaleBand()
-	// 	.domain(color.domain())
-	// 	.range([margin.top, height - margin.bottom])
-	// 	.padding(0.1);
 </script>
 
 <div class="timeTriangle" bind:borderBoxSize={borderBoxSize}>

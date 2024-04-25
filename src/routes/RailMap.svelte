@@ -3,8 +3,6 @@
 	 * map component for rail, should be p similar
 	 * Perhaps want to get rid of duplicate code, but low priority and this is not a SWE class
 	*/
-
-
 	/*
 
 	  0: "Acela"
@@ -62,7 +60,6 @@
 	// [width, height]
 	export let dims;
 
-	// TODO try to make display reactive
 	let borderBoxSize;
 	// borderBoxSize: has 2 entires: inline-size - width of div, block-size - height of div
 	// borderBoxSize could be undefined
@@ -93,10 +90,6 @@
 			console.log(`ERRROR RENDERING RAIL MAP FOR CITY ${city}`)
 		}
 	});
-
-
-	//$: width = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 975
-	//$: height = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 610
 
 	// projections
 	$: usaMapProjection = d3.geoAlbersUsa().fitSize([width, height], map);

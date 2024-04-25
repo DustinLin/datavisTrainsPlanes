@@ -1,12 +1,10 @@
 <script>
 	/**
-	 * The "map component"?
+	// wont have onhover? Used for just plotting the cities we want to build HSR in, No interaction
 	*/
 
 	import * as d3 from 'd3';
 	import {VIS_PROPERTIES, cityPairsToCities, cityStToCity, cityNamePlacement} from '../utils';
-
-	// wont have onhover? Used for just plotting the cities we want to build HSR in? No interaction?
 
 	// prov want to rename "dataset" to like map data or smth
 	export let map; // the usa geo map to plot
@@ -81,12 +79,6 @@
 
 	// now have some cities that we want to plot
 
-	// TODO try to make display reactive
-	// borderBoxSize: has 2 entires: inline-size - width of div, block-size - height of div
-	// borderBoxSize could be undefined
-	//$: width = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 975
-	//$: height = borderBoxSize ? Math.min(borderBoxSize[0].blockSize, borderBoxSize[0].inlineSize) : 610
-
 	const CITY_CIRCLE_R = VIS_PROPERTIES.CITY_CIRCLE_R
 	const CITY_CIRCLE_COL = VIS_PROPERTIES.CITY_CIRCLE_COL
 
@@ -128,21 +120,6 @@
 			stroke-width={2.5}
 			opacity={LINE_OPACITY}
 		/>
-
-		<!--
-
-		<text
-			font-size = 12
-			font-family = "sans-serif"
-			dominant-baseline = "text-top"
-			font-weight = "bold"
-			x = {(routeToCords(route, 0,0) + routeToCords(route, 1,0)) /2}
-			y = {(routeToCords(route, 0,1) + routeToCords(route, 1,1)) /2}
-		>
-			{routeInc()}
-		</text>
-
-		-->
 
 		{/each}
 
@@ -199,7 +176,6 @@
 			/>
 
 		{/if}
-
 
 	</svg>
 
